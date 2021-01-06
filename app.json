@@ -1,0 +1,31 @@
+{
+  "pages": [
+    "pages/personal/index/index",
+    "pages/home/home"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#CC0033",
+    "navigationBarTitleText": "合纵会员",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#000",
+    "selectedColor": "#CC0033",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "/icon/index1.png",
+        "selectedIconPath": "/icon/index.png"
+      },
+      {
+        "pagePath": "pages/personal/index/index",
+        "text": "我的",
+        "iconPath": "/icon/my1.png",
+        "selectedIconPath": "/icon/my.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,107 @@
+<!-- 个人信息 -->
+<view class="personal">
+	<view class="user-info">
+		<view>
+			<image class="avatar" src="{{userInfo.avatarUrl}}"></image>
+		</view>
+		<view class="name">
+			<view class="nick-name">{{userInfo.nickName}}</view>
+			<view class="id-tag">普通人员</view>
+		</view>
+	</view>
+	<view class="qrcode">
+		<view class="code">
+			<image src="{{qrCode}}" bindtap="preview"></image>
+			<view class="code-tag">我的二维码</view>
+		</view>
+		<view>
+			<image class="right" src="/icon/right1.png"></image>
+		</view>
+	</view>
+</view>
+
+<!-- 我的订单 -->
+<view class="order">
+	<view class="title">我的订单</view>
+	<view class="list">
+		<view>
+			<image class="avatar" src="{{userInfo.avatarUrl}}"></image>
+
+			<view>待支付</view>
+		</view>
+
+		<view>
+			<image class="avatar" src="{{userInfo.avatarUrl}}"></image>
+
+			<view>待发货</view>
+
+		</view>
+
+		<view>
+			<image class="avatar" src="{{userInfo.avatarUrl}}"></image>
+
+			<view>待收货</view>
+		</view>
+
+		<view>
+			<image class="avatar" src="{{userInfo.avatarUrl}}"></image>
+
+			<view>待评价</view>
+
+		</view>
+		<view>
+			<image class="avatar" src="{{userInfo.avatarUrl}}"></image>
+
+			<view>待退款</view>
+		</view>
+
+	</view>
+</view>
+
+<!-- 我的服务 -->
+<view class="service">
+	<view class="title">我的服务</view>
+	<view class="list">
+		<view>
+			<image class="avatar" src="{{userInfo.avatarUrl}}"></image>
+
+			<view>健康数据</view>
+		</view>
+
+		<view>
+			<image class="avatar" src="{{userInfo.avatarUrl}}"></image>
+
+			<view>申请专员</view>
+
+		</view>
+
+		<view>
+			<image class="avatar" src="{{userInfo.avatarUrl}}"></image>
+
+			<view>分享</view>
+		</view>
+
+	
+
+	</view>
+</view>
+
+
+<!-- 遮罩 -->
+<view class="{{isAuthorization ? 'mark' : ''}}"></view>
+<!-- 微信授权 -->
+<block wx:if="{{isAuthorization}}">
+	<view class="authorization">
+		<view class="authorization-box">
+			<view class="authorization-name">微信登录授权</view>
+			<view class="authorization-use">
+				<view>合纵会员小程序申请获取以下权限</view>
+				<view>· 获得您的公开信息（昵称、头像等）</view>
+			</view>
+			<view class="authorization-btn">
+				<button size="mini" type="warn" bindtap="cancel">取消</button>
+				<button size="mini" type="primary" open-type="getUserInfo" bindgetuserinfo="getUserInfo">确认授权</button>
+			</view>
+		</view>
+	</view>
+</block>

@@ -1,0 +1,57 @@
+<!--pages/home/home.wxml-->
+<view class="box">
+  <view class="header">
+    <swiper class="swiper" circular="true" autoplay="true" interval="5000" duration="1000">
+      <!-- <block wx:for="{{banner}}" wx:key="{{index}}">
+        <swiper-item>
+          <image mode="aspectFill" src="{{item.carouselImages}}" class="slide-image" />
+        </swiper-item>
+      </block> -->
+      <block>
+        <swiper-item>
+          <image mode="aspectFill" src="../../icon/8c1001e93901213f5347ebb256e736d12f2e956c.jpg" class="slide-image" />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
+  <view class='titleText'>精选资讯</view>
+  <view class="activity-box">
+    <block wx:if="{{information.length > 0}}">
+      <view wx:for="{{information}}" wx:key="{{index}}">
+        <!-- 单张大图 -->
+        <view wx:if="{{item.imgList.length == 0 || item.imgList.length == 2}}" class="activity-list1"
+          data-index="{{index}}" data-id="{{item.detailsId}}" bindtap='openDetals'>
+          <view class="titleBox">
+            <text class="title">{{item.detailsTitle}}</text>
+          </view>
+          <image wx:if="{{item.imgList.length == 2}}" mode="aspectFill" src="{{item.imgList[0]}}" />
+        </view>
+        <!-- 单张小图 -->
+        <view wx:elif="{{item.imgList.length == 1}}" class="activity-list2" data-index="{{index}}"
+          data-id="{{item.detailsId}}" bindtap='openDetals'>
+          <view class="titleBox">
+            <text class="title">{{item.detailsTitle}}</text>
+          </view>
+          <image mode="aspectFill" src="{{item.imgList[0]}}" />
+        </view>
+        <!-- 多图 -->
+        <view wx:elif="{{item.imgList.length > 2}}" class="activity-list3" data-index="{{index}}"
+          data-id="{{item.detailsId}}" bindtap='openDetals'>
+          <view class="titleBox">
+            <text class="title">{{item.detailsTitle}}</text>
+          </view>
+          <view class="imageBox">
+            <image wx:for="{{item.imgList}}" wx:for-item="items" wx:for-index="indexs" wx:key="{{items}}"
+              wx:if="{{indexs < 3}}" mode="aspectFill" src="{{items}}" />
+          </view>
+        </view>
+      </view>
+    </block>
+    <text wx:else class="notData">暂无数据~</text>
+  </view>
+
+  <view wx:if="{{showFoot}}" class="foot">
+    <text>没有更多了~ ╮（╯＿╰）╭</text>
+  </view>
+</view>
