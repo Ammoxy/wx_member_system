@@ -1,4 +1,5 @@
 let app = getApp();
+let user = require('../../../model/user');
 
 
 Page({
@@ -7,6 +8,7 @@ Page({
         isAuthorization: false,
         userInfo: null,
         qrCode: '/icon/qrcode.jpg',
+        wxInfo: null
     },
 
     /**
@@ -26,8 +28,13 @@ Page({
     onShow: function () {
         // 微信授权
         this.setData({
-            isAuthorization: true
+            wxInfo: wx.getStorageSync('wxInfo'),
         })
+        if (!wx.getStorageSync('token')) {
+            this.setData({
+                isAuthorization: true
+            })
+        }
     },
     getUserInfo(e) {
         let self = this;
@@ -37,26 +44,37 @@ Page({
                 if (code) {
                     wx.getUserInfo({
                         success: (res) => {
-                            app.globalData.userInfo = res.userInfo;
-                            wx.showToast({
-                              title: '授权成功',
-                              icon: 'success',
-                              success: (res) => {
-                                  self.setData({
-                                      isAuthorization: false
-                                  });
-                                  wx.showLoading({
-                                    title: '获取数据中',
+                            user.login(code, res.iv, res.encryptedData).then(response => {
+                                console.log(111, response.info.avatarUrl);
+                                wx.showToast({
+                                    title: '授权成功',
+                                    icon: 'success',
                                     success: (res) => {
-                                        wx.hideLoading();
+                                        console.log('res', res);
+                                        
+                                        wx.setStorage({
+                                            data: response.token,
+                                            key: 'token',
+                                        })
+                                        // 全局
+                                        var wxInfo = {
+                                            avatarUrl: response.info.avatarUrl,
+                                            nickName: response.info.nickName
+                                        };
+                                        wx.setStorageSync('wxInfo', wxInfo)
                                         self.setData({
-                                            userInfo: app.globalData.userInfo
+                                            wxInfo: wxInfo,
+                                            isAuthorization: false
                                         });
-                                        console.log(self.data.userInfo)
+                                        console.log(self.data.isAuthorization);
+                                        
                                     }
-                                  })
-                              }
+                                })
+                            }).catch(err => {
+                                console.log(err);
+                                
                             })
+
                         }
                     })
                 }

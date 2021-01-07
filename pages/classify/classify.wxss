@@ -1,0 +1,94 @@
+
+.main {
+  background: #efefef;
+  height: 100vh;
+  width: 100vw;
+
+}
+
+.left {
+  width: 25%;
+  float: left;
+  /* border-right: 1px solid #666; */
+  height: 100vh;
+  box-sizing: border-box;
+  font-size:  26rpx;
+}
+
+
+.left view{
+  /* border-bottom: 1rpx solid #666; */
+  background: #fff;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  position: relative;
+}
+
+.left view::before{
+  content: '';
+  background: #fff;
+  /* border-left: 8rpx; */
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8rpx;
+}
+/* .left view.active::before{
+  background: #CC0033;
+} */
+
+.left view.active {
+  background-color: #fff;
+  border-left: 2px solid #CC0033;
+  font-weight: bold;
+  color: #CC0033;
+}
+
+.right{
+  float: right;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 75%;
+  padding: 0  10rpx;
+  /* background: #efefefef; */
+  box-sizing: border-box;
+  height: 100vh;
+  height: 100vh;
+}
+ .right  .title{
+  height: 40rpx;
+  line-height: 40rpx;
+}
+.content {
+  background: #fff;
+  width: 32%;
+  padding: 10rpx;
+  box-sizing: border-box;
+  text-align: center;
+  margin-top: 10rpx;
+  font-size: 24rpx;
+}
+.content  image{
+  width: 90%;
+}
+
+
+.content  text{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: block;
+  white-space: nowrap;
+}
+.right-flex{
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.right_title{
+  font-size: 28rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+}

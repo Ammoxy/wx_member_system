@@ -29,7 +29,13 @@ function get(baseUrl, url, data, cb) {
     method: 'get',
     header: header,
     success: function (res) {
-      if (res.statusCode === 200) {
+      if (res.data.code === 10000) {
+        // if(res.data.code == 10000) {
+        //   wx.showToast({
+        //     icon: "none",
+        //     title: res.data.toast
+        //   });
+        // }
         if(res.data.code == 10001) {
           wx.showToast({
             icon: "none",
@@ -85,9 +91,9 @@ function post(baseUrl, url, data, cb) {
     data: data,
     header: header,
     success: function (res) {
-      console.log(res);
+      // console.log(res);
       
-      if (res.statusCode === 200) {
+      if (res.data.code === 10000) {
         if(res.data.code == 10001) {
           wx.showToast({
             icon: "none",
@@ -147,7 +153,7 @@ function del(baseUrl, url, data, cb) {
     method: 'delete',
     header: header,
     success: function (res) {
-      if (res.statusCode === 200) {
+      if (res.data.code === 10000) {
         if(res.data.code == 10001) {
           wx.showToast({
             icon: "none",

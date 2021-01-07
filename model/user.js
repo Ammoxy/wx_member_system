@@ -8,8 +8,10 @@ user.login = function(code, iv, encryptedData) {
             iv: iv,
             encryptedData: encryptedData
         }, function(response) {
-            if(response.msg === 'ok') {
-                var res = response.data
+            // console.log('response', response);
+            
+            if(response.code === 10000) {
+                var res = response.result
                 resolve(res);
             } else {
                 reject(response);

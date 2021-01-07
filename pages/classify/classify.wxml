@@ -1,0 +1,20 @@
+<view class="main">
+  <!-- 左边导航栏 -->
+  <scroll-view scroll-y="true" scroll-into-view="{{leftId}}" class="left">
+    <view wx:for="{{menuArr}}" wx:key="*this" data-myid="{{item.id}}" id="left{{item.id}}" class="scroll-view-item  {{lifeActiveNum==item.id?'active':''}}  "  bindtap="leftClick">
+      {{item.title}}</view>
+  </scroll-view>
+  <!-- 右边 -->
+  <scroll-view scroll-y="true" class="right" scroll-with-animation="true" bindscroll="rightScrollTop" scroll-into-view="{{rightId}}"
+  >
+    <view wx:for="{{menuArr}}" wx:key="*this" id="right{{item.id}}" class="scroll-view-item rightblock "  >
+      <view class="right_title" >{{item.title}}</view>
+      <view class="right-flex" >
+      <view class="content" wx:for="{{item.subArr}}" wx:key="*this">
+        <image src="{{item.imgSrc}}" mode="widthFix"></image>
+        <text>{{item.imgDesc}}</text>
+      </view>
+    </view>
+    </view>
+  </scroll-view>
+</view>

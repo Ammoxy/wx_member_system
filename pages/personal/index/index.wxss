@@ -61,12 +61,12 @@ page {
     right: 0;
     bottom: 20rpx;
     left: 0rpx;
-    
+
     display: flex;
     align-items: center;
 }
 
-.authorization-btn  button {
+.authorization-btn button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -94,10 +94,20 @@ page {
 }
 
 .avatar {
-    width: 120rpx;
-    height: 120rpx;
+    width: 100rpx;
+    height: 100rpx;
+    margin: 20rpx;
     border: 2rpx solid #fff;
     border-radius: 50%;
+}
+
+.auto-img {
+    width: 80rpx;
+    height: 80rpx;
+    background-color: rgb(99, 55, 55);
+    margin: 10rpx;
+    display: block;
+    
 }
 
 .name {
@@ -118,6 +128,7 @@ page {
     border-radius: 30rpx;
     background-color: rgba(0, 0, 0, 0.5);
     font-size: 18rpx;
+    text-align: center;
 }
 
 .qrcode {
@@ -156,8 +167,26 @@ page {
     flex-wrap: wrap;
 }
 
+.order .list .box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20vw;
+    margin: 20rpx 0;
+    font-size: 24rpx;
+}
+
 /* 我的服务 */
 .service .list {
     display: flex;
     flex-wrap: wrap;
+}
+.service .list .box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20vw;
+    margin: 20rpx 0;
+    font-size: 24rpx;
+
 }
