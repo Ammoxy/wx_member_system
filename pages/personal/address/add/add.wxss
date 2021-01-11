@@ -1,0 +1,66 @@
+page {
+    font-size: 32rpx;
+}
+
+.wrap {
+    margin-left: 10rpx;
+}
+
+.box {
+    padding: 10rpx 0;
+    border-bottom: 1rpx rgb(0, 0, 0, .2) solid;
+    display: flex;
+    align-items: center;
+}
+
+.box .left {
+    width: 20vw;
+    color: rgb(0, 0, 0, .7);
+}
+
+.box .right {
+    display: flex;
+    align-items: center;
+    color: rgb(0, 0, 0, .7);
+}
+
+.box input {
+    width: 78vw;
+    height: 82rpx;
+    line-height: 82rpx;
+}
+
+.box image {
+    width: 50rpx;
+    height: 50rpx;
+}
+
+.box .default {
+    width: 80vw;
+}
+
+.box switch {
+    height: 82rpx;
+    line-height: 82rpx;
+}
+
+.save {
+    margin-top: 50rpx;
+}
+
+.save .save-btn {
+    width: 90vw;
+    border-radius: 50rpx;
+    background-color: #cc0033;
+    color: #ffffff;
+}
+
+.delete {
+    margin-top: 30rpx;
+}
+
+.delete .delete-btn {
+    width: 90vw;
+    border-radius: 50rpx;
+    border: 1rpx solid #ccc;
+}

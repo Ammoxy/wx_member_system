@@ -1,0 +1,34 @@
+<view class="wrap">
+	<view class="box">
+		<text class="left">收货人</text>
+		<input placeholder="请填写收货人"></input>
+	</view>
+	<view class="box">
+		<text class="left">联系方式</text>
+		<input placeholder="请填写手机号"></input>
+	</view>
+	<view class="box">
+		<text class="left">所在地区</text>
+		<input placeholder="省市区县、乡镇等" style="width: 60vw;"></input>
+		<view class="right" bindtap="map">
+			<image src="/icon/gps.png"></image>
+			<text>定位</text>
+		</view>
+	</view>
+	<view class="box">
+		<text class="left">详细地址</text>
+		<input placeholder="街道、牌号楼等"></input>
+	</view>
+	<view class="box">
+		<text class="left default">设置为默认地址</text>
+		<switch></switch>
+	</view>
+</view>
+
+<view class="save">
+	<button class="save-btn">保存</button>
+</view>
+
+<view class="delete">
+	<button class="delete-btn">删除地址</button>
+</view>

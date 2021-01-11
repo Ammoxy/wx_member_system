@@ -6,8 +6,8 @@ global.configs = function(version) {
         api.get(api.baseUrl.host, api.url.Configs, {
             version: version
         }, function(response) {
-            if(response.msg === 'ok') {
-                var res = response.data
+            if(response.code === 10000) {
+                var res = response.result
                 resolve(res);
             } else {
                 reject(response);

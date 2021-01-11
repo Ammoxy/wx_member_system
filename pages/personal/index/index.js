@@ -96,5 +96,25 @@ Page({
             current: self.data.qrCode, // 当前显示图片的http链接
             urls: [self.data.qrCode] // 需要预览的图片http链接列表
         })
-    }
+    },
+
+    // 去收货地址
+    toAddress() {
+        wx.navigateTo({
+          url: '/pages/personal/address/index/index',
+        })
+    },
+    toUserInfo() {
+        if (!wx.getStorageSync('token')) {
+            wx.showToast({
+                icon: "none",
+                title: '请先登录'
+            });
+            wx.removeStorageSync('wxInfo')
+        } else {
+            wx.navigateTo({
+                url: "../information/information"
+            })
+        }
+    },
 })
