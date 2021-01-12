@@ -28,31 +28,7 @@
 					value="{{area ? area : areaList[is_area].title}}"></input>
 			</picker>
 		</view>
-		<!-- <view class="box">
-		<text class="left">所在地区</text>
-		<picker>
-			<input placeholder="省市区" style="width: 60vw;"></input>
-		</picker>
-		<view class="right" bindtap="map">
-			<image src="/icon/gps.png"></image>
-			<text>定位</text>
-		</view>
-	</view> -->
-		<view class="box">
-			<text class="left">详细地址</text>
-			<input placeholder="街道、牌号楼等" name="address"></input>
-		</view>
-		<view class="box">
-			<text class="left default">设置为默认地址</text>
-			<switch name="is_default"></switch>
-		</view>
-	</view>
 
-	<view class="save">
-		<button class="save-btn" form-type='submit'>保存</button>
-	</view>
 
-	<!-- <view class="delete">
-		<button class="delete-btn" bindtap="reset">重置</button>
-	</view> -->
-</form>
+
+

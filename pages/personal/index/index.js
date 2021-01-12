@@ -113,6 +113,7 @@ Page({
                 url: '/pages/personal/address/index/index',
             })
         }
+
     },
     toUserInfo() {
         if (!wx.getStorageSync('token')) {
@@ -153,4 +154,5 @@ Page({
             }
         })
     },
+
 })

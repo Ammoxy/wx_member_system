@@ -11,6 +11,7 @@
 	<scroll-view class="sidebar" scroll-y="true" scroll-into-view="{{leftId}}">
 		<block wx:for="{{classifyData}}" wx:key="{{index}}">
 			<view data-id="{{item.id}}" data-index="{{index}}" id="left{{item.id}}" class="item {{index == num ? 'choose' : ''}}" bindtap="nav">
+
 				<text>{{item.name}}</text>
 			</view>
 		</block>
@@ -31,6 +32,7 @@
 					</view>
 				</view>
 				</view>
+
 			</block>
 		</view>
 	</scroll-view>

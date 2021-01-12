@@ -76,4 +76,5 @@ Page({
     console.log(self.data.heightArr);
 
   }
+
 })

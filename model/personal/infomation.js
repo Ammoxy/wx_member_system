@@ -44,4 +44,5 @@ infomation.userInfo = function (token) {
 },
 
 
+
 module.exports = infomation;

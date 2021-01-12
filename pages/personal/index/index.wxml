@@ -67,7 +67,7 @@
 			<image class="auto-img img-bg" src="../../../icon/data.png" style="background: #CC3333;"></image>
 			<view>健康数据</view>
 		</view>
-		<view class="item" bindtap="toAttache">
+		<view class="item">
 			<image class="auto-img img-bg" src="../../../icon/apply.png" style="background: #CC3333;"></image>
 			<view>申请专员</view>
 		</view>
