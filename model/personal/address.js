@@ -2,56 +2,102 @@ var api = require('../../api/index')
 
 var address = {};
 
-address.addresses = function(page, limit, area_id, address) {
+// 获取用户配送地址列表
+address.addList = function (token) {
     return new Promise((resolve, reject) => {
-        api.get(api.baseUrl.host, api.url.Addresses, {
-            page: page,
-            limit: limit,
-            area_id: area_id,
-            address: address
-        }, function(response) {
-            if(response.msg === 'ok') {
-                var res = response.data
+        api.get(api.baseUrl.host, api.url.AddList, {
+            token: token
+        }, function (response) {
+            if(response.code === 10000) {
+                var res = response.result
                 resolve(res);
             } else {
                 reject(response);
             }
         })
     })
-}
+},
 
-address.areas = function(page, limit, parent_id) {
+// 新增用户收货地址
+address.createAdd = function (token, province_id, city_id, district_id, address, name, phone, is_default) {
     return new Promise((resolve, reject) => {
-        api.get(api.baseUrl.host, api.url.Areas, {
-            page: page,
-            limit: limit,
+        api.post(api.baseUrl.host, api.url.CreateAdd, {
+            token: token,
+            province_id: province_id,
+            city_id: city_id,
+            district_id: district_id,
+            address: address,
+            name: name,
+            phone: phone,
+            is_default: is_default
+        }, function (response) {
+            if(response.code === 10000) {
+                var res = response.result
+                resolve(res);
+            } else {
+                reject(response);
+            }
+        })
+    })
+},
+
+// 修改
+address.amendAdd = function (token, province_id, city_id, district_id, address, name, phone, is_default, id) {
+    return new Promise((resolve, reject) => {
+        api.post(api.baseUrl.host, api.url.CreateAdd, {
+            token: token,
+            province_id: province_id,
+            city_id: city_id,
+            district_id: district_id,
+            address: address,
+            name: name,
+            phone: phone,
+            is_default: is_default,
+            id: id
+        }, function (response) {
+            if(response.code === 10000) {
+                var res = response.result
+                resolve(res);
+            } else {
+                reject(response);
+            }
+        })
+    })
+},
+
+// 删除
+address.delAdd = function (token, id) {
+    return new Promise((resolve, reject) => {
+        api.del(api.baseUrl.host, api.url.DelAdd, {
+            token: token,
+            id: id
+        }, function (response) {
+            if(response.code === 10000) {
+                var res = response.result
+                resolve(res);
+            } else {
+                reject(response);
+            }
+        })
+    })
+},
+
+// 获取省市区
+address.chinaAreas = function (token, type, parent_id) {
+    return new Promise((resolve, reject) => {
+        api.get(api.baseUrl.host, api.url.ChinaAreas, {
+            token: token,
+            type: type,
             parent_id: parent_id
-        }, function(response) {
-            if(response.msg === 'ok') {
-                var res = response.data
+        }, function (response) {
+            if(response.code === 10000) {
+                var res = response.result
                 resolve(res);
             } else {
                 reject(response);
             }
         })
     })
-}
+},
 
-// 获取门牌号
-address.room = function(page, limit, address_id) {
-    return new Promise((resolve, reject) => {
-        api.get(api.baseUrl.host, api.url.Rooms, {
-            page: page,
-            limit: limit,
-            address_id: address_id
-        }, function(response) {
-            if(response.msg === 'ok') {
-                var res = response.data
-                resolve(res);
-            } else {
-                reject(response);
-            }
-        })
-    })
-}
 module.exports = address;

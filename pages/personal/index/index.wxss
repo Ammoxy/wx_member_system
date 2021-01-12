@@ -101,34 +101,28 @@ page {
     border-radius: 50%;
 }
 
-.auto-img {
-    width: 80rpx;
-    height: 80rpx;
-    background-color: rgb(99, 55, 55);
-    margin: 10rpx;
-    display: block;
-    
-}
-
 .name {
-    margin-left: 20rpx;
-
     display: flex;
     flex-direction: column;
 }
 
 .name .nick-name {
-    margin-bottom: 20rpx;
+    margin: 20rpx 0;
     font-size: 36rpx;
+    width: 300rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .id-tag {
+    width: 80rpx;
+    height: 25rpx;
+    line-height: 25rpx;
     padding: 10rpx 20rpx;
-    /* border: 2rpx solid #ccc; */
     border-radius: 30rpx;
     background-color: rgba(0, 0, 0, 0.5);
     font-size: 18rpx;
-    text-align: center;
 }
 
 .qrcode {
@@ -162,26 +156,52 @@ page {
 }
 
 /* 我的订单 */
+.order, .service {
+    background-color: #fff;
+}
+
 .order .list {
     display: flex;
     flex-wrap: wrap;
 }
 
-.order .list .box {
+.order .list .item {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 20vw;
     margin: 20rpx 0;
     font-size: 24rpx;
+
+    position: relative;
+}
+
+.order .list .item .dot {
+    position: absolute;
+    right: 20rpx;
+    top: -2rpx;
+    min-width: 32rpx;
+    height: 32rpx;
+    padding: 0 7rpx;
+    line-height: 32rpx;
+    font-size: 18rpx;
+    border-radius: 32rpx;
+    background: #FF4949;
+    color: #fff;
+    text-align: center;
 }
 
 /* 我的服务 */
+.service {
+    margin-top: 20rpx;
+}
+
 .service .list {
     display: flex;
     flex-wrap: wrap;
 }
-.service .list .box{
+
+.service .list .item {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -189,4 +209,35 @@ page {
     margin: 20rpx 0;
     font-size: 24rpx;
 
+}
+
+/* 公共样式 */
+.title {
+    padding: 20rpx;
+    border-bottom: 1rpx solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title .view-all {
+    color: #999;
+    font-size: 26rpx;
+}
+
+.title image {
+    width: 20rpx;
+    height: 20rpx;
+    margin-left: 10rpx;
+}
+
+.auto-img {
+    width: 60rpx;
+    height: 60rpx;
+    margin: 10rpx;
+    display: block;
+}
+
+.img-bg {
+    border-radius: 50%;
 }

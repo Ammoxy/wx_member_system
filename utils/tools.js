@@ -49,5 +49,10 @@ tools.jsonParse = function(obj) {
   }
 };
 
+tools.toNorms = function(array) {
+  var mphone = array.substring(0, 3) + '****' + array.substring(7, 11);
+  return mphone;
+}
+
 
 module.exports = tools;

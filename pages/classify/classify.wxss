@@ -1,94 +1,104 @@
-
-.main {
-  background: #efefef;
-  height: 100vh;
+page {
   width: 100vw;
-
-}
-
-.left {
-  width: 25%;
-  float: left;
-  /* border-right: 1px solid #666; */
   height: 100vh;
-  box-sizing: border-box;
-  font-size:  26rpx;
+  display: flex;
+  flex-direction: column;
+  font-size: 30rpx;
 }
 
+.search {
+  margin: 10rpx;
+}
 
-.left view{
-  /* border-bottom: 1rpx solid #666; */
-  background: #fff;
-  height: 80rpx;
-  line-height: 80rpx;
-  text-align: center;
+.search input {
   position: relative;
+  height: 50rpx;
+  line-height: 50rpx;
+  padding: 10rpx 50rpx;
+  background-color: rgb(0,0,0,0.1);
+  font-size: 30rpx;
 }
 
-.left view::before{
-  content: '';
-  background: #fff;
-  /* border-left: 8rpx; */
-  height: 100%;
+.search image {
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.search .icon-search {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 8rpx;
+  top: 30rpx;
+  left: 20rpx;
 }
-/* .left view.active::before{
-  background: #CC0033;
-} */
+.search .icon-close {
+  position: absolute;
+  top: 30rpx;
+  right: 20rpx;
+}
 
-.left view.active {
+/* 内容 */
+.main {
+  flex: 1;
+  display: flex;
+  height: 100%;
+}
+
+/* 左侧导航 */
+.sidebar {
+  width: 180rpx;
+  height: 100%;
   background-color: #fff;
-  border-left: 2px solid #CC0033;
-  font-weight: bold;
+}
+
+.sidebar .item {
+  padding: 20rpx;
+}
+
+.choose {
+  border-left: 4rpx solid #CC0033;
   color: #CC0033;
 }
 
-.right{
-  float: right;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  width: 75%;
-  padding: 0  10rpx;
-  /* background: #efefefef; */
-  box-sizing: border-box;
-  height: 100vh;
-  height: 100vh;
-}
- .right  .title{
-  height: 40rpx;
-  line-height: 40rpx;
-}
-.content {
-  background: #fff;
-  width: 32%;
-  padding: 10rpx;
-  box-sizing: border-box;
-  text-align: center;
-  margin-top: 10rpx;
-  font-size: 24rpx;
-}
-.content  image{
-  width: 90%;
+/* 间隔 */
+.interval {
+  width: 2rpx;
+  height: 100%;
+  background-color: #ccc;
 }
 
-
-.content  text{
-  text-overflow: ellipsis;
-  overflow: hidden;
-  display: block;
-  white-space: nowrap;
+/* 右边内容 */
+.container {
+  flex: 1;
+  height: 100%;
 }
-.right-flex{
+
+.container .box {
+  margin: 10rpx;
+  width: 100%;
+}
+
+.container .box .title {
+  color: #666666;
+  font-size: 30rpx;
+}
+
+.container .box .list {
   display: flex;
-  justify-content: flex-start;
   flex-wrap: wrap;
 }
-.right_title{
+
+.container .box .list .item {
+  margin: 20rpx 15rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container .box .item view {
   font-size: 28rpx;
-  height: 60rpx;
-  line-height: 60rpx;
+}
+
+.container .box .list image{
+  width: 100rpx;
+  height: 100rpx;
+
 }

@@ -1,6 +1,6 @@
 let app = getApp();
 let user = require('../../../model/user');
-
+var infomation = require('../../../model/personal/infomation')
 
 Page({
 
@@ -8,14 +8,14 @@ Page({
         isAuthorization: false,
         userInfo: null,
         qrCode: '/icon/qrcode.jpg',
-        wxInfo: null
+        wxInfo: null,
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        this.getInfo()
     },
 
     /**
@@ -51,7 +51,7 @@ Page({
                                     icon: 'success',
                                     success: (res) => {
                                         console.log('res', res);
-                                        
+
                                         wx.setStorage({
                                             data: response.token,
                                             key: 'token',
@@ -61,18 +61,20 @@ Page({
                                             avatarUrl: response.info.avatarUrl,
                                             nickName: response.info.nickName
                                         };
+                                        // var userInfo = response.userInfo
                                         wx.setStorageSync('wxInfo', wxInfo)
+                                        // wx.setStorageSync('userInfo', userInfo)
                                         self.setData({
                                             wxInfo: wxInfo,
                                             isAuthorization: false
                                         });
                                         console.log(self.data.isAuthorization);
-                                        
+
                                     }
                                 })
                             }).catch(err => {
                                 console.log(err);
-                                
+
                             })
 
                         }
@@ -96,5 +98,59 @@ Page({
             current: self.data.qrCode, // 当前显示图片的http链接
             urls: [self.data.qrCode] // 需要预览的图片http链接列表
         })
-    }
+    },
+
+    // 去收货地址
+    toAddress() {
+        if (!wx.getStorageSync('token')) {
+            wx.showToast({
+                icon: "none",
+                title: '请先登录'
+            });
+            wx.removeStorageSync('wxInfo')
+        } else {
+            wx.navigateTo({
+                url: '/pages/personal/address/index/index',
+            })
+        }
+    },
+    toUserInfo() {
+        if (!wx.getStorageSync('token')) {
+            wx.showToast({
+                icon: "none",
+                title: '请先登录'
+            });
+            wx.removeStorageSync('wxInfo')
+        } else {
+            wx.navigateTo({
+                url: "../information/information"
+            })
+        }
+    },
+
+    toAttache() {
+        if (!wx.getStorageSync('token')) {
+            wx.showToast({
+                icon: "none",
+                title: '请先登录'
+            });
+            wx.removeStorageSync('wxInfo')
+        } else {
+            wx.navigateTo({
+                url: '/pages/personal/attache/attache',
+            })
+        }
+    },
+
+    getInfo() {
+        var self = this;
+        infomation.userInfo(wx.getStorageSync('token')).then(res => {
+            console.log(res);
+            if (res) {
+                self.setData({
+                    userInfo: res
+                })
+            }
+        })
+    },
 })

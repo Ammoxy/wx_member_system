@@ -1,0 +1,20 @@
+<scroll-view scroll-y="true">
+	<view class="box">
+		<view class="list" wx:for="{{addressData}}">
+			<view class="info">
+				<view class="name">{{item.name}} <text>{{item.phone}}</text></view>
+				<view>
+					<text class="default" wx:if="{{item.is_default == 1}}">默认</text>{{item.address}}
+				</view>
+			</view>
+			<view class="edit" bindtap="toEdit" data-id="{{item.id}}" data-address="{{item.address}}" data-cityId="{{item.city_id}}" data-districtId="{{item.district_id}}" data-provinceId="{{item.province_id}}" data-name="{{item.name}}" data-phone="{{item.phone}}" data-isDefault="{{item.is_default}}" data-city="{{item.city.name}}" data-district="{{item.district.name}}" data-province="{{item.province.name}}">
+				<text>编辑</text>
+			</view>
+		</view>
+	</view>
+</scroll-view>
+
+
+<view class="add" bindtap="toAdd">
+	<text>新增收货地址</text>
+</view>

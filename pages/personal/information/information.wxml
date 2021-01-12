@@ -1,0 +1,43 @@
+<form bindsubmit='register'>
+	<view class="info">
+		<view class="left">姓名:</view>
+		<input placeholder="请输入姓名" value='{{userInfo.name}}' name="name"></input>
+	</view>
+	<view class="info">
+		<view class="left">性别:</view>
+		<radio-group name='sex'>
+			<radio value="1" checked="{{userInfo.sex == 1 ? true : ''}}" />男
+			<radio value="2" checked="{{userInfo.sex == 2 ? true : ''}}" />女
+		</radio-group>
+	</view>
+	<view class="info">
+		<view class="left">年龄:</view>
+		<input placeholder="请输入年龄" value='{{userInfo.age}}' name="age"></input>
+	</view>
+	<view class="info">
+		<view class="left">电话:</view>
+		<input placeholder="请输入电话" value='{{userInfo.phone}}' name="phone"></input>
+	</view>
+	<view class="info">
+		<view class="left">身高:</view>
+		<input placeholder="请输入身高(cm)" value='{{userInfo.stature}}' name="stature"></input>
+	</view>
+	<view class="info">
+		<view class="left">体重:</view>
+		<input placeholder="请输入体重(kg)" value='{{userInfo.weight}}' name="weight"></input>
+	</view>
+	<view class="info">
+		<view class="left">职业:</view>
+		<input placeholder="请输入职业" value='{{userInfo.profession}}' name="profession"></input>
+	</view>
+	<view class="info">
+		<view class="left">身份类型:</view>
+		<picker bindchange="IDChange" range="{{identityData}}" range-key="name" value="{{index}}">
+			<input placeholder="请选择身份类型" value='{{identity ? identity : ""}}' name="type" disabled></input>
+		</picker>
+	</view>
+
+	<view class="submit">
+		<button form-type='submit'>提交信息</button>
+	</view>
+</form>

@@ -29,14 +29,20 @@ function get(baseUrl, url, data, cb) {
     method: 'get',
     header: header,
     success: function (res) {
-      if (res.data.code === 10000) {
+      if (res.statusCode === 200) {
         // if(res.data.code == 10000) {
         //   wx.showToast({
         //     icon: "none",
         //     title: res.data.toast
         //   });
         // }
-        if(res.data.code == 10001) {
+        if (res.data.code == 10001) {
+          wx.showToast({
+            icon: "none",
+            title: res.data.toast
+          });
+        }
+        if (res.data.code == 10002) {
           wx.showToast({
             icon: "none",
             title: '请重新登录'
@@ -47,25 +53,19 @@ function get(baseUrl, url, data, cb) {
             url: "/pages/personal/index/index"
           });
         }
-        if(res.data.code == 10002) {
+        if (res.data.code == 10003) {
           wx.showToast({
             icon: "none",
             title: res.data.toast
           });
         }
-        if(res.data.code == 10003) {
+        if (res.data.code == 10004) {
           wx.showToast({
             icon: "none",
             title: res.data.toast
           });
         }
-        if(res.data.code == 10004) {
-          wx.showToast({
-            icon: "none",
-            title: res.data.toast
-          });
-        }
-        if(res.data.code == 10005) {
+        if (res.data.code == 10005) {
           wx.showToast({
             icon: "none",
             title: res.data.toast
@@ -92,44 +92,50 @@ function post(baseUrl, url, data, cb) {
     header: header,
     success: function (res) {
       // console.log(res);
-      
-      if (res.data.code === 10000) {
-        if(res.data.code == 10001) {
+
+      if (res.statusCode === 200) {
+        // if(res.data.code == 10000) {
+        //   wx.showToast({
+        //     icon: "none",
+        //     title: res.data.toast
+        //   });
+        // }
+        if (res.data.code == 10001) {
+          wx.showToast({
+            icon: "none",
+            title: res.data.toast
+          });
+        }
+        if (res.data.code == 10002) {
           wx.showToast({
             icon: "none",
             title: '请重新登录'
           });
           wx.removeStorageSync('wxInfo')
           wx.removeStorageSync('token')
-          wx.reLaunch({
+          wx.switchTab({
             url: "/pages/personal/index/index"
           });
         }
-        if(res.data.code == 10002) {
+        if (res.data.code == 10003) {
           wx.showToast({
             icon: "none",
             title: res.data.toast
           });
         }
-        if(res.data.code == 10003) {
+        if (res.data.code == 10004) {
           wx.showToast({
             icon: "none",
             title: res.data.toast
           });
         }
-        if(res.data.code == 10004) {
+        if (res.data.code == 10005) {
           wx.showToast({
             icon: "none",
             title: res.data.toast
           });
         }
-        if(res.data.code == 10005) {
-          wx.showToast({
-            icon: "none",
-            title: res.data.toast
-          });
-        }
-        if(res.data.code == 10006) {
+        if (res.data.code == 10006) {
           wx.showToast({
             icon: "none",
             title: res.data.toast
@@ -153,8 +159,20 @@ function del(baseUrl, url, data, cb) {
     method: 'delete',
     header: header,
     success: function (res) {
-      if (res.data.code === 10000) {
-        if(res.data.code == 10001) {
+      if (res.statusCode === 200) {
+        // if(res.data.code == 10000) {
+        //   wx.showToast({
+        //     icon: "none",
+        //     title: res.data.toast
+        //   });
+        // }
+        if (res.data.code == 10001) {
+          wx.showToast({
+            icon: "none",
+            title: res.data.toast
+          });
+        }
+        if (res.data.code == 10002) {
           wx.showToast({
             icon: "none",
             title: '请重新登录'
@@ -165,25 +183,19 @@ function del(baseUrl, url, data, cb) {
             url: "/pages/personal/index/index"
           });
         }
-        if(res.data.code == 10002) {
+        if (res.data.code == 10003) {
           wx.showToast({
             icon: "none",
             title: res.data.toast
           });
         }
-        if(res.data.code == 10003) {
+        if (res.data.code == 10004) {
           wx.showToast({
             icon: "none",
             title: res.data.toast
           });
         }
-        if(res.data.code == 10004) {
-          wx.showToast({
-            icon: "none",
-            title: res.data.toast
-          });
-        }
-        if(res.data.code == 10005) {
+        if (res.data.code == 10005) {
           wx.showToast({
             icon: "none",
             title: res.data.toast
@@ -207,5 +219,5 @@ module.exports = {
   baseUrl: baseUrl,
   get: get,
   post: post,
-  delete: del
+  del: del
 }

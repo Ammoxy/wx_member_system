@@ -1,0 +1,53 @@
+.info {
+  padding: 20rpx;
+  border-bottom: rgb(0,0,0,.2) 1rpx solid;
+
+  display: flex;
+  align-items: center;
+}
+
+.info .left {
+  width: 200rpx;
+}
+
+.info radio {
+  width: 60rpx;
+  height: 60rpx;
+
+  transform: scale(0.7);
+}
+
+/* 修改radio选中时样式 */
+
+radio .wx-radio-input.wx-radio-input-checked::before {
+  width: 75rpx;
+  height: 75rpx;
+  line-height: 75rpx;
+  text-align: center;
+  margin: -0 0 0 0;
+  background-color: #cc0033;
+  border-radius: 50%;
+  border: 1rpx solid #cc0033;
+}
+
+
+.info input {
+  width: 500rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+
+.submit {
+  margin-top: 40rpx;
+}
+
+.submit button {
+  width: 700rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 50rpx;
+
+  background-color: #cc0033;
+  color: #fff;
+  font-size: 32rpx;
+}

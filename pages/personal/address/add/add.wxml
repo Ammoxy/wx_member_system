@@ -1,0 +1,58 @@
+<form bindsubmit='saveAddress'>
+	<view class="wrap">
+		<view class="box">
+			<text class="left">收货人</text>
+			<input placeholder="请填写收货人" name="name"></input>
+		</view>
+		<view class="box">
+			<text class="left">联系方式</text>
+			<input placeholder="请填写手机号" name="phone"></input>
+		</view>
+		<view class="box">
+			<text class="left">省份</text>
+			<picker bindchange="proChange" range="{{provideList}}" range-key="name" value="{{index}}">
+				<input placeholder="请选在所在省份" value='{{provide ? provide : ""}}' name="province_id" disabled></input>
+			</picker>
+		</view>
+		<view class="box">
+			<text class="left">市级</text>
+			<picker bindchange="cityChange" range="{{cityList}}" range-key="name" value="{{index}}">
+				<input class="input" placeholder='请选在所在市级' disabled name="city_id"
+					value="{{city ? city : cityList[is_city].title}}"></input>
+			</picker>
+		</view>
+		<view class="box">
+			<text class="left">区级</text>
+			<picker bindchange="areaChange" range="{{areaList}}" range-key="name" value="{{index}}">
+				<input class="input" placeholder='请选在所在区级' disabled name="district_id"
+					value="{{area ? area : areaList[is_area].title}}"></input>
+			</picker>
+		</view>
+		<!-- <view class="box">
+		<text class="left">所在地区</text>
+		<picker>
+			<input placeholder="省市区" style="width: 60vw;"></input>
+		</picker>
+		<view class="right" bindtap="map">
+			<image src="/icon/gps.png"></image>
+			<text>定位</text>
+		</view>
+	</view> -->
+		<view class="box">
+			<text class="left">详细地址</text>
+			<input placeholder="街道、牌号楼等" name="address"></input>
+		</view>
+		<view class="box">
+			<text class="left default">设置为默认地址</text>
+			<switch name="is_default"></switch>
+		</view>
+	</view>
+
+	<view class="save">
+		<button class="save-btn" form-type='submit'>保存</button>
+	</view>
+
+	<!-- <view class="delete">
+		<button class="delete-btn" bindtap="reset">重置</button>
+	</view> -->
+</form>

@@ -1,0 +1,57 @@
+page {
+    font-size: 30rpx;
+}
+
+.box {
+    height: 90vh;
+    margin-left: 10rpx;
+
+}
+
+.box .list {
+    padding: 20rpx 10rpx;
+    border-bottom: 1rpx solid rgb(0,0,0,.2);
+
+    display: flex;
+    align-items: center;
+}
+
+.box .list .info {
+    width: 90vw;
+}
+
+.box .list .info .name {
+    font-weight: 800;
+    font-size: 36rpx;
+}
+
+.box .list .info .default {
+    margin-right: 10rpx;
+    padding: 5rpx 10rpx;
+    border: 1rpx #CC0033 solid;
+    border-radius: 5rpx;
+
+    color: #cc0033;
+    font-size: 20rpx;
+}
+
+.box .list .edit {
+    width: 10vw;
+    padding: 20rpx;
+    color: #cc0033;
+
+    display: flex;
+    align-items: center;
+}
+
+/* 新增收货地址 */
+.add {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 4vh;
+    padding: 20rpx;
+    text-align: center;
+    background-color: #CC0033;
+    color: #fff;
+}
