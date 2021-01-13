@@ -1,4 +1,4 @@
-page {
+/* page {
   font-size: 32rpx;
 }
 
@@ -63,4 +63,4 @@ page {
   width: 90vw;
   border-radius: 50rpx;
   border: 1rpx solid #ccc;
-}
+} */

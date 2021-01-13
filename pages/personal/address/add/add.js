@@ -20,17 +20,29 @@ Page({
     province_id: '',
     city_id: '',
     district_id: '',
-    // amendId: '',
-    // info: null
+    amendId: '',
+    info: null,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // this.setData({
-    //   amendId: options.id
-    // })
+    if (options.id) {
+      this.setData({
+        amendId: options.id,
+        info: JSON.parse(options.data),
+        provide: JSON.parse(options.data).province,
+        city: JSON.parse(options.data).city,
+        area: JSON.parse(options.data).district,
+        province_id: JSON.parse(options.data).provinceid,
+        city_id: JSON.parse(options.data).cityid,
+        district_id: JSON.parse(options.data).districtid,
+      })
+      this.getCity(this.data.province_id);
+      this.getArea(this.data.city_id)
+      console.log(this.data.info);
+    }
     this.getPro();
     // console.log(JSON.parse(options.data));
   },
@@ -82,7 +94,7 @@ Page({
       is_city: e.detail.value,
       city: self.data.cityList[e.detail.value].name,
       // parent_id: self.data.cityList[e.detail.value].id,
-      city_id	: self.data.cityList[e.detail.value].id,
+      city_id: self.data.cityList[e.detail.value].id,
       area: ''
     })
     // self.data.parent_id = self.data.cityList[self.data.is_city].id;
@@ -102,19 +114,50 @@ Page({
   saveAddress(e) {
     var self = this;
     console.log(e);
-    var name = e.detail.value.name;
-    var address = e.detail.value.address;
-    var province_id = self.data.province_id;
-    var city_id = self.data.city_id;
-    var district_id = self.data.district_id;
     var is_default;
-    e.detail.value.is_default == true ? is_default = 1 :  is_default = 2;
-    var phone = e.detail.value.phone;
-    if (province_id && city_id && district_id && address && name && phone && is_default) {
-      add.createAdd(wx.getStorageSync('token'), province_id, city_id, district_id, address, name, phone, is_default).then(res => {
+    e.detail.value.is_default == true ? is_default = 1 : is_default = 2;
+    if (self.data.amendId) {
+      this.setData({
+        info: {
+          token: wx.getStorageSync('token'),
+          province_id: self.data.province_id,
+          city_id: self.data.city_id,
+          district_id: self.data.district_id,
+          address: e.detail.value.address,
+          name: e.detail.value.name,
+          phone: e.detail.value.phone,
+          is_default: is_default,
+          id: self.data.amendId
+        }
+      })
+    } else {
+      this.setData({
+        info: {
+          token: wx.getStorageSync('token'),
+          province_id: self.data.province_id,
+          city_id: self.data.city_id,
+          district_id: self.data.district_id,
+          address: e.detail.value.address,
+          name: e.detail.value.name,
+          phone: e.detail.value.phone,
+          is_default: is_default
+        }
+      })
+    }
+
+    console.log(self.data.info);
+
+    // var name = e.detail.value.name;
+    // var address = e.detail.value.address;
+    // var province_id = self.data.province_id;
+    // var city_id = self.data.city_id;
+    // var district_id = self.data.district_id;
+    // var phone = e.detail.value.phone;
+    if (self.data.info.province_id && self.data.info.city_id && self.data.info.district_id && self.data.info.address && self.data.info.name && self.data.info.phone && self.data.info.is_default) {
+      add.createAdd(self.data.info).then(res => {
         console.log(res);
         wx.showToast({
-          title: '添加成功',
+          title: '提交成功',
           icon: 'none',
           success: () => {
             wx.navigateBack({
@@ -130,7 +173,39 @@ Page({
       })
     }
   },
-  reset() {},
+  delAdd(e) {
+    var self = this;
+    wx.showModal({
+      title: '提示',
+      content: '是否删除该地址',
+      success(res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+          add.delAdd(wx.getStorageSync('token'), self.data.amendId).then(res => {
+            wx.showToast({
+              icon: "none",
+              title: '删除成功',
+              success: () => {
+                wx.navigateBack({
+                  delta: 1,
+                })
+                // wx.navigateTo({
+                //   url: '../index/index',
+                // })
+              }
+            });
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消');
+          wx.showToast({
+            icon: "none",
+            title: '取消成功'
+          });
+        }
+      }
+    })
+
+  },
   // map(e) {
   //   var self = this;
   //   console.log("开启地图")

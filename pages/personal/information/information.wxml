@@ -30,12 +30,12 @@
 		<view class="left">职业:</view>
 		<input placeholder="请输入职业" value='{{userInfo.profession}}' name="profession"></input>
 	</view>
-	<view class="info">
+	<!-- <view class="info">
 		<view class="left">身份类型:</view>
 		<picker bindchange="IDChange" range="{{identityData}}" range-key="name" value="{{index}}">
 			<input placeholder="请选择身份类型" value='{{identity ? identity : ""}}' name="type" disabled></input>
 		</picker>
-	</view>
+	</view> -->
 
 	<view class="submit">
 		<button form-type='submit'>提交信息</button>

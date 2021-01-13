@@ -15,7 +15,9 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.getInfo()
+        if (wx.getStorageSync('wxInfo')) {
+            this.getInfo() 
+        }
     },
 
     /**
@@ -61,9 +63,9 @@ Page({
                                             avatarUrl: response.info.avatarUrl,
                                             nickName: response.info.nickName
                                         };
-                                        // var userInfo = response.userInfo
+                                        var health_user = response.userInfo
                                         wx.setStorageSync('wxInfo', wxInfo)
-                                        // wx.setStorageSync('userInfo', userInfo)
+                                        wx.setStorageSync('health_user', health_user)
                                         self.setData({
                                             wxInfo: wxInfo,
                                             isAuthorization: false

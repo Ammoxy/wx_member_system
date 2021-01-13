@@ -17,44 +17,10 @@ address.addList = function (token) {
         })
     })
 },
-
-// 新增用户收货地址
-address.createAdd = function (token, province_id, city_id, district_id, address, name, phone, is_default) {
+// 修改/新增
+address.createAdd = function (data) {
     return new Promise((resolve, reject) => {
-        api.post(api.baseUrl.host, api.url.CreateAdd, {
-            token: token,
-            province_id: province_id,
-            city_id: city_id,
-            district_id: district_id,
-            address: address,
-            name: name,
-            phone: phone,
-            is_default: is_default
-        }, function (response) {
-            if(response.code === 10000) {
-                var res = response.result
-                resolve(res);
-            } else {
-                reject(response);
-            }
-        })
-    })
-},
-
-// 修改
-address.amendAdd = function (token, province_id, city_id, district_id, address, name, phone, is_default, id) {
-    return new Promise((resolve, reject) => {
-        api.post(api.baseUrl.host, api.url.CreateAdd, {
-            token: token,
-            province_id: province_id,
-            city_id: city_id,
-            district_id: district_id,
-            address: address,
-            name: name,
-            phone: phone,
-            is_default: is_default,
-            id: id
-        }, function (response) {
+        api.post(api.baseUrl.host, api.url.CreateAdd, data, function (response) {
             if(response.code === 10000) {
                 var res = response.result
                 resolve(res);

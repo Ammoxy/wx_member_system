@@ -2,11 +2,11 @@
 	<view class="wrap">
 		<view class="box">
 			<text class="left">收货人</text>
-			<input placeholder="请填写收货人" name="name"></input>
+			<input placeholder="请填写收货人" name="name" value="{{info.name}}"></input>
 		</view>
 		<view class="box">
 			<text class="left">联系方式</text>
-			<input placeholder="请填写手机号" name="phone"></input>
+			<input placeholder="请填写手机号" name="phone" value="{{info.phone}}"></input>
 		</view>
 		<view class="box">
 			<text class="left">省份</text>
@@ -28,7 +28,20 @@
 					value="{{area ? area : areaList[is_area].title}}"></input>
 			</picker>
 		</view>
+		<view class="box">
+			<text class="left">详细地址</text>
+			<input placeholder="街道、牌号楼等" name="address"  value="{{info.address}}"></input>
+		</view>
+		<view class="box">
+			<text class="left default">设置为默认地址</text>
+			<switch name="is_default" checked="{{info.isdefault == 1}}"></switch>
+		</view>
+	</view>
+	<view class="save">
+		<button class="save-btn" form-type='submit'>保存</button>
+	</view>
 
-
-
-
+	<view class="delete" wx:if="{{amendId}}">
+		<button class="delete-btn" bindtap="delAdd">删除地址</button>
+	</view>
+</form>

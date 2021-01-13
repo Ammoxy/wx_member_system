@@ -1,23 +1,16 @@
 {
   "pages": [
-    "pages/classify/classify",
 
     "pages/personal/index/index",
-<<<<<<< HEAD
     "pages/personal/information/information",
     "pages/classify/classify",
-=======
->>>>>>> 117a6290cac85f4b36b82e1e87799d7bc1f7f841
     "pages/car/car",
     "pages/personal/address/index/index",
     "pages/personal/address/add/add",
     "pages/home/home",
-<<<<<<< HEAD
     "pages/personal/address/amendAdd/amendAdd",
     "pages/personal/attache/attache"
-=======
-    "pages/personal/information/information"
->>>>>>> 117a6290cac85f4b36b82e1e87799d7bc1f7f841
+
   ],
   "window": {
     "backgroundTextStyle": "light",

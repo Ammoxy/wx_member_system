@@ -17,18 +17,21 @@
 	</view>
 	<view class="info">
 		<view class="left">部门:</view>
-		<picker bindchange="IDChange" range="{{identityData}}" range-key="name" value="{{index}}">
-			<input placeholder="请选择部门" value='{{identity ? identity : ""}}' name="merchant_id" disabled></input>
+		<picker bindchange="merchantChange" range="{{merchantList}}" range-key="name" value="{{index}}">
+			<input placeholder="请选择部门" value='{{merchant ? merchant : ""}}' name="merchant_id" disabled></input>
 		</picker>
   </view>
   <view class="info">
-		<view class="left">健康专员:</view>
-		<picker bindchange="IDChange" range="{{identityData}}" range-key="name" value="{{index}}">
-			<input placeholder="请选择健康专员" value='{{identity ? identity : ""}}' name="health_id" disabled></input>
+		<view class="left">健康专员等级:</view>
+		<picker bindchange="healthChange" range="{{helUserList}}" range-key="name" value="{{index}}">
+			<input placeholder="请选择健康专员" value='{{healthUser ? healthUser : ""}}' name="health_id" disabled></input>
 		</picker>
 	</view>
 
 	<view class="submit">
-		<button form-type='submit'>提交信息</button>
+		<button form-type='submit' wx:if="{{state == 1}}" disabled>待审核</button>
+		<button form-type='submit' wx:elif="{{state == 2}}">审核通过</button>
+		<button form-type='submit' wx:elif="{{state == 3}}">审核未通过. 重新提交</button>
+		<button form-type='submit' wx:else>提交信息</button>
 	</view>
 </form>

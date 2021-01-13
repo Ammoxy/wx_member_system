@@ -8,6 +8,11 @@ const url = {
     'DelAdd': '/del/shipping/info', // 删除收货地址
     'ChinaAreas': '/china/areas', // 获取省市区
 
+    'HealthUser': '/health/user', // 获取健康专员等级列表
+    'CreationHealthUser': '/creation/health/user', // 提交健康专员申请
+    'MerchantSelList': '/merchant/select/list', // 获取商家选择列表
+    'HealthDetail': '/health/user/detail', // 获取健康专员详情
+
 
     'ClassifyList': '/classify', // 获取分类列表
 

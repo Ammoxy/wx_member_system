@@ -32,10 +32,10 @@ Page({
     })
     address.addList(wx.getStorageSync('token')).then(res => {
       console.log(res);
-      res.forEach(item => {
-        item.phone = tools.toNorms(item.phone);
-        // console.log(tools.toNorms(item.phone));
-      })
+      // res.forEach(item => {
+      //   item.phone = tools.toNorms(item.phone);
+      //   // console.log(tools.toNorms(item.phone));
+      // })
       self.setData({
         addressData: res
       })
@@ -61,9 +61,8 @@ Page({
       district: e.currentTarget.dataset.district,
     }
     wx.navigateTo({
-      url: '../amendAdd/amendAdd?data=' + JSON.stringify(info) + '&id=' + e.currentTarget.dataset.id,
+      url: '../add/add?data=' + JSON.stringify(info) + '&id=' + e.currentTarget.dataset.id,
     })
-    
   },
 
 })

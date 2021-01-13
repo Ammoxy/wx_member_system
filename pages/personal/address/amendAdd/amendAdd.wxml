@@ -1,4 +1,4 @@
-<form bindsubmit='saveAddress'>
+<!-- <form bindsubmit='saveAddress'>
 	<view class="wrap">
 		<view class="box">
 			<text class="left">收货人</text>
@@ -28,16 +28,6 @@
 					value="{{area ? area : areaList[is_area].title}}"></input>
 			</picker>
 		</view>
-		<!-- <view class="box">
-		<text class="left">所在地区</text>
-		<picker>
-			<input placeholder="省市区" style="width: 60vw;"></input>
-		</picker>
-		<view class="right" bindtap="map">
-			<image src="/icon/gps.png"></image>
-			<text>定位</text>
-		</view>
-	</view> -->
 		<view class="box">
 			<text class="left">详细地址</text>
 			<input placeholder="街道、牌号楼等" name="address" value="{{info.address}}"></input>
@@ -55,4 +45,4 @@
 	<view class="delete">
 		<button class="delete-btn" bindtap="delAdd">删除地址</button>
 	</view>
-</form>
+</form> -->
