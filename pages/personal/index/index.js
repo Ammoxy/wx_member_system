@@ -9,22 +9,17 @@ Page({
         userInfo: null,
         qrCode: '/icon/qrcode.jpg',
         wxInfo: null,
+        type: '',
+        user_id: ''
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        if (wx.getStorageSync('wxInfo')) {
+        if (wx.getStorageSync('token')) {
             this.getInfo() 
         }
-    },
-
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
     },
 
     onShow: function () {
@@ -36,6 +31,8 @@ Page({
             this.setData({
                 isAuthorization: true
             })
+        } else {
+            this.getInfo() 
         }
     },
     getUserInfo(e) {
@@ -63,9 +60,9 @@ Page({
                                             avatarUrl: response.info.avatarUrl,
                                             nickName: response.info.nickName
                                         };
-                                        var health_user = response.userInfo
+                                        // var health_user = response.userInfo
                                         wx.setStorageSync('wxInfo', wxInfo)
-                                        wx.setStorageSync('health_user', health_user)
+                                        // wx.setStorageSync('health_user', health_user)
                                         self.setData({
                                             wxInfo: wxInfo,
                                             isAuthorization: false
@@ -140,9 +137,11 @@ Page({
             wx.removeStorageSync('wxInfo')
         } else {
             wx.navigateTo({
-                url: '/pages/personal/attache/attache',
+                url: '/pages/personal/attache/attache?health_user=' + JSON.stringify(this.data.userInfo) + '&user_id=' + this.data.user_id,
             })
         }
+        console.log(JSON.stringify(null));
+        
     },
 
     getInfo() {
@@ -151,7 +150,9 @@ Page({
             console.log(res);
             if (res) {
                 self.setData({
-                    userInfo: res
+                    userInfo: res,
+                    type: res.type,
+                    user_id: res.user_id
                 })
             }
         })

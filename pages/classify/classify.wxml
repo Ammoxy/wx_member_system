@@ -8,32 +8,37 @@
 
 <view class="main">
 	<!-- 左边导航 -->
-	<scroll-view class="sidebar" scroll-y="true" scroll-into-view="{{leftId}}">
-		<block wx:for="{{classifyData}}" wx:key="{{index}}">
-			<view data-id="{{item.id}}" data-index="{{index}}" id="left{{item.id}}" class="item {{index == num ? 'choose' : ''}}" bindtap="nav">
-
+	<!-- <scroll-view class="sidebar" scroll-y="true" scroll-into-view="{{leftId}}"> -->
+	<view class="sidebar">
+		<block wx:for="{{classifyData}}" wx:key="{{index}}" class="sidebar">
+			<view data-id="{{item.id}}" data-index="{{index}}" id="{{'left' + item.id}}"
+				class="item {{index == num ? 'choose' : ''}}" bindtap="nav">
 				<text>{{item.name}}</text>
 			</view>
 		</block>
-	</scroll-view>
+	</view>
+
+	<!-- </scroll-view> -->
 	<view class="interval"></view>
 	<!-- 右边内容 -->
-	<scroll-view class="container" scroll-y="true" scroll-into-view="{{rightId}}" bindscroll="rightScrollTop">
+	<!-- <scroll-view class="container" scroll-y="true" scroll-into-view="{{rightId}}" bindscroll="rightScrollTop"> -->
+	<view class="container">
 		<view class="box">
 			<block>
-				<view wx:for="{{classifyData}}" id="right{{item.id}}">
-					<view wx:if="{{item.subs}}" wx:for="{{item.subs}}" class="rightblock">
-					<view class="title">{{item.name}}</view>
-					<view class="list" wx:for="{{item.subs}}">
-						<view class="item">
-							<image class="auto-img img-bg" src="{{item.img}}"></image>
-							<view>{{item.name}}</view>
+				<view wx:for="{{classifyRight}}">
+					<view wx:if="{{item.subs}}">
+						<view class="title">{{item.name}}</view>
+						<view class="list" wx:for="{{item.subs}}">
+							<view class="item">
+								<image class="auto-img img-bg" src="{{item.img}}"></image>
+								<view>{{item.name}}</view>
+							</view>
 						</view>
 					</view>
 				</view>
-				</view>
-
 			</block>
 		</view>
-	</scroll-view>
+	</view>
+
+	<!-- </scroll-view> -->
 </view>

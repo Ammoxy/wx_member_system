@@ -6,7 +6,9 @@
 		</view>
 		<view class="name">
 			<view class="nick-name">{{wxInfo.nickName}}</view>
-			<view class="id-tag">普通人员</view>
+			<view class="id-tag" wx:if="{{type == 1}}">普通人员</view>
+			<view class="id-tag" wx:elif="{{type == 2}}">会员</view>
+			<view class="id-tag" wx:elif="{{type == 3}}">健康专员</view>
 		</view>
 	</view>
 	<view class="qrcode">

@@ -13,25 +13,33 @@ Page({
     merchant: '',
     health_id: '',
     merchant_id: '',
-    state: ''
+    state: '',
+    user_id: '',
+    health_user: null,
+    id: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      user_id: options.user_id,
+      health_user: JSON.parse(options.health_user).health_user
+    })
     this.getHelUser();
     this.getMerchant();
-    if (wx.getStorageSync('health_user')) {
-      var health_user = wx.getStorageSync('health_user').health_user;
-      this.getDetail()
+    // console.log(JSON.parse(options.health_user));
+
+    if (JSON.parse(options.health_user).health_user) {
+      this.getDetail();
     }
   },
 
   getDetail() {
     var self = this;
-    var user_id = wx.getStorageSync('health_user').user_id
-    attache.healthDetail(wx.getStorageSync('token'), user_id).then(res => {
+    // var user_id = wx.getStorageSync('health_user').user_id
+    attache.healthDetail(wx.getStorageSync('token'), self.data.user_id).then(res => {
       console.log(res);
       wx.showLoading({
         title: '获取数据中..',
@@ -41,16 +49,17 @@ Page({
             state: res.state,
             userInfo: {
               address: res.address,
-              health_id: res.health_id,
               identity: res.identity,
-              merchant_id: res.merchant_id,
               name: res.name,
               phone: res.phone,
             },
+            health_id: res.health_id,
+            merchant_id: res.merchant_id,
             healthUser: res.health_name,
-            merchant: res.merchant_name
+            merchant: res.merchant_name,
+            id: res.id
           })
-          wx.hideLoading()
+          wx.hideLoading();
         }
       })
     })
@@ -98,17 +107,32 @@ Page({
   registerAttache(e) {
     console.log(e);
     var self = this;
-    self.setData({
-      userInfo: {
-        token: wx.getStorageSync('token'),
-        address: e.detail.value.address,
-        health_id: self.data.health_id,
-        identity: e.detail.value.identity,
-        merchant_id: self.data.merchant_id,
-        name: e.detail.value.name,
-        phone: e.detail.value.phone,
-      }
-    })
+    if (self.data.health_user) {
+      self.setData({
+        userInfo: {
+          token: wx.getStorageSync('token'),
+          address: e.detail.value.address,
+          health_id: self.data.health_id,
+          identity: e.detail.value.identity,
+          merchant_id: self.data.merchant_id,
+          name: e.detail.value.name,
+          phone: e.detail.value.phone,
+          id: self.data.id
+        }
+      })
+    } else {
+      self.setData({
+        userInfo: {
+          token: wx.getStorageSync('token'),
+          address: e.detail.value.address,
+          health_id: self.data.health_id,
+          identity: e.detail.value.identity,
+          merchant_id: self.data.merchant_id,
+          name: e.detail.value.name,
+          phone: e.detail.value.phone,
+        }
+      })
+    }
 
     if (self.data.userInfo.name && self.data.userInfo.address && self.data.userInfo.health_id && self.data.userInfo.identity && self.data.userInfo.merchant_id && self.data.userInfo.phone) {
       attache.register(self.data.userInfo).then(res => {
@@ -116,6 +140,9 @@ Page({
           title: '提交成功, 请等待审核',
           icon: 'none'
         })
+        if (self.data.health_user) {
+          self.getDetail()
+        }
       })
     } else {
       wx.showToast({
