@@ -51,3 +51,7 @@ radio .wx-radio-input.wx-radio-input-checked::before {
   color: #fff;
   font-size: 32rpx;
 }
+
+.ban-color {
+  color: #ccc;
+}

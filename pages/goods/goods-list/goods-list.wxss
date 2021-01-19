@@ -1,0 +1,113 @@
+.search {
+    min-width: 100vw;
+    position: fixed;
+    top: 0;
+    padding: 10rpx;
+    z-index: 99;
+    background-color: #fff;
+}
+
+.search input {
+    width: 630rpx;
+    position: relative;
+    height: 50rpx;
+    line-height: 50rpx;
+    padding: 10rpx 50rpx;
+    border-radius: 5rpx;
+    background-color: rgb(0, 0, 0, 0.1);
+    font-size: 30rpx;
+}
+
+.search image {
+    width: 30rpx;
+    height: 30rpx;
+}
+
+.search .icon-search {
+    position: absolute;
+    top: 30rpx;
+    left: 20rpx;
+}
+
+.search .icon-close {
+    position: absolute;
+    top: 30rpx;
+    right: 40rpx;
+}
+
+/* 排序 */
+.rank {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 8vh;
+    padding: 10rpx 0;
+}
+
+.main {
+    height: 88vh;
+}
+
+.goods {
+    display: flex;
+    padding: 10rpx;
+}
+
+.goods .goods-image {
+    width: 200rpx;
+    height: 200rpx;
+}
+
+.goods .goods-info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 45rpx;
+}
+
+.goods .goods-info .goods-name {
+    width: 480rpx;
+    font-size: 28rpx;
+    font-weight: 700;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+
+.goods .goods-info .goods-name text {
+    padding: 5rpx 10rpx;
+    border-radius: 10rpx;
+    background-color: #cc0033;
+    color: #fff;
+    font-size: 24rpx;
+}
+
+.goods .goods-info .goods-sales {
+    margin-top: 10rpx;
+    font-size: 24rpx;
+}
+
+.goods .goods-info .price {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20rpx;
+    font-size: 24rpx;
+}
+
+.goods .goods-info .price .member {
+    color: #cc0033;
+    font-size: 30rpx;
+}
+
+.goods .goods-info .price .retail {
+    margin-top: 5rpx;
+}
+
+.goods .goods-info .price .goods-views {
+    margin-top: 20rpx;
+    margin-right: 20rpx;
+}
+
+.choose {
+    border-bottom: 4rpx solid #CC0033;
+    color: #CC0033;
+}

@@ -1,16 +1,19 @@
 {
   "pages": [
-
     "pages/personal/index/index",
-    "pages/personal/information/information",
-    "pages/classify/classify",
+    "pages/personal/order/index/index",
+    "pages/goods/detail/detail",
     "pages/car/car",
+    "pages/goods/goods-list/goods-list",
+    "pages/personal/information/information",
     "pages/personal/address/index/index",
     "pages/personal/address/add/add",
     "pages/home/home",
     "pages/personal/address/amendAdd/amendAdd",
-    "pages/personal/attache/attache"
+    "pages/personal/attache/attache",
+    "pages/classify/classify",
 
+    "pages/car/order-detail/order-detail"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,0 +1,158 @@
+<!-- 搜索 -->
+<view class="search">
+	<image class="icon-search" src="/icon/search.png"></image>
+	<input placeholder="搜索我的订单"></input>
+	<!-- 输入了内容在显示关闭按钮 -->
+	<image class="icon-close" src="/icon/close.png"></image>
+</view>
+
+<!-- 排序 -->
+<view class="rank">
+	<view class="{{current == 1 ? 'choose' : ''}}" data-num="1" bindtap="currentTag">全部</view>
+	<view class="{{current == 2 ? 'choose' : ''}}" data-num="2" bindtap="currentTag">待付款</view>
+	<view class="{{current == 3 ? 'choose' : ''}}" data-num="3" bindtap="currentTag">待发货</view>
+	<view class="{{current == 4 ? 'choose' : ''}}" data-num="4" bindtap="currentTag">待收货</view>
+	<view class="{{current == 5 ? 'choose' : ''}}" data-num="5" bindtap="currentTag">待评价</view>
+</view>
+
+<!-- 订单列表 -->
+<scroll-view scroll-y="true">
+	<view class="list">
+		<!-- 全部订单 -->
+		<block wx:if="{{current == 1}}">
+			<block>
+				<view class="item">
+					<view class="state">
+						<text>交易成功 </text>
+						<text>交易关闭 </text>
+						<text>| 删除</text>
+					</view>
+					<view class="goods">
+						<view>
+							<image src="/icon/add.png"></image>
+						</view>
+						<view class="info">
+							<view class="name">商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题</view>
+						</view>
+					</view>
+					<view class="handle">
+						<view class="button" style="background-color: #cc0033;">去评价</view>
+						<view class="button" style="background-color: #cc0033;">再来一单</view>
+						<view></view>
+					</view>
+				</view>
+				<view class="item">
+					<view class="state">
+						<text>交易成功</text>
+						<text>交易关闭</text>
+					</view>
+					<view class="goods">
+						<view>
+							<image src="/icon/add.png"></image>
+						</view>
+						<view class="info">
+							<view class="name">商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题</view>
+						</view>
+					</view>
+				</view>
+			</block>
+		</block>
+		<!-- 待付款 -->
+		<block wx:if="{{current == 2}}">
+			<view class="item">
+				<view class="state">
+					<text>交易成功 </text>
+					<text>交易关闭 </text>
+					<text>| 删除</text>
+				</view>
+				<view class="goods">
+					<view>
+						<image src="/icon/add.png"></image>
+					</view>
+					<view class="info">
+						<view class="name">商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题</view>
+					</view>
+				</view>
+				<view class="handle">
+					<view class="button" style="background-color: #cc0033;">去付款</view>
+
+					<view class="button" style="background-color: #cc0033;">取消订单</view>
+					<view></view>
+
+				</view>
+			</view>
+		</block>
+		<!-- 待发货 -->
+		<block wx:if="{{current == 3}}">
+			<view class="item">
+				<view class="state">
+					<text>交易成功 </text>
+					<text>交易关闭 </text>
+					<text>| 删除</text>
+				</view>
+				<view class="goods">
+					<view>
+						<image src="/icon/add.png"></image>
+					</view>
+					<view class="info">
+						<view class="name">商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题</view>
+					</view>
+				</view>
+				<view class="handle">
+
+
+					<view class="button" style="background-color: #cc0033;">再来一单</view>
+					<view></view>
+
+				</view>
+			</view>
+		</block>
+		<!-- 待收货 -->
+		<block wx:if="{{current == 4}}">
+			<view class="item">
+				<view class="state">
+					<text>交易成功 </text>
+					<text>交易关闭 </text>
+					<text>| 删除</text>
+				</view>
+				<view class="goods">
+					<view>
+						<image src="/icon/add.png"></image>
+					</view>
+					<view class="info">
+						<view class="name">商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题</view>
+					</view>
+				</view>
+				<view class="handle">
+
+
+					<view class="button" style="background-color: #cc0033;">确认收货</view>
+					<view></view>
+
+				</view>
+			</view>
+		</block>
+		<!-- 待评价 -->
+		<block wx:if="{{current == 5}}">
+			<view class="item">
+				<view class="state">
+					<text>交易成功 </text>
+					<text>交易关闭 </text>
+					<text>| 删除</text>
+				</view>
+				<view class="goods">
+					<view>
+						<image src="/icon/add.png"></image>
+					</view>
+					<view class="info">
+						<view class="name">商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题</view>
+					</view>
+				</view>
+				<view class="handle">
+					<view class="button" style="background-color: #cc0033;">去评价</view>
+
+				</view>
+			</view>
+		</block>
+	</view>
+</scroll-view>

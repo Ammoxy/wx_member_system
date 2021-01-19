@@ -92,18 +92,15 @@ Page({
         self.setData({
           userInfo: res
         })
-        wx.showLoading({
-          title: '提交中',
-          icon: "loading",
+        wx.showToast({
+          title: '提交成功',
+          icon: 'none',
           success: () => {
-            wx.hideLoading();
-            wx.showToast({
-              icon: "none",
-              title: '提交成功',
-            });
+            wx.navigateBack({
+              delta: 1,
+            })
           }
         })
-
       })
     } else {
       wx.showToast({

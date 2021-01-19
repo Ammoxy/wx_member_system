@@ -15,8 +15,11 @@ Page({
     merchant_id: '',
     state: '',
     user_id: '',
-    health_user: null,
-    id: ''
+    // health_user: null,
+    id: '',
+    isSave: false, // 提交按钮
+    detailData: null,
+    disabled: false
   },
 
   /**
@@ -25,26 +28,28 @@ Page({
   onLoad: function (options) {
     this.setData({
       user_id: options.user_id,
-      health_user: JSON.parse(options.health_user).health_user
+      // health_user: JSON.parse(options.health_user).health_user
     })
     this.getHelUser();
     this.getMerchant();
     // console.log(JSON.parse(options.health_user));
+    this.getDetail();
 
-    if (JSON.parse(options.health_user).health_user) {
-      this.getDetail();
-    }
+   
+
+    // if (JSON.parse(options.health_user).health_user) {
+    // }
   },
 
   getDetail() {
     var self = this;
     // var user_id = wx.getStorageSync('health_user').user_id
-    attache.healthDetail(wx.getStorageSync('token'), self.data.user_id).then(res => {
-      console.log(res);
-      wx.showLoading({
-        title: '获取数据中..',
-        icon: 'none',
-        success: () => {
+    wx.showLoading({
+      title: '获取数据中..',
+      icon: 'none',
+      success: () => {
+        attache.healthApplyDetail(wx.getStorageSync('token'), self.data.user_id).then(res => {
+          console.log(res);
           self.setData({
             state: res.state,
             userInfo: {
@@ -57,11 +62,20 @@ Page({
             merchant_id: res.merchant_id,
             healthUser: res.health_name,
             merchant: res.merchant_name,
-            id: res.id
+            id: res.id,
+            detailData: res
           })
+          if (self.data.state == 1) {
+            this.setData({
+              disabled: true
+            })
+          }
           wx.hideLoading();
-        }
-      })
+
+        }).catch(err => {
+          console.log(err);
+        })
+      }
     })
   },
 
@@ -81,7 +95,8 @@ Page({
 
     self.setData({
       healthUser: self.data.helUserList[e.detail.value].name,
-      health_id: self.data.helUserList[e.detail.value].id
+      health_id: self.data.helUserList[e.detail.value].id,
+      isSave: true
     })
   },
 
@@ -100,55 +115,91 @@ Page({
     var self = this;
     self.setData({
       merchant: self.data.merchantList[e.detail.value].name,
-      merchant_id: self.data.merchantList[e.detail.value].id
+      merchant_id: self.data.merchantList[e.detail.value].id,
+      isSave: true
     })
   },
 
   registerAttache(e) {
     console.log(e);
     var self = this;
-    if (self.data.health_user) {
-      self.setData({
-        userInfo: {
-          token: wx.getStorageSync('token'),
-          address: e.detail.value.address,
-          health_id: self.data.health_id,
-          identity: e.detail.value.identity,
-          merchant_id: self.data.merchant_id,
-          name: e.detail.value.name,
-          phone: e.detail.value.phone,
-          id: self.data.id
-        }
-      })
-    } else {
-      self.setData({
-        userInfo: {
-          token: wx.getStorageSync('token'),
-          address: e.detail.value.address,
-          health_id: self.data.health_id,
-          identity: e.detail.value.identity,
-          merchant_id: self.data.merchant_id,
-          name: e.detail.value.name,
-          phone: e.detail.value.phone,
-        }
-      })
-    }
+    // if (self.data.health_user) {
+    //   self.setData({
+    //     userInfo: {
+    //       token: wx.getStorageSync('token'),
+    //       address: e.detail.value.address,
+    //       health_id: self.data.health_id,
+    //       identity: e.detail.value.identity,
+    //       merchant_id: self.data.merchant_id,
+    //       name: e.detail.value.name,
+    //       phone: e.detail.value.phone,
+    //       id: self.data.id
+    //     }
+    //   })
+    // } else {
+    self.setData({
+      userInfo: {
+        token: wx.getStorageSync('token'),
+        address: e.detail.value.address,
+        health_id: self.data.health_id,
+        identity: e.detail.value.identity,
+        merchant_id: self.data.merchant_id,
+        name: e.detail.value.name,
+        phone: e.detail.value.phone,
+      }
+    })
+    // }
 
-    if (self.data.userInfo.name && self.data.userInfo.address && self.data.userInfo.health_id && self.data.userInfo.identity && self.data.userInfo.merchant_id && self.data.userInfo.phone) {
-      attache.register(self.data.userInfo).then(res => {
-        wx.showToast({
-          title: '提交成功, 请等待审核',
-          icon: 'none'
-        })
-        if (self.data.health_user) {
-          self.getDetail()
-        }
-      })
-    } else {
+    if ((self.data.userInfo.address == self.data.detailData.address) && (self.data.userInfo.health_id == self.data.detailData.health_id) && (self.data.userInfo.identity == self.data.detailData.identity) && (self.data.userInfo.merchant_id == self.data.detailData.merchant_id) && (self.data.userInfo.name == self.data.detailData.name) && (self.data.userInfo.phone == self.data.detailData.phone)) {
       wx.showToast({
-        title: '请填写完整信息',
+        title: '信息相同, 无法重复提交',
         icon: 'none'
       })
+    } else {
+      if (self.data.userInfo.name && self.data.userInfo.address && self.data.userInfo.health_id && self.data.userInfo.identity && self.data.userInfo.merchant_id && self.data.userInfo.phone) {
+        attache.register(self.data.userInfo).then(res => {
+          wx.showToast({
+            title: '提交成功, 请等待审核',
+            icon: 'none'
+          })
+          self.setData({
+            isSave: false
+          })
+          // if (self.data.health_user) {
+          self.getDetail()
+          // }
+        })
+      } else {
+        wx.showToast({
+          title: '请填写完整信息',
+          icon: 'none'
+        })
+      }
     }
+  },
+
+  nameBlur(e) {
+    this.setData({
+      // isSave: true,
+      name: e.detail.value
+    })
+  },
+  phoneBlur(e) {
+    this.setData({
+      isSave: true,
+      name: e.detail.value
+    })
+  },
+  identityBlur(e) {
+    this.setData({
+      isSave: true,
+      name: e.detail.value
+    })
+  },
+  addressBlur(e) {
+    this.setData({
+      isSave: true,
+      name: e.detail.value
+    })
   },
 })

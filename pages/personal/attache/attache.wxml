@@ -1,37 +1,37 @@
 <form bindsubmit='registerAttache'>
 	<view class="info">
 		<view class="left">姓名:</view>
-		<input placeholder="请输入姓名" value='{{userInfo.name}}' name="name"></input>
+		<input class="{{disabled == true ? 'ban-color' : ''}}" placeholder="请输入姓名" value='{{userInfo.name}}' name="name" bindblur="nameBlur" disabled="{{disabled}}"></input>
 	</view>
 	<view class="info">
 		<view class="left">电话:</view>
-		<input placeholder="请输入电话" value='{{userInfo.phone}}' name="phone"></input>
+		<input class="{{disabled == true ? 'ban-color' : ''}}" placeholder="请输入电话" value='{{userInfo.phone}}' name="phone" bindblur="phoneBlur" disabled="{{disabled}}"></input>
   </view>
   <view class="info">
 		<view class="left">身份证号:</view>
-		<input placeholder="请输入身份证" value='{{userInfo.identity}}' name="identity"></input>
+		<input class="{{disabled == true ? 'ban-color' : ''}}" placeholder="请输入身份证" value='{{userInfo.identity}}' name="identity" bindblur="identityBlur" disabled="{{disabled}}"></input>
   </view>
   <view class="info">
 		<view class="left">地址:</view>
-		<input placeholder="请输入地址" value='{{userInfo.address}}' name="address"></input>
+		<input class="{{disabled == true ? 'ban-color' : ''}}" placeholder="请输入地址" value='{{userInfo.address}}' name="address" bindblur="addressBlur" disabled="{{disabled}}"></input>
 	</view>
 	<view class="info">
 		<view class="left">部门:</view>
-		<picker bindchange="merchantChange" range="{{merchantList}}" range-key="name" value="{{index}}">
-			<input placeholder="请选择部门" value='{{merchant ? merchant : ""}}' name="merchant_id" disabled></input>
+		<picker bindchange="merchantChange" range="{{merchantList}}" range-key="name" value="{{index}}" disabled="{{disabled}}">
+			<input class="{{disabled == true ? 'ban-color' : ''}}" placeholder="请选择部门" value='{{merchant ? merchant : ""}}' name="merchant_id" disabled></input>
 		</picker>
   </view>
   <view class="info">
 		<view class="left">健康专员等级:</view>
-		<picker bindchange="healthChange" range="{{helUserList}}" range-key="name" value="{{index}}">
-			<input placeholder="请选择健康专员" value='{{healthUser ? healthUser : ""}}' name="health_id" disabled></input>
+		<picker bindchange="healthChange" range="{{helUserList}}" range-key="name" value="{{index}}" disabled="{{disabled}}">
+			<input class="{{disabled == true ? 'ban-color' : ''}}" placeholder="请选择健康专员" value='{{healthUser ? healthUser : ""}}' name="health_id" disabled></input>
 		</picker>
 	</view>
 
-	<view class="submit">
-		<button form-type='submit' wx:if="{{state == 1}}" disabled>待审核</button>
-		<button form-type='submit' wx:elif="{{state == 2}}">审核通过</button>
-		<button form-type='submit' wx:elif="{{state == 3}}">审核未通过. 重新提交</button>
-		<button form-type='submit' wx:else>提交信息</button>
+	<view class="submit" wx:if="{{isSave}}">
+		<button form-type='submit'>提交信息</button>
+	</view>
+	<view class="submit" wx:if="{{state == 1}}">
+		<button disabled>待审核</button>
 	</view>
 </form>

@@ -1,44 +1,33 @@
+<!-- 全部删除 -->
+<view class="mag delete">
+	<view bindtap="toMag" wx:if="{{isShow}}">完成</view>
+	<view bindtap="toMag" wx:else>管理</view>
+</view>
 <scroll-view scroll-y="true">
 	<view class="container">
 		<block>
-			<view class="list">
+			<view class="list" wx:for="{{carts}}">
 				<view>
-					<radio bindtap="choseShop">
-						<image src="/icon/my1.png" style="width: 200rpx;height:200rpx;"></image>
+					<radio bindtap="choseShop" checked="{{item.isCheck}}" value="{{item.good_id}}" data-id="{{item.good_id}}"
+						data-index="{{index}}" data-count="{{item.count}}" data-price="{{item.good.price}}" data-vip="{{item.good.vip_price}}">
+						<image src="{{item.good.img}}" style="width: 200rpx;height:200rpx;"></image>
 					</radio>
 				</view>
 				<view class="goods">
 					<view class="title">
-						<view>标题艰苦环境尽快改好就刚好看见</view>
-						<image src="/icon/my1.png" style="width: 40rpx;height:40rpx;"></image>
+						<view>{{item.good.name}}</view>
+						<!-- <image src="/icon/delete.png" style="width: 40rpx;height:40rpx;" bindtap="toDel" data-index="{{index}}" data-id="{{item.good.id}}">
+						</image> -->
 					</view>
 					<view class="number">
-						<view class="price">￥36.99</view>
+						<view class="price" wx:if="{{user_type == 3 || user_type == 2}}">￥{{item.good.vip_price}}</view>
+						<view class="price" wx:else>￥{{item.good.price}}</view>
 						<view class="buy">
-							<text class="subtract" bindtap="toSubtract">-</text>
-							<text class="total">{{total}}</text>
-							<text class="add" bindtap="toAdd">+</text>
-						</view>
-					</view>
-				</view>
-			</view>
-			<view class="list">
-				<view>
-					<radio>
-						<image src="/icon/my1.png" style="width: 200rpx;height:200rpx;"></image>
-					</radio>
-				</view>
-				<view class="goods">
-					<view class="title">
-						<view>标题艰苦环境尽快改好就刚好看见</view>
-						<image src="/icon/my1.png" style="width: 40rpx;height:40rpx;"></image>
-					</view>
-					<view class="number">
-						<view class="price">￥36.99</view>
-						<view class="buy">
-							<text class="subtract">-</text>
-							<text class="total">7543</text>
-							<text class="add">+</text>
+							<text class="subtract" bindtap="toSubtract" data-count="{{item.count}}" data-id="{{item.good.id}}"
+								data-price="{{item.good.price}}" data-index="{{index}}">-</text>
+							<input class="total ta" value="{{item.count}}"></input>
+							<text class="add" bindtap="toAdd" data-count="{{item.count}}" data-id="{{item.good.id}}"
+								data-price="{{item.good.price}}" data-index="{{index}}">+</text>
 						</view>
 					</view>
 				</view>
@@ -52,12 +41,15 @@
 <view class="box">
 	<view class="settlement">
 		<view>
-			<radio>全选</radio>
+			<radio bindtap="allCheck" checked="{{isAllCheck}}">全选</radio>
 		</view>
-		<view class="total">
-			<view class="number">共件</view>
-			<view class="sum">总计:<text style="color:#cc0033">￥</text></view>
-			<view class="pay">结算</view>
+		<view class="total" wx:if="{{!isShow}}">
+			<view class="number">共件: {{totalCount}}</view>
+			<view class="sum">总计:<text style="color:#cc0033">￥ {{totalPrice}}</text></view>
+			<view class="pay" bindtap="toAccount">结算</view>
+		</view>
+		<view class="total" wx:else>
+			<view class="pay" bindtap="toDelAll">删除</view>
 		</view>
 	</view>
 </view>

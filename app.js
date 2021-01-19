@@ -70,6 +70,6 @@ App({
 
   globalData: {
     userInfo: null,
-    
+    userType: null
   }
 })

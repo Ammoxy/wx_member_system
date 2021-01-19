@@ -26,7 +26,7 @@
 <view class="order">
 	<view class="title">
 		<text>我的订单</text>
-		<view class="view-all">
+		<view class="view-all" bindtap="toAllOrder">
 			<text>查看全部</text>
 			<image src="/icon/right.png"></image>
 		</view>

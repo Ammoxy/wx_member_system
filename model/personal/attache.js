@@ -33,6 +33,23 @@ attache.healthDetail = function (token, user_id) {
   })
 }
 
+// 申请详情
+attache.healthApplyDetail = function (token, user_id) {
+    return new Promise((resolve, reject) => {
+        api.get(api.baseUrl.host, api.url.HealthApplyDetail, {
+          token: token,
+          user_id: user_id
+        }, function (response) {
+            if(response.code === 10000) {
+                var res = response.result
+                resolve(res);
+            } else {
+                reject(response);
+            }
+        })
+    })
+  }
+
 // 获取健康专员等级列表
 attache.healthUser = function (token) {
   return new Promise((resolve, reject) => {

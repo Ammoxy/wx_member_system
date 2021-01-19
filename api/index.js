@@ -9,6 +9,13 @@ var header = {
   // 'token': ''
 }
 
+var header1 = {
+  'Accept': 'application/json',
+  'content-type': 'application/json'
+  // 'Authorization': null,
+  // 'token': ''
+}
+
 // header.token = wx.getStorageSync('token')
 
 function queryData(data) {

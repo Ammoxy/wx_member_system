@@ -7,12 +7,46 @@ page {
     height: 88vh;
 }
 
+.delete {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10rpx;
+}
+
+.delete view { 
+    width: 150rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    border-radius: 30rpx;
+    text-align: center;
+    background-color: #cc0033;
+    color: #fff;
+    font-size: 26rpx;
+}
+
 .container .list {
     display: flex;
-    margin-top: 10rpx;
+    margin-bottom: 10rpx;
     border-radius: 20rpx;
     background-color: #fff;
 }
+
+.container .list radio{
+   margin: 20rpx;
+}
+
+/* 修改radio选中时样式 */
+
+radio .wx-radio-input.wx-radio-input-checked::before {
+    width: 65rpx;
+    height: 65rpx;
+    line-height: 65rpx;
+    text-align: center;
+    margin: 0 0 0 0;
+    background-color: #cc0033;
+    border-radius: 50%;
+    border: 1rpx solid #cc0033;
+  }
 
 .container .list .goods {
     display: flex;
@@ -44,10 +78,21 @@ page {
     color: #cc0033;
 }
 
-.container .list .goods .number .buy text {
+.container .list .goods .number .buy {
+    display: flex;
+}
+
+.container .list .goods .number .buy text,
+.container .list .goods .number .buy input {
+    height: 50rpx;
+    line-height: 50rpx;
     padding: 5rpx 20rpx;
     margin-left: 5rpx;
     background-color: #ccc;
+}
+
+.container .list .goods .number .buy input {
+    width: 60rpx;
 }
 
 
@@ -101,4 +146,12 @@ page {
     border-radius: 30rpx;
     background-color: #cc0033;
     color: #fff;
+}
+
+.ta {
+    text-align: center;
+}
+
+.mag {
+    background-color: #fff;
 }

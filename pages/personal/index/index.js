@@ -149,6 +149,7 @@ Page({
         infomation.userInfo(wx.getStorageSync('token')).then(res => {
             console.log(res);
             if (res) {
+                app.globalData.userType = res.type;
                 self.setData({
                     userInfo: res,
                     type: res.type,
@@ -157,5 +158,11 @@ Page({
             }
         })
     },
+    // 查看全部订单
+    toAllOrder() {
+        wx.navigateTo({
+          url: '/pages/personal/order/index/index',
+        })
+    }
 
 })
