@@ -79,7 +79,7 @@ Page({
                         currentPage: self.data.page,
                         perPage: self.data.limit,
                         order: 'sales',
-                        type: 'asc'
+                        type: 'desc'
                     }
                 })
             } else {
@@ -89,7 +89,7 @@ Page({
                         currentPage: self.data.page,
                         perPage: self.data.limit,
                         order: 'sales',
-                        type: 'desc'
+                        type: 'asc'
                     }
                 })
             }
@@ -102,7 +102,7 @@ Page({
                         currentPage: self.data.page,
                         perPage: self.data.limit,
                         order: 'price',
-                        type: 'asc'
+                        type: 'desc'
                     }
                 })
             } else {
@@ -112,7 +112,7 @@ Page({
                         currentPage: self.data.page,
                         perPage: self.data.limit,
                         order: 'price',
-                        type: 'desc'
+                        type: 'asc'
                     }
                 })
             }
@@ -124,7 +124,7 @@ Page({
                         token: wx.getStorageSync('token'),
                         currentPage: self.data.page,
                         perPage: self.data.limit,
-                        type: 'asc'
+                        type: 'desc'
                     }
                 })
             } else {
@@ -133,7 +133,7 @@ Page({
                         token: wx.getStorageSync('token'),
                         currentPage: self.data.page,
                         perPage: self.data.limit,
-                        type: 'desc'
+                        type: 'asc'
                     }
                 })
             }

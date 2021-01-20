@@ -28,32 +28,32 @@
 		<text>我的订单</text>
 		<view class="view-all" bindtap="toAllOrder">
 			<text>查看全部</text>
-			<image src="/icon/right.png"></image>
+			<image src="/icon/right2.png"></image>
 		</view>
 
 	</view>
 	<view class="list">
-		<view class="item">
+		<view class="item" data-num="1" bindtap="toPay">
 			<view class="dot">12</view>
 			<image class="auto-img" src="../../../icon/pay.png"></image>
 			<view>待支付</view>
 		</view>
-		<view class="item">
+		<view class="item" data-num="2" bindtap="toSend">
 			<view class="dot"></view>
 			<image class="auto-img" src="../../../icon/wait-send.png"></image>
 			<view>待发货</view>
 		</view>
-		<view class="item">
+		<view class="item" data-num="3" bindtap="toCollect">
 			<view class="dot"></view>
 			<image class="auto-img" src="../../../icon/wait_collect.png"></image>
 			<view>待收货</view>
 		</view>
-		<view class="item">
+		<view class="item" data-num="4" bindtap="toDis">
 			<view class="dot"></view>
 			<image class="auto-img" src="../../../icon/comment.png"></image>
 			<view>待评价</view>
 		</view>
-		<view class="item">
+		<view class="item" bindtap="toRefund"> 
 			<view class="dot"></view>
 			<image class="auto-img" src="../../../icon/refund.png"></image>
 			<view>待退款</view>

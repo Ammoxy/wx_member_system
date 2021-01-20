@@ -28,6 +28,8 @@ const url = {
     'UserOrder': '/creation/user/order', // 创建会员订单
     'CreationOrder': '/creation/order', // 创建订单
 
+    'Banners': '/banner/list', // 获取轮播图列表
+
 };
 
 module.exports = url;

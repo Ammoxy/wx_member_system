@@ -1,4 +1,5 @@
 // pages/home/home.js
+var bannerAPI = require('../../model/home/banner')
 Page({
 
   /**
@@ -6,65 +7,27 @@ Page({
    */
   data: {
     showFoot: false,
+    bannerList: [],
     information: [{
       imgList: ['../../icon/8c1001e93901213f5347ebb256e736d12f2e956c.jpg', '../../icon/8c1001e93901213f5347ebb256e736d12f2e956c.jpg', '../../icon/8c1001e93901213f5347ebb256e736d12f2e956c.jpg'],
       detailsTitle: '精选测试',
     }, ]
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-
+    this.getBanner()
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
 
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  getBanner() {
+    var self = this;
+    bannerAPI.banners().then(res => {
+      self.setData({
+        bannerList: res
+      })
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

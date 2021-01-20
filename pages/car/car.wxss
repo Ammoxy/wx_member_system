@@ -5,12 +5,13 @@ page {
 
 .container {
     height: 88vh;
+    margin-top: 10rpx;
 }
 
 .delete {
     display: flex;
     justify-content: flex-end;
-    margin: 10rpx;
+    padding: 10rpx;
 }
 
 .delete view { 

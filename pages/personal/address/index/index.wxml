@@ -4,7 +4,7 @@
 <scroll-view scroll-y="true">
 	<view class="box">
 		<view class="list" wx:for="{{addressData}}">
-			<view class="info">
+			<view class="info" bindtap="choseAdd" data-name="{{item.name}}" data-phone="{{item.phone}}"data-address="{{item.address}}" data-id="{{item.id}}">
 				<view class="name">{{item.name}} <text>{{tools.tool(item.phone)}}</text></view>
 				<view>
 					<text class="default" wx:if="{{item.is_default == 1}}">默认</text>{{item.address}}

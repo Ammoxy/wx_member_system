@@ -15,7 +15,7 @@
 				</view>
 				<view class="goods">
 					<view class="title">
-						<view>{{item.good.name}}</view>
+						<view>{{item.good.intro}}</view>
 						<!-- <image src="/icon/delete.png" style="width: 40rpx;height:40rpx;" bindtap="toDel" data-index="{{index}}" data-id="{{item.good.id}}">
 						</image> -->
 					</view>
@@ -25,7 +25,7 @@
 						<view class="buy">
 							<text class="subtract" bindtap="toSubtract" data-count="{{item.count}}" data-id="{{item.good.id}}"
 								data-price="{{item.good.price}}" data-index="{{index}}">-</text>
-							<input class="total ta" value="{{item.count}}"></input>
+							<input class="total ta" value="{{item.count}}" disabled></input>
 							<text class="add" bindtap="toAdd" data-count="{{item.count}}" data-id="{{item.good.id}}"
 								data-price="{{item.good.price}}" data-index="{{index}}">+</text>
 						</view>

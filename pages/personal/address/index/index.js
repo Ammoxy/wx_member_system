@@ -7,13 +7,26 @@ Page({
    * 页面的初始数据
    */
   data: {
-    addressData: []
+    addressData: [],
+    isOrder: false, // 订单选择地址
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options);
+
+    if (options.superiors) {
+      this.setData({
+        isOrder: true
+      })
+    } else {
+      this.setData({
+        isOrder: false
+      })
+    }
+
     this.getList()
   },
   onShow: function () {
@@ -63,6 +76,31 @@ Page({
     wx.navigateTo({
       url: '../add/add?data=' + JSON.stringify(info) + '&id=' + e.currentTarget.dataset.id,
     })
+  },
+
+  choseAdd(e) {
+    console.log(e);
+    var self = this;
+    // wx.navigateBack({
+    //   delta: 0,
+    // })
+    if (self.data.isOrder) {
+      var pages = getCurrentPages();
+      var prevPage = pages[pages.length - 2];
+      var address = 'addressInfo.address';
+      var phone = 'addressInfo.phone';
+      var id = 'addressInfo.id';
+      var name = 'addressInfo.name'
+      prevPage.setData({
+        [address]: e.currentTarget.dataset.address,
+        [id]: e.currentTarget.dataset.id,
+        [phone]: e.currentTarget.dataset.phone,
+        [name]: e.currentTarget.dataset.name,
+      })
+      wx.navigateBack({
+        delta: 1
+      })
+    }
   },
 
 })

@@ -1,2 +1,69 @@
-<!--pages/car/order-detail/order-detail.wxml-->
-<text>pages/car/order-detail/order-detail.wxml</text>
+<form bindsubmit="toAccount"></form>
+<view class="pay-content">
+  <view class="fetch-box">
+    <text class="left default">到店自取</text>
+    <switch name="fetch" checked="{{fetch}}" bindtap="toSet"></switch>
+  </view>
+  <!-- 选择收货地址 -->
+  <block>
+    <view wx:if="{{fetch}}" class="address-box">
+      <text class="left">商家地址</text>
+      <picker bindchange="addressChange" range="{{merchantList}}" range-key="address" value="{{index}}">
+        <input class="input" placeholder='请选择商家地址' disabled name="merchant_id"
+          value="{{merchant ? merchant : merchantList[is_merchant].name}}"></input>
+      </picker>
+    </view>
+    <view class="address-box" bindtap="toAdd" wx:else>
+      <view class="img-box">
+        <image class="auto-img" src="/icon/loc.png"></image>
+      </view>
+      <view class="address">
+        <view class="user_info"><text>{{addressInfo.name}}</text><text>{{addressInfo.phone}}</text></view>
+        <view class="user_add">{{addressInfo.address}}</view>
+      </view>
+      <view class="right-icon">
+        <image class="auto-img" src="/icon/right.png"></image>
+      </view>
+    </view>
+  </block>
+
+  <!-- 订单内容 -->
+  <view class="order-content">
+    <view class="order-item" wx:for="{{orderData}}">
+      <view class="item">
+        <view class="pro-img">
+          <image class="auto-img" src="{{item.img}}" />
+        </view>
+        <view class="pro-desc">
+          <view class="pro-name">
+            <!-- <view class="ch-name">{{item.name}}</view> -->
+            <view class="en-name">{{item.intro}}{{item.intro}}</view>
+          </view>
+          <!-- <view class="pro-rule">运费: {{item.eight}}</view> -->
+        </view>
+        <view class="pro-info">
+          <view class="pro-price">￥{{item.price}}</view>
+          <view class="pro-count">x{{item.count}}</view>
+        </view>
+      </view>
+      <view class="item">
+        <view class="price-box">
+          <text class="text">共计 {{item.count}} 件商品 运费: {{item.freight}} 合计：</text>
+          <text class="price">￥{{totalPrice}}</text>
+        </view>
+      </view>
+      <!-- <view class="item bottom-item"></view> -->
+    </view>
+  </view>
+</view>
+
+<!--底部结算  -->
+<view class="box">
+  <view class="settlement">
+    <view class="total">
+      <view class="number">共件: {{totalCount}}</view>
+      <view class="sum">总计:<text style="color:#cc0033">￥ {{totalPrice}}</text></view>
+      <view class="pay" bindtap="toAccount">创建订单</view>
+    </view>
+  </view>
+</view>

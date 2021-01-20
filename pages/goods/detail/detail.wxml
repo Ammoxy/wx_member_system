@@ -17,8 +17,10 @@
 			<view class="name">
 				{{details.intro}}</view>
 			<view class="profile">
-				<view class="price" style="color: #cc0033;font-size: 36rpx;" wx:if="{{user_type == 3 || user_type == 2}}">
+				<view class="price" style="color: #cc0033;font-size: 36rpx;" wx:if="{{user_id == 2}}">
 					￥{{details.vip_price}}</view>
+				<view class="price" style="color: #cc0033;font-size: 36rpx;" wx:elif="{{user_id == 1}}">
+					￥{{details.price}}</view>
 				<view class="price" style="color: #cc0033;font-size: 36rpx;" wx:else>￥{{details.price}}</view>
 				<view>
 					<text style="color: #666666;font-size: 26rpx;padding-right: 10rpx;">销量:{{details.sales}}</text>
@@ -35,14 +37,15 @@
 		</view>
 	</view>
 </view>
-<view wx:if="{{user_id == 1}}" class="btn-box">
+<view class="btn-box">
 	<view class="buy">
 		<text class="subtract" bindtap="toSubtract">-</text>
-		<input class="total ta" value="{{count}}"></input>
+		<input class="total ta" value="{{count}}" bindblur="iptCount"></input>
 		<text class="add" bindtap="toAdd">+</text>
 	</view>
-	<button bindtap="addOrder" class="add-btn">添加订单</button>
+	<button bindtap="addOrder" class="add-btn" wx:if="{{user_id == 1}}">添加订单</button>
+	<button bindtap="addCar" class="add-btn" wx:else>加入购物车</button>
 </view>
-<view wx:else class=".btn-box">
+<!-- <view wx:else class=".btn-box">
 	<button bindtap="addCar" class="btn-bg">加入购物车</button>
-</view>
+</view> -->

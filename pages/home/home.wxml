@@ -7,9 +7,9 @@
           <image mode="aspectFill" src="{{item.carouselImages}}" class="slide-image" />
         </swiper-item>
       </block> -->
-      <block>
+      <block wx:for="{{bannerList}}">
         <swiper-item>
-          <image mode="aspectFill" src="../../icon/8c1001e93901213f5347ebb256e736d12f2e956c.jpg" class="slide-image" />
+          <image mode="aspectFill" src="{{item.img}}" class="slide-image" />
         </swiper-item>
       </block>
     </swiper>

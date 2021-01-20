@@ -6,8 +6,19 @@ Page({
      * 页面的初始数据
      */
     data: {
-        current: 1,
+        current: 0,
 
+    },
+
+    onLoad(option) {
+        console.log(option);
+        
+        this.setData({
+            current: Number(option.num)
+        })
+
+        console.log(this.data.current);
+        
     },
 
     currentTag(e) {

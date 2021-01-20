@@ -319,5 +319,4 @@ Page({
             isShow: !self.data.isShow
         })
     },
-
 })

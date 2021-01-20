@@ -8,18 +8,18 @@
 
 <!-- 排序 -->
 <view class="rank">
-	<view class="{{current == 1 ? 'choose' : ''}}" data-num="1" bindtap="currentTag">全部</view>
-	<view class="{{current == 2 ? 'choose' : ''}}" data-num="2" bindtap="currentTag">待付款</view>
-	<view class="{{current == 3 ? 'choose' : ''}}" data-num="3" bindtap="currentTag">待发货</view>
-	<view class="{{current == 4 ? 'choose' : ''}}" data-num="4" bindtap="currentTag">待收货</view>
-	<view class="{{current == 5 ? 'choose' : ''}}" data-num="5" bindtap="currentTag">待评价</view>
+	<view class="{{current == 0 ? 'choose' : ''}}" data-num="0" bindtap="currentTag">全部</view>
+	<view class="{{current == 1 ? 'choose' : ''}}" data-num="1" bindtap="currentTag">待付款</view>
+	<view class="{{current == 2 ? 'choose' : ''}}" data-num="2" bindtap="currentTag">待发货</view>
+	<view class="{{current == 3 ? 'choose' : ''}}" data-num="3" bindtap="currentTag">待收货</view>
+	<view class="{{current == 4 ? 'choose' : ''}}" data-num="4" bindtap="currentTag">待评价</view>
 </view>
 
 <!-- 订单列表 -->
 <scroll-view scroll-y="true">
 	<view class="list">
 		<!-- 全部订单 -->
-		<block wx:if="{{current == 1}}">
+		<block wx:if="{{current == 0}}">
 			<block>
 				<view class="item">
 					<view class="state">
@@ -58,7 +58,7 @@
 			</block>
 		</block>
 		<!-- 待付款 -->
-		<block wx:if="{{current == 2}}">
+		<block wx:if="{{current == 1}}">
 			<view class="item">
 				<view class="state">
 					<text>交易成功 </text>
@@ -83,7 +83,7 @@
 			</view>
 		</block>
 		<!-- 待发货 -->
-		<block wx:if="{{current == 3}}">
+		<block wx:if="{{current == 2}}">
 			<view class="item">
 				<view class="state">
 					<text>交易成功 </text>
@@ -108,7 +108,7 @@
 			</view>
 		</block>
 		<!-- 待收货 -->
-		<block wx:if="{{current == 4}}">
+		<block wx:if="{{current == 3}}">
 			<view class="item">
 				<view class="state">
 					<text>交易成功 </text>
@@ -133,7 +133,7 @@
 			</view>
 		</block>
 		<!-- 待评价 -->
-		<block wx:if="{{current == 5}}">
+		<block wx:if="{{current == 4}}">
 			<view class="item">
 				<view class="state">
 					<text>交易成功 </text>

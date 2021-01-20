@@ -1,5 +1,7 @@
 // pages/personal/attache/attache.js
 var attache = require('../../../model/personal/attache')
+var reg = require('../../../utils/reg')
+
 Page({
 
   /**
@@ -35,7 +37,7 @@ Page({
     // console.log(JSON.parse(options.health_user));
     this.getDetail();
 
-   
+
 
     // if (JSON.parse(options.health_user).health_user) {
     // }
@@ -137,12 +139,19 @@ Page({
     //     }
     //   })
     // } else {
+    var identity = e.detail.value.identity
+    if (!reg.IDCard(identity)) {
+      wx.showToast({
+        icon: "none",
+        title: '请输入有效的身份证号码'
+      })
+    }
     self.setData({
       userInfo: {
         token: wx.getStorageSync('token'),
         address: e.detail.value.address,
         health_id: self.data.health_id,
-        identity: e.detail.value.identity,
+        identity: identity,
         merchant_id: self.data.merchant_id,
         name: e.detail.value.name,
         phone: e.detail.value.phone,
@@ -193,8 +202,14 @@ Page({
   identityBlur(e) {
     this.setData({
       isSave: true,
-      name: e.detail.value
+      // name: e.detail.value
     })
+    if (!reg.IDCard(e.detail.value)) {
+      wx.showToast({
+        icon: "none",
+        title: '请输入有效的身份证号码',
+      })
+    }
   },
   addressBlur(e) {
     this.setData({

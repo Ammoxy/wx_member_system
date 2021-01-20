@@ -19,6 +19,10 @@ Page({
     onLoad: function (options) {
         if (wx.getStorageSync('token')) {
             this.getInfo() 
+        } else {
+            this.setData({
+                isAuthorization: true
+            })
         }
     },
 
@@ -68,7 +72,7 @@ Page({
                                             isAuthorization: false
                                         });
                                         console.log(self.data.isAuthorization);
-
+                                        // self.getInfo()
                                     }
                                 })
                             }).catch(err => {
@@ -161,8 +165,36 @@ Page({
     // 查看全部订单
     toAllOrder() {
         wx.navigateTo({
-          url: '/pages/personal/order/index/index',
+          url: '/pages/personal/order/index/index?num=' + 0,
         })
-    }
+    },
+
+    toPay(e) {
+        console.log(e);
+        
+        var self = this;
+        wx.navigateTo({
+          url: '../../personal/order/index/index?num=' + e.currentTarget.dataset.num,
+        })
+    },
+    toSend(e) {
+        var self = this;
+        wx.navigateTo({
+          url: '../../personal/order/index/index?num=' + e.currentTarget.dataset.num,
+        })
+    },
+    toCollect(e) {
+        var self = this;
+        wx.navigateTo({
+          url: '../../personal/order/index/index?num=' + e.currentTarget.dataset.num,
+        })
+    },
+    toDis(e) {
+        var self = this;
+        wx.navigateTo({
+          url: '../../personal/order/index/index?num=' + e.currentTarget.dataset.num,
+        })
+    },
+    toRefund(e) {},
 
 })

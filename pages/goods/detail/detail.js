@@ -22,7 +22,9 @@ Page({
             img: '',
             is_fetch: '',
             price: '',
-            count: ''
+            count: '',
+            id: '',
+            have_merchant: []
         },
         count: 1
     },
@@ -54,6 +56,10 @@ Page({
                         img: res.img,
                         is_fetch: res.is_fetch,
                         price: res.price,
+                        name: res.name,
+                        intro: res.intro,
+                        id: res.id,
+                        have_merchant: res.have_merchant
                     }
                 })
             })
@@ -88,7 +94,6 @@ Page({
         var self = this;
         self.setData({
             count: self.data.count + 1,
-
         })
     },
 
@@ -98,7 +103,7 @@ Page({
             carParam: {
                 token: wx.getStorageSync('token'),
                 good_id: self.data.good_id,
-                count: 1,
+                count: self.data.count,
                 type: 1
             }
         })
@@ -111,18 +116,29 @@ Page({
         })
     },
 
+    iptCount(e) {
+        this.setData({
+            count: e.detail.value
+        })
+    },
+
     addOrder() {
         var self = this;
-        var data = {
+        var data = [];
+        data.push({
             freight: self.data.info.freight,
             img: self.data.info.img,
             is_fetch: self.data.info.is_fetch,
-            price: self.data.info.price * self.data.count,
-            count: self.data.count
-        }
+            price: self.data.info.price,
+            count: self.data.count,
+            name: self.data.info.name,
+            intro: self.data.info.intro,
+            id: self.data.info.id,
+            have_merchant: self.data.info.have_merchant
+        })
         console.log(data);
         wx.navigateTo({
-          url: '../../car/order-detail/order-detail?data=' + JSON.stringify(data),
+            url: '../../car/order-detail/order-detail?data=' + JSON.stringify(data),
         })
         // self.setData({
         //     orderParam: {

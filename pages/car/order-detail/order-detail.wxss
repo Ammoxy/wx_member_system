@@ -1,1 +1,225 @@
-/* pages/car/order-detail/order-detail.wxss */
+page {
+  min-height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.pay-content {
+  padding: 20rpx;
+}
+
+.address-box {
+  background-color: #fff;
+  padding: 16rpx;
+  display: flex;
+  align-items: center;
+  height: 10vh;
+}
+
+.address-box input {
+  width: 70vw;
+  height: 82rpx;
+  line-height: 82rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.address-box .left {
+  width: 30vw;
+  color: rgb(0, 0, 0, .7);
+}
+
+.address-box .img-box {
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.address-box .address {
+  margin-left: 20rpx;
+  width: calc(100% - 80rpx - 60rpx);
+}
+
+.address-box .right-icon {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.address-box .address .user_add {
+  /* margin-left: 20rpx; */
+  font-size: 24rpx;
+  color: #a8a8a8;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  /* 这里是超出几行省略 */
+  overflow: hidden;
+}
+
+.order-content {
+  margin-top: 20rpx;
+}
+
+.order-content .order-item {
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+
+.order-content .order-item .item {
+  background-color: #fff;
+  padding: 20rpx;
+  display: flex;
+  flex: 1;
+}
+
+.order-content .order-item .item .pro-img {
+  width: 120rpx;
+}
+
+.order-content .order-item .item .pro-desc {
+  margin-left: 20rpx;
+  width: calc(100% - 6vh - 60rpx - 20rpx);
+
+}
+
+.order-content .order-item .item .pro-desc .pro-name {
+  height: 88rpx;
+}
+
+.order-content .order-item .item .pro-desc .pro-name .en-name {
+  font-size: 24rpx;
+  color: #a8a8a8;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  /* 这里是超出几行省略 */
+  overflow: hidden;
+}
+
+/* .pro-rule {
+  height: 32rpx;
+  line-height: 32rpx;
+  font-size: 24rpx;
+  color: #a8a8a8;
+} */
+.order-content .order-item .item .pro-info {
+  width: 6vh;
+}
+
+.order-content .order-item .item .pro-info .pro-price {
+  height: 88rpx;
+  color: #444;
+  font-size: 24rpx;
+  line-height: 42rpx;
+}
+
+.order-content .order-item .item .pro-info .pro-count {
+  font-size: 20rpx;
+  color: #a8a8a8;
+  height: 32rpx;
+  line-height: 32rpx;
+  text-align: right;
+}
+
+.text {
+  color: #999;
+  font-size: 20rpx;
+  line-height: 42rpx;
+}
+
+.price {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #444;
+}
+
+.bottom-item {
+  margin: -10rpx 10rpx 0;
+  padding: 0;
+  height: 20rpx;
+  position: relative;
+  z-index: -1;
+  border-bottom-left-radius: 10rpx;
+  border-bottom-right-radius: 10rpx;
+  background-color: #fff;
+}
+
+.auto-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.price-box {
+  display: flex;
+  justify-content: flex-end;
+  width: 100vh;
+}
+
+
+/* 底部结算 */
+.box {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+}
+
+.box .settlement {
+  padding: 20rpx;
+  background-color: #fff;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.box .settlement .total {
+  display: flex;
+  align-items: center;
+}
+
+.box .settlement .total view {
+  margin-left: 10rpx;
+}
+
+.box .settlement .total .number {
+  font-size: 30rpx;
+  color: #ccc;
+}
+
+.box .settlement .total .number {
+  font-size: 30rpx;
+  color: #ccc;
+}
+
+.box .settlement .total .sum {
+  font-weight: 600;
+}
+
+.box .settlement .total .pay {
+  padding: 10rpx 50rpx;
+  border-radius: 30rpx;
+  background-color: #cc0033;
+  color: #fff;
+}
+
+
+
+.fetch-box {
+  background: #fff;
+  padding: 10rpx;
+  border-bottom: 1rpx rgb(0, 0, 0, .2) solid;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.fetch-box .left {
+  width: 20vw;
+  color: rgb(0, 0, 0, .7);
+}
+
+.fetch-box .default {
+  width: 80vw;
+}
