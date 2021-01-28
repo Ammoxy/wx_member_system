@@ -1,158 +1,119 @@
 <!-- 搜索 -->
-<view class="search">
+<!-- <view class="search" wx:if="{{isCommon}}">
 	<image class="icon-search" src="/icon/search.png"></image>
 	<input placeholder="搜索我的订单"></input>
-	<!-- 输入了内容在显示关闭按钮 -->
 	<image class="icon-close" src="/icon/close.png"></image>
-</view>
+</view> -->
 
 <!-- 排序 -->
-<view class="rank">
+<view class="rank" wx:if="{{isCommon}}">
 	<view class="{{current == 0 ? 'choose' : ''}}" data-num="0" bindtap="currentTag">全部</view>
 	<view class="{{current == 1 ? 'choose' : ''}}" data-num="1" bindtap="currentTag">待付款</view>
 	<view class="{{current == 2 ? 'choose' : ''}}" data-num="2" bindtap="currentTag">待发货</view>
 	<view class="{{current == 3 ? 'choose' : ''}}" data-num="3" bindtap="currentTag">待收货</view>
-	<view class="{{current == 4 ? 'choose' : ''}}" data-num="4" bindtap="currentTag">待评价</view>
+	<view class="{{current == 4 ? 'choose' : ''}}" data-num="4" bindtap="currentTag">已收货</view>
+	<view class="{{current == 5 ? 'choose' : ''}}" data-num="5" bindtap="currentTag">取消</view>
 </view>
 
 <!-- 订单列表 -->
-<scroll-view scroll-y="true">
-	<view class="list">
+<scroll-view scroll-y="true" lower-threshold="100" bindscrolltolower="scrollToLower" style="height: 90vh;">
+	<view class="list" wx:if="{{!isCommon}}">
 		<!-- 全部订单 -->
-		<block wx:if="{{current == 0}}">
-			<block>
-				<view class="item">
-					<view class="state">
-						<text>交易成功 </text>
-						<text>交易关闭 </text>
-						<text>| 删除</text>
-					</view>
-					<view class="goods">
-						<view>
-							<image src="/icon/add.png"></image>
-						</view>
-						<view class="info">
-							<view class="name">商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题</view>
-						</view>
-					</view>
-					<view class="handle">
-						<view class="button" style="background-color: #cc0033;">去评价</view>
-						<view class="button" style="background-color: #cc0033;">再来一单</view>
-						<view></view>
-					</view>
-				</view>
-				<view class="item">
-					<view class="state">
-						<text>交易成功</text>
-						<text>交易关闭</text>
-					</view>
-					<view class="goods">
-						<view>
-							<image src="/icon/add.png"></image>
-						</view>
-						<view class="info">
-							<view class="name">商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题</view>
-						</view>
-					</view>
-				</view>
-			</block>
-		</block>
-		<!-- 待付款 -->
-		<block wx:if="{{current == 1}}">
-			<view class="item">
+		<block>
+			<view class="item" wx:for="{{orderData}}">
 				<view class="state">
-					<text>交易成功 </text>
-					<text>交易关闭 </text>
-					<text>| 删除</text>
+					<text style="color: #cc0033;" wx:if="{{item.status == 1}}">待付款</text>
+					<text style="color: #cc0033;" wx:if="{{item.status == 2}}">待发货</text>
+					<text style="color: #cc0033;" wx:if="{{item.status == 3}}">待收货</text>
+					<text style="color: #cc0033;" wx:if="{{item.status == 4}}">已收货</text>
+					<text style="color: #cc0033;" wx:if="{{item.status == 5}}">退款</text>
+					<text style="color: #cc0033;" wx:if="{{item.status == 6}}">取消 </text>
+					<!-- <text style="color: #cc0033;" wx:if="{{item.status == 6}}">| 删除</text> -->
 				</view>
 				<view class="goods">
 					<view>
-						<image src="/icon/add.png"></image>
+						<image src="{{item.userGood.img}}"></image>
 					</view>
 					<view class="info">
-						<view class="name">商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题</view>
+						<view class="name">{{item.userGood.intro}}</view>
+						<view class="price-box mt">
+							<text class="text">共计 {{item.count}} 件商品 运费: {{item.freight}}合计：</text>
+							<text class="price">￥{{item.money + item.freight}}</text>
+						</view>
 					</view>
 				</view>
 				<view class="handle">
-					<view class="button" style="background-color: #cc0033;">去付款</view>
-
-					<view class="button" style="background-color: #cc0033;">取消订单</view>
+					<view class="button" style="background-color: #cc0033;" data-id="{{item.id}}" wx:if="{{item.status == 3}}"
+						bindtap="toShipments">确认收货</view>
+					<view class="button" style="background-color: #cc0033;" data-id="{{item.id}}" wx:if="{{item.status == 1}}"
+						bindtap="toCancel">取消订单</view>
+					<view class="button" style="background-color: #cc0033;" wx:if="{{item.status == 1}}" bindtap="toPay"
+						data-id="{{item.id}}">付款</view>
+					<view class="button" style="background-color: #cc0033;" wx:if="{{item.is_fetch == 2 && item.status == 2}}">核销码: {{item.recaption.code}}</view>
+				</view>
+			</view>
+		</block>
+		<view class="foot">
+			<text>没有更多数据了~ ╮（╯＿╰）╭</text>
+		</view>
+	</view>
+	<view class="list" wx:else>
+		<!-- 全部订单 -->
+		<block>
+			<view class="item" wx:for="{{orderData}}">
+				<view style="color: #CC0033; font-size: 24rpx">创建时间: {{item.created_at}}</view>
+				<view class="state">
+					<text style="color: #cc0033;" wx:if="{{item.status == 1}}">待付款</text>
+					<text style="color: #cc0033;" wx:if="{{item.status == 2}}">待发货</text>
+					<text style="color: #cc0033;" wx:if="{{item.status == 3}}">待收货</text>
+					<text style="color: #cc0033;" wx:if="{{item.status == 4}}">已收货</text>
+					<text style="color: #cc0033;" wx:if="{{item.status == 5}}">取消</text>
+				</view>
+				<view class="goods" wx:if="{{item.good.length == 1}}">
+					<view>
+						<image src="{{item.good[0].good.img}}"></image>
+					</view>
+					<view class="info">
+						<view class="name">{{item.good[0].good.intro}}</view>
+						<view class="price-box mt">
+							<text class="text">共计 {{item.good[0].count}} 件商品 运费: {{item.freight}}合计：</text>
+							<text class="price">￥{{item.total_money + item.freight}}</text>
+						</view>
+					</view>
+				</view>
+				<view class="goods" wx:else>
+					<scroll-view scroll-x>
+						<view class="doctorBox">
+							<view class="doctorList" wx:for="{{item.good}}" wx:key="{{index}}">
+								<image class="portrait" mode='aspectFill' src="{{item.good.img}}" />
+								<view class='name'><text>{{item.good.intro}}</text></view>
+								<!-- <view class="post"><text>{{item.doctorPost}}</text></view> -->
+								<!-- <view class="good">
+										<view class="lable">擅长</view><text>{{item.doctorGoodAt}}</text>
+									</view> -->
+							</view>
+						</view>
+					</scroll-view>
+				</view>
+				<view class="price-box" wx:if="{{item.good.length > 1}}">
+					<text class="text">共计 {{totalCount}} 件商品 运费: {{item.freight}}合计：</text>
+					<text class="price">￥{{totalMomey + item.freight}}</text>
+				</view>
+				<view class="handle">
+					<view class="button" style="background-color: #cc0033;" data-id="{{item.id}}" wx:if="{{item.status == 3}}"
+						bindtap="toShipments">确认收货</view>
+					<view class="button" style="background-color: #cc0033;" data-id="{{item.id}}" wx:if="{{item.status == 1}}"
+						bindtap="toCancel">取消订单</view>
+					<!-- <view class="button" style="background-color: #cc0033;" data-id="{{item.id}}" wx:if="{{item.status == 4}}">
+							去评价</view> -->
+					<view class="button" style="background-color: #cc0033;" data-id="{{item.id}}" wx:if="{{item.status == 1}}"
+						bindtap="toPay">付款</view>
 					<view></view>
-
 				</view>
 			</view>
 		</block>
-		<!-- 待发货 -->
-		<block wx:if="{{current == 2}}">
-			<view class="item">
-				<view class="state">
-					<text>交易成功 </text>
-					<text>交易关闭 </text>
-					<text>| 删除</text>
-				</view>
-				<view class="goods">
-					<view>
-						<image src="/icon/add.png"></image>
-					</view>
-					<view class="info">
-						<view class="name">商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题</view>
-					</view>
-				</view>
-				<view class="handle">
-
-
-					<view class="button" style="background-color: #cc0033;">再来一单</view>
-					<view></view>
-
-				</view>
-			</view>
-		</block>
-		<!-- 待收货 -->
-		<block wx:if="{{current == 3}}">
-			<view class="item">
-				<view class="state">
-					<text>交易成功 </text>
-					<text>交易关闭 </text>
-					<text>| 删除</text>
-				</view>
-				<view class="goods">
-					<view>
-						<image src="/icon/add.png"></image>
-					</view>
-					<view class="info">
-						<view class="name">商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题</view>
-					</view>
-				</view>
-				<view class="handle">
-
-
-					<view class="button" style="background-color: #cc0033;">确认收货</view>
-					<view></view>
-
-				</view>
-			</view>
-		</block>
-		<!-- 待评价 -->
-		<block wx:if="{{current == 4}}">
-			<view class="item">
-				<view class="state">
-					<text>交易成功 </text>
-					<text>交易关闭 </text>
-					<text>| 删除</text>
-				</view>
-				<view class="goods">
-					<view>
-						<image src="/icon/add.png"></image>
-					</view>
-					<view class="info">
-						<view class="name">商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题</view>
-					</view>
-				</view>
-				<view class="handle">
-					<view class="button" style="background-color: #cc0033;">去评价</view>
-
-				</view>
-			</view>
-		</block>
+		<view wx:if="{{orderData.length == 0 || showFoot}}" class="foot">
+			<text>没有更多数据了~ ╮（╯＿╰）╭</text>
+		</view>
 	</view>
 </scroll-view>

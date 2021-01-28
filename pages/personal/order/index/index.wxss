@@ -2,7 +2,7 @@ page {
     background-color: #f0f0f0;
 }
 
-.search {
+/* .search {
     min-width: 100vw;
     position: fixed;
     top: 0;
@@ -37,20 +37,20 @@ page {
     position: absolute;
     top: 30rpx;
     right: 40rpx;
-}
+} */
 
 /* 排序 */
 .rank {
     display: flex;
     justify-content: space-around;
-    margin-top: 8vh;
+    /* margin-top: 8vh; */
     padding: 10rpx 0;
     background-color: #fff;
 }
 
-.list {
+/* .list {
     height: 88vh;
-}
+} */
 
 .item {
     display: flex;
@@ -90,9 +90,32 @@ page {
     overflow: hidden;
 }
 
+.price-box {
+    display: flex;
+    justify-content: flex-end;
+    /* width: 460rpx; */
+}
+
+.price-box .text {
+    color: #999;
+    font-size: 20rpx;
+    line-height: 42rpx;
+}
+
+.price-box .price {
+    font-size: 32rpx;
+    font-weight: bold;
+    color: #444;
+}
+
+.mt {
+    margin-top: 50rpx;
+}
+
 .item .handle {
     display: flex;
     justify-content: flex-end;
+    margin-top: 10rpx;
 }
 
 .item .handle .button {
@@ -106,4 +129,68 @@ page {
 .choose {
     border-bottom: 4rpx solid #CC0033;
     color: #CC0033;
+}
+
+/* 医师列表 */
+.doctorBox {
+    width: 100vw;
+    padding: 20rpx 0;
+    display: flex;
+    font-size: 30rpx;
+}
+
+.doctorBox .doctorList {
+    position: relative;
+    width: 28vw;
+    min-width: 28vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.doctorBox .doctorList .portrait {
+    width: 25vw;
+    height: 25vw;
+}
+
+.doctorBox .doctorList view {
+    width: 25vw;
+    height: 40rpx;
+    display: flex;
+    justify-content: center;
+}
+
+.doctorBox .doctorList text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.doctorBox .doctorList .name {
+    color: #333;
+    /* font-weight: bold; */
+}
+
+.doctorBox .doctorList .post {
+    color: #333;
+    font-size: 26rpx;
+}
+
+.doctorBox .doctorList .good {
+    font-size: 26rpx;
+}
+
+.doctorBox .doctorList .lable {
+    width: 70rpx;
+    min-width: 70rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    text-align: center;
+    border-radius: 10rpx;
+    background-color: #ccc;
+    color: #333;
+    margin-right: 10rpx;
 }

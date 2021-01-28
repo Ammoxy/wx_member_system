@@ -37,12 +37,6 @@ function get(baseUrl, url, data, cb) {
     header: header,
     success: function (res) {
       if (res.statusCode === 200) {
-        // if(res.data.code == 10000) {
-        //   wx.showToast({
-        //     icon: "none",
-        //     title: res.data.toast
-        //   });
-        // }
         if (res.data.code == 10001) {
           wx.showToast({
             icon: "none",
@@ -56,7 +50,7 @@ function get(baseUrl, url, data, cb) {
           });
           wx.removeStorageSync('wxInfo')
           wx.removeStorageSync('token')
-          wx.switchTab({
+          wx.reLaunch({
             url: "/pages/personal/index/index"
           });
         }

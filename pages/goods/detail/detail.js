@@ -13,7 +13,7 @@ Page({
         details: null,
         id: '',
         carParam: null,
-        user_type: '',
+        // user_id: 1,
         user_id: 2,
         orderParam: null,
         merchant_id: '',
@@ -26,7 +26,8 @@ Page({
             id: '',
             have_merchant: []
         },
-        count: 1
+        count: 1,
+        user_type: ''
     },
 
     /**
@@ -36,18 +37,18 @@ Page({
         this.setData({
             id: options.id,
             good_id: options.id,
-            user_type: app.globalData.userType
+            user_type: options.user_type
         });
         this.getDetail();
-        console.log(app.globalData.userType);
-
     },
 
     getDetail() {
         var self = this;
+        wx.showLoading({
+          title: '数据加载中...',
+        })
         if (self.data.user_id == 1) {
             goods.memberGoodDetail(wx.getStorageSync('token'), self.data.id).then(res => {
-                // console.log('res', res);
                 WxParse.wxParse('article', 'html', res.detail, self, 2);
                 self.setData({
                     details: res,
@@ -62,17 +63,17 @@ Page({
                         have_merchant: res.have_merchant
                     }
                 })
+                wx.hideLoading()
             })
         } else {
             goods.goodDetail(wx.getStorageSync('token'), self.data.id).then(res => {
-                // console.log('res', res);
                 WxParse.wxParse('article', 'html', res.detail, self, 2);
                 self.setData({
                     details: res
                 })
+                wx.hideLoading()
             })
         }
-
     },
 
     toSubtract() {
@@ -80,7 +81,6 @@ Page({
         if (self.data.count > 1) {
             self.setData({
                 count: self.data.count - 1,
-
             })
         } else {
             wx.showToast({
@@ -108,7 +108,6 @@ Page({
             }
         })
         carAPI.creationCar(self.data.carParam).then(res => {
-            // console.log(res);
             wx.showToast({
                 title: '添加购物车成功',
                 icon: 'none'
@@ -134,25 +133,11 @@ Page({
             name: self.data.info.name,
             intro: self.data.info.intro,
             id: self.data.info.id,
-            have_merchant: self.data.info.have_merchant
+            have_merchant: self.data.info.have_merchant,
         })
         console.log(data);
         wx.navigateTo({
             url: '../../car/order-detail/order-detail?data=' + JSON.stringify(data),
         })
-        // self.setData({
-        //     orderParam: {
-        //         token: wx.getStorageSync('token'),
-        //         good_id: self.data.good_id,
-        //         freight: 0,
-        //         money: 200,
-        //         count: 1,
-        //         merchant_id: 1
-        //     }
-        // })
-        // orderAPI.userOrder(self.data.orderParam).then(res => {
-
-        // })
     },
-
 })

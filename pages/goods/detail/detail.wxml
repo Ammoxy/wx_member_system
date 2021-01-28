@@ -17,12 +17,13 @@
 			<view class="name">
 				{{details.intro}}</view>
 			<view class="profile">
-				<view class="price" style="color: #cc0033;font-size: 36rpx;" wx:if="{{user_id == 2}}">
+				<view class="price" style="color: #cc0033;font-size: 36rpx;" wx:if="{{(user_id != 1 && user_type == 2) || (user_id != 1 && user_type == 3)}}">
 					￥{{details.vip_price}}</view>
-				<view class="price" style="color: #cc0033;font-size: 36rpx;" wx:elif="{{user_id == 1}}">
+				<view class="price" style="color: #cc0033;font-size: 36rpx;" wx:elif="{{user_id != 1 && user_type != 2 && user_type != 3}}">
 					￥{{details.price}}</view>
-				<view class="price" style="color: #cc0033;font-size: 36rpx;" wx:else>￥{{details.price}}</view>
+				<view class="price" style="color: #cc0033;font-size: 36rpx;" wx:if="{{user_id == 1}}">￥{{details.price}}</view>
 				<view>
+					<text style="color: #666666;font-size: 26rpx;padding-right: 10rpx;">运费:{{details.freight}}</text>
 					<text style="color: #666666;font-size: 26rpx;padding-right: 10rpx;">销量:{{details.sales}}</text>
 					<text style="color: #666666;font-size: 26rpx;">库存:{{details.repertory}}</text>
 				</view>

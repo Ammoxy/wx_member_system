@@ -14,6 +14,9 @@
 				<text>编辑</text>
 			</view>
 		</view>
+		<view wx:if="{{addressData.length == 0}}" class="foot">
+			<text>暂无地址~ ╮（╯＿╰）╭</text>
+		</view>
 	</view>
 </scroll-view>
 

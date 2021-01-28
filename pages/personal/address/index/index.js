@@ -45,10 +45,6 @@ Page({
     })
     address.addList(wx.getStorageSync('token')).then(res => {
       console.log(res);
-      // res.forEach(item => {
-      //   item.phone = tools.toNorms(item.phone);
-      //   // console.log(tools.toNorms(item.phone));
-      // })
       self.setData({
         addressData: res
       })

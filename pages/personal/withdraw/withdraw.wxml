@@ -1,0 +1,19 @@
+<!--pages/personal/withdraw/withdraw.wxml-->
+<form bindsubmit='withdraw'>
+  <view class="box">
+    <view class="money-box">
+      <view class="title">可提现金额</view>
+      <view class="momey">{{totalMoney}}</view>
+    </view>
+    <view class="input-box">
+      <view class="title">提现金额</view>
+      <view class="ipt-box">
+        <view class="ipt">
+          ￥<input type="text" focus="{{true}}" value="{{momey}}" name="momey" />
+        </view>
+        <button form-type='submit'>提现</button>
+      </view>
+      <!-- <view class="title"><text class="all" bindtap="withdrawAll" data-momey="{{totalMoney}}">全部提现</text></view> -->
+    </view>
+  </view>
+</form>

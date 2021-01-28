@@ -2,23 +2,25 @@ App({
   onShow: function () {
     // this.getUserInfo();
     // var global = require('./model/global');
-    // var imfomation = require('./model/personal/infomation')
+    var imfomation = require('./model/personal/infomation')
     var self = this;
     // 获取用户信息
-    if (wx.getStorageSync('token')) {
-      // imfomation.userInfo(wx.getStorageSync('token')).then(res => {
-      //   if (res) {
-      //     wx.reLaunch({
-      //       url: "/pages/personal/index/change-user/change-user"
-      //     })
-      //   }
-      // })
-    }
+    // if (wx.getStorageSync('token')) {
+    //   imfomation.userInfo(wx.getStorageSync('token')).then(res => {
+    //     if (res) {
+    //       self.setData({
+    //         user_type: res.type
+    //       })
+    //     }
+    //   })
+    // }
     // 开关配置
-    var version = '1.0.39';
+    // var version = '1.0.39';
     // global.configs(version).then(res => {
     //   wx.setStorageSync('openFace', res.config_value);
     // })
+    // console.log(self.user_type);
+    
   },
   onLaunch: function () {
     let self = this;
@@ -70,6 +72,6 @@ App({
 
   globalData: {
     userInfo: null,
-    userType: null
+    user_type: 1
   }
 })

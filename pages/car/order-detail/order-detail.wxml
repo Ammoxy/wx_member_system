@@ -1,11 +1,17 @@
 <form bindsubmit="toAccount"></form>
 <view class="pay-content">
-  <view class="fetch-box">
+  <view class="fetch-box" wx:if="{{is_fetch == 1}}">
     <text class="left default">到店自取</text>
     <switch name="fetch" checked="{{fetch}}" bindtap="toSet"></switch>
   </view>
   <!-- 选择收货地址 -->
   <block>
+    <view wx:if="{{fetch}}" class="address-box">
+      <text class="left">自取时间</text>
+      <picker mode="date" value="{{date}}" start="2020-01-01" end="2030-01-01" bindchange="bindDateChange">
+        <input class="input" placeholder="请选择日期" value="{{checkDate ? checkDate : ''}}" disabled></input>
+      </picker>
+    </view>
     <view wx:if="{{fetch}}" class="address-box">
       <text class="left">商家地址</text>
       <picker bindchange="addressChange" range="{{merchantList}}" range-key="address" value="{{index}}">
@@ -32,24 +38,35 @@
     <view class="order-item" wx:for="{{orderData}}">
       <view class="item">
         <view class="pro-img">
-          <image class="auto-img" src="{{item.img}}" />
+          <image class="auto-img" mode="scaleToFill" src="{{item.img}}" />
         </view>
         <view class="pro-desc">
           <view class="pro-name">
-            <!-- <view class="ch-name">{{item.name}}</view> -->
-            <view class="en-name">{{item.intro}}{{item.intro}}</view>
+            <view class="en-name">{{item.intro}}</view>
           </view>
-          <!-- <view class="pro-rule">运费: {{item.eight}}</view> -->
         </view>
         <view class="pro-info">
-          <view class="pro-price">￥{{item.price}}</view>
+          <view class="pro-price" wx:if="{{user_id == 1}}">￥{{item.price}}</view>
+          <view class="pro-price" wx:elif="{{(user_id != 1 && user_type == 2)|| (user_id != 1 && user_type == 3)}}">
+            ￥{{item.vip_price}}</view>
+          <view class="pro-price" wx:elif="{{user_id != 1 && user_type == 1}}">￥{{item.price}}</view>
+          <view class="pro-count">运费: {{item.freight}}</view>
           <view class="pro-count">x{{item.count}}</view>
         </view>
       </view>
       <view class="item">
-        <view class="price-box">
-          <text class="text">共计 {{item.count}} 件商品 运费: {{item.freight}} 合计：</text>
-          <text class="price">￥{{totalPrice}}</text>
+        <view class="price-box" wx:if="{{fetch}}">
+          <text class="text">共计 {{item.count}} 件商品 合计：</text>
+          <text class="price" wx:if="{{user_id == 1}}">￥{{item.price * item.count}}</text>
+          <text class="price" wx:elif="{{(user_id != 1 && user_type == 2) || (user_id != 1 && user_type == 3)}}">￥{{item.vip_price * item.count}}</text>
+          <text class="price" wx:elif="{{user_id != 1 && user_type == 1}}">￥{{item.price * item.count}}</text>
+        </view>
+        <view class="price-box" wx:else>
+          <text class="text">共计 {{item.count}} 件商品 运费: {{item.freight * item.count}}合计：</text>
+          <text class="price" wx:if="{{user_id == 1}}">￥{{item.price * item.count + item.freight * item.count}}</text>
+          <text class="price"
+            wx:elif="{{(user_id != 1 && user_type == 2) || (user_id != 1 && user_type == 3)}}">￥{{item.vip_price * item.count + item.freight * item.count}}</text>
+          <text class="price" wx:elif="{{user_id != 1 && user_type == 1}}">￥{{item.price * item.count}}</text>
         </view>
       </view>
       <!-- <view class="item bottom-item"></view> -->
@@ -61,9 +78,10 @@
 <view class="box">
   <view class="settlement">
     <view class="total">
-      <view class="number">共件: {{totalCount}}</view>
-      <view class="sum">总计:<text style="color:#cc0033">￥ {{totalPrice}}</text></view>
-      <view class="pay" bindtap="toAccount">创建订单</view>
+      <view class="number">共件: {{totalCount}} <text wx:if="{{!fetch}}">运费: {{freight}}</text></view>
+      <view class="sum" wx:if="{{!fetch}}">总计:<text style="color:#cc0033">￥ {{totalPrice}}</text></view>
+      <view class="sum" wx:else>总计:<text style="color:#cc0033">￥ {{totalMoney}}</text></view>
+      <view class="pay" bindtap="toAccount">提交订单</view>
     </view>
   </view>
 </view>

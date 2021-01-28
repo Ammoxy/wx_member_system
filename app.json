@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/home/home",
+
     "pages/personal/index/index",
     "pages/personal/order/index/index",
     "pages/goods/detail/detail",
@@ -8,12 +10,13 @@
     "pages/personal/information/information",
     "pages/personal/address/index/index",
     "pages/personal/address/add/add",
-    "pages/home/home",
     "pages/personal/address/amendAdd/amendAdd",
     "pages/personal/attache/attache",
     "pages/classify/classify",
-
-    "pages/car/order-detail/order-detail"
+    "pages/car/order-detail/order-detail",
+    "pages/personal/withdraw/withdraw",
+    "pages/personal/underling/underling",
+    "pages/personal/commission-ource/commission-ource"
   ],
   "window": {
     "backgroundTextStyle": "light",

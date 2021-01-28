@@ -50,26 +50,38 @@
 .goods {
     display: flex;
     padding: 10rpx;
+    height: 19vh;
 }
 
-.goods .goods-image {
+.goods .img-box {
     width: 200rpx;
     height: 200rpx;
+}
+
+.goods .img-box .goods-image {
+    width: 100%;
+    height: 100%;
+    display: block;
 }
 
 .goods .goods-info {
     display: flex;
     flex-direction: column;
     margin-left: 45rpx;
+    /* height: 200rpx; */
+    width: calc(100% - 200rpx - 45rpx);
 }
 
 .goods .goods-info .goods-name {
-    width: 480rpx;
+    /* width: 100%; */
+    height: 80rpx;
     font-size: 28rpx;
-    font-weight: 700;
+    /* font-weight: 700; */
+    text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+    /* 这里是超出几行省略 */
     overflow: hidden;
 }
 

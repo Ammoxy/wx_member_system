@@ -1,0 +1,79 @@
+/* pages/personal/withdraw/withdraw.wxss */
+page {
+  background-color: #ccc;
+  /* height: 100%; */
+}
+
+.box {
+  height: 90vh;
+}
+
+.box .money-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 100rpx 20rpx;
+  /* padding: 20rpx; */
+  /* border-radius: 55rpx; */
+  height: 10vh;
+}
+
+
+.box .money-box .title {
+  font-size: 32rpx;
+  font-weight: 700;
+  margin-bottom: 50rpx;
+}
+
+.box .money-box .momey {
+  font-size: 32rpx;
+}
+
+.box .input-box {
+  /* margin: 20rpx; */
+  background-color: #fff;
+  border-radius: 55rpx;
+  padding: 20rpx;
+  height: calc(100vh - 10vh - 260rpx);
+}
+
+.box .input-box .title {
+  font-size: 24rpx;
+  padding: 20rpx;
+}
+.all {
+  color: #CC0033;
+  padding: 20rpx 0;
+  margin: 0 20rpx;
+}
+
+.box .input-box .ipt-box {
+  display: flex;
+  padding: 20rpx;
+}
+
+.box .input-box .ipt-box .ipt {
+  width: 80%;
+  height: 180rpx;
+  line-height: 180rpx;
+  font-size: 48rpx;
+  display: flex;
+  /* flex-direction: column; */
+  /* align-items: center; */
+}
+
+.box .input-box .ipt-box .ipt input {
+  height: 180rpx;
+  line-height: 180rpx;
+  font-size: 48rpx;
+  margin-left: 20rpx;
+}
+
+.box .input-box .ipt-box button {
+  width: 20%;
+  height: 180rpx;
+  background-color: #CC0033;
+  color: #fff;
+  font-size: 32rpx;
+  line-height: 180rpx;
+}

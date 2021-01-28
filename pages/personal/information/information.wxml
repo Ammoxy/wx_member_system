@@ -1,7 +1,11 @@
 <form bindsubmit='register'>
 	<view class="info">
-		<view class="left">姓名:</view>
+		<view class="left">姓名(必填):</view>
 		<input placeholder="请输入姓名" value='{{userInfo.name}}' name="name"></input>
+	</view>
+	<view class="info">
+		<view class="left">电话(必填):</view>
+		<input placeholder="请输入电话" value='{{userInfo.phone}}' name="phone"></input>
 	</view>
 	<view class="info">
 		<view class="left">性别:</view>
@@ -12,19 +16,15 @@
 	</view>
 	<view class="info">
 		<view class="left">年龄:</view>
-		<input placeholder="请输入年龄" value='{{userInfo.age}}' name="age"></input>
-	</view>
-	<view class="info">
-		<view class="left">电话:</view>
-		<input placeholder="请输入电话" value='{{userInfo.phone}}' name="phone"></input>
+		<input placeholder="请输入年龄" value='{{userInfo.age == 0 ? "" : userInfo.age}}' name="age"></input>
 	</view>
 	<view class="info">
 		<view class="left">身高:</view>
-		<input placeholder="请输入身高(cm)" value='{{userInfo.stature}}' name="stature"></input>
+		<input placeholder="请输入身高(cm)" value='{{userInfo.stature == 0 ? "" : userInfo.stature}}' name="stature"></input>
 	</view>
 	<view class="info">
 		<view class="left">体重:</view>
-		<input placeholder="请输入体重(kg)" value='{{userInfo.weight}}' name="weight"></input>
+		<input placeholder="请输入体重(kg)" value='{{userInfo.weight == 0 ? "" : userInfo.weight}}' name="weight"></input>
 	</view>
 	<view class="info">
 		<view class="left">职业:</view>

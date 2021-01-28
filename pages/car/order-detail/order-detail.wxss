@@ -63,6 +63,7 @@ page {
 .order-content .order-item {
   border-radius: 10rpx;
   overflow: hidden;
+  margin-bottom: 20rpx;
 }
 
 .order-content .order-item .item {
@@ -74,11 +75,12 @@ page {
 
 .order-content .order-item .item .pro-img {
   width: 120rpx;
+  height: 120rpx;
 }
 
 .order-content .order-item .item .pro-desc {
   margin-left: 20rpx;
-  width: calc(100% - 6vh - 60rpx - 20rpx);
+  width: calc(100% - 10vh - 120rpx - 20rpx);
 
 }
 
@@ -104,7 +106,8 @@ page {
   color: #a8a8a8;
 } */
 .order-content .order-item .item .pro-info {
-  width: 6vh;
+  width: 10vh;
+  text-align: right;
 }
 
 .order-content .order-item .item .pro-info .pro-price {
@@ -184,12 +187,7 @@ page {
 }
 
 .box .settlement .total .number {
-  font-size: 30rpx;
-  color: #ccc;
-}
-
-.box .settlement .total .number {
-  font-size: 30rpx;
+  font-size: 24rpx;
   color: #ccc;
 }
 

@@ -1,5 +1,6 @@
 // pages/goods/goods-list/goods-list.js
 var goods = require('../../../model/classify/goods');
+var infomationAPI = require('../../../model/personal/infomation')
 var app = getApp()
 Page({
 
@@ -13,17 +14,9 @@ Page({
         id: '',
         goodsList: [],
         detailId: '',
+        // user_id: 1,
         user_id: 2,
         user_type: '',
-        sortList: [{
-                value: 0,
-                name: '顺序'
-            },
-            {
-                value: 1,
-                name: '倒序'
-            }
-        ],
         current: 1,
         isSelected: false
     },
@@ -32,19 +25,15 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        console.log(options);
         this.setData({
             id: options.id,
-            user_type: app.globalData.userType
         })
         this.getList();
-
+        this.getInfo()
     },
 
     currentTag(e) {
         let self = this;
-        console.log(e);
-        
         self.setData({
             current: e.currentTarget.dataset.num,
             isSelected: !e.currentTarget.dataset.selected,
@@ -138,7 +127,6 @@ Page({
                 })
             }
         }
-
         if (self.data.user_id == 1) {
             self.getMemberGoodList(self.data.paramData)
         } else {
@@ -146,10 +134,11 @@ Page({
         }
     },
 
+    // 普通商品
     getGoodList(val) {
         var self = this;
         wx.showLoading({
-            title: '数组加载中...',
+            title: '数据加载中...',
         })
         goods.goodsList(val).then(res => {
             self.setData({
@@ -158,6 +147,7 @@ Page({
             wx.hideLoading()
         })
     },
+    // 会员商品
     getMemberGoodList(val) {
         var self = this;
         wx.showLoading({
@@ -170,7 +160,7 @@ Page({
             wx.hideLoading()
         })
     },
-
+    // 商品数据
     getList() {
         var self = this;
         self.setData({
@@ -195,106 +185,19 @@ Page({
         })
 
         wx.navigateTo({
-            url: '../detail/detail?id=' + self.data.detailId,
+            url: '../detail/detail?id=' + self.data.detailId + '&user_type=' + self.data.user_type,
         })
     },
 
-    sortChange(e) {
-        console.log(e);
+    getInfo() {
         var self = this;
-        if (e.detail.value == 0) {
-            if (self.data.user_id == 1) {
+        infomationAPI.userInfo(wx.getStorageSync('token')).then(res => {
+            console.log(res);
+            if (res) {
                 self.setData({
-                    paramData: {
-                        token: wx.getStorageSync('token'),
-                        currentPage: self.data.page,
-                        perPage: self.data.limit,
-                        type: 'asc'
-                    }
+                    user_type: res.type
                 })
-                self.getMemberGoodList(self.data.paramData)
-            } else {
-                self.setData({
-                    paramData: {
-                        token: wx.getStorageSync('token'),
-                        currentPage: self.data.page,
-                        perPage: self.data.limit,
-                        type: 'asc'
-                    }
-                })
-                self.getGoodList(self.data.paramData);
-            }
-        } else if (e.detail.value == 1) {
-            if (self.data.user_id == 1) {
-                self.setData({
-                    paramData: {
-                        token: wx.getStorageSync('token'),
-                        currentPage: self.data.page,
-                        perPage: self.data.limit,
-                        type: 'desc'
-                    }
-                })
-                self.getMemberGoodList(self.data.paramData)
-            } else {
-                self.setData({
-                    paramData: {
-                        token: wx.getStorageSync('token'),
-                        currentPage: self.data.page,
-                        perPage: self.data.limit,
-                        type: 'desc'
-                    }
-                })
-                self.getGoodList(self.data.paramData);
-            }
-        }
-    },
-
-    synthesize() {
-        var self = this;
-        self.setData({
-            paramData: {
-                token: wx.getStorageSync('token'),
-                currentPage: self.data.page,
-                perPage: self.data.limit,
-                order: 'sort'
             }
         })
-        if (self.data.user_id == 1) {
-            self.getMemberGoodList(self.data.paramData)
-        } else {
-            self.getGoodList(self.data.paramData);
-        }
-    },
-    toSales() {
-        var self = this;
-        self.setData({
-            paramData: {
-                token: wx.getStorageSync('token'),
-                currentPage: self.data.page,
-                perPage: self.data.limit,
-                order: 'sales'
-            }
-        })
-        if (self.data.user_id == 1) {
-            self.getMemberGoodList(self.data.paramData)
-        } else {
-            self.getGoodList(self.data.paramData);
-        }
-    },
-    toPrice() {
-        var self = this;
-        self.setData({
-            paramData: {
-                token: wx.getStorageSync('token'),
-                currentPage: self.data.page,
-                perPage: self.data.limit,
-                order: 'price'
-            }
-        })
-        if (self.data.user_id == 1) {
-            self.getMemberGoodList(self.data.paramData)
-        } else {
-            self.getGoodList(self.data.paramData);
-        }
     },
 })

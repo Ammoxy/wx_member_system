@@ -1,5 +1,6 @@
 // pages/home/home.js
 var bannerAPI = require('../../model/home/banner')
+var docAPI = require('../../model/home/document')
 Page({
 
   /**
@@ -16,6 +17,7 @@ Page({
 
   onLoad: function (options) {
     this.getBanner()
+    this.getDocType()
   },
   onShow: function () {
 
@@ -23,9 +25,22 @@ Page({
 
   getBanner() {
     var self = this;
+    wx.showLoading({
+      title: '数据加载中...',
+    })
     bannerAPI.banners().then(res => {
       self.setData({
         bannerList: res
+      })
+      wx.hideLoading()
+    })
+  },
+
+  getDocType() {
+    var self = this;
+    docAPI.docType().then(res => {
+      self.setData({
+        classFication: res
       })
     })
   },

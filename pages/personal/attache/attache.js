@@ -28,24 +28,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(1, options);
+
     this.setData({
       user_id: options.user_id,
-      // health_user: JSON.parse(options.health_user).health_user
     })
     this.getHelUser();
     this.getMerchant();
-    // console.log(JSON.parse(options.health_user));
-    this.getDetail();
-
-
-
-    // if (JSON.parse(options.health_user).health_user) {
-    // }
+    if (this.data.user_id) {
+      this.getDetail();
+    }
   },
 
   getDetail() {
     var self = this;
-    // var user_id = wx.getStorageSync('health_user').user_id
     wx.showLoading({
       title: '获取数据中..',
       icon: 'none',
@@ -123,22 +119,7 @@ Page({
   },
 
   registerAttache(e) {
-    console.log(e);
     var self = this;
-    // if (self.data.health_user) {
-    //   self.setData({
-    //     userInfo: {
-    //       token: wx.getStorageSync('token'),
-    //       address: e.detail.value.address,
-    //       health_id: self.data.health_id,
-    //       identity: e.detail.value.identity,
-    //       merchant_id: self.data.merchant_id,
-    //       name: e.detail.value.name,
-    //       phone: e.detail.value.phone,
-    //       id: self.data.id
-    //     }
-    //   })
-    // } else {
     var identity = e.detail.value.identity
     if (!reg.IDCard(identity)) {
       wx.showToast({
@@ -157,7 +138,6 @@ Page({
         phone: e.detail.value.phone,
       }
     })
-    // }
 
     if ((self.data.userInfo.address == self.data.detailData.address) && (self.data.userInfo.health_id == self.data.detailData.health_id) && (self.data.userInfo.identity == self.data.detailData.identity) && (self.data.userInfo.merchant_id == self.data.detailData.merchant_id) && (self.data.userInfo.name == self.data.detailData.name) && (self.data.userInfo.phone == self.data.detailData.phone)) {
       wx.showToast({
@@ -169,14 +149,17 @@ Page({
         attache.register(self.data.userInfo).then(res => {
           wx.showToast({
             title: '提交成功, 请等待审核',
-            icon: 'none'
+            icon: 'none',
+            success: () => {
+              self.setData({
+                isSave: false
+              })
+              wx.navigateBack({
+                delta: 1,
+              })
+            }
           })
-          self.setData({
-            isSave: false
-          })
-          // if (self.data.health_user) {
-          self.getDetail()
-          // }
+
         })
       } else {
         wx.showToast({
@@ -189,7 +172,6 @@ Page({
 
   nameBlur(e) {
     this.setData({
-      // isSave: true,
       name: e.detail.value
     })
   },
@@ -202,7 +184,6 @@ Page({
   identityBlur(e) {
     this.setData({
       isSave: true,
-      // name: e.detail.value
     })
     if (!reg.IDCard(e.detail.value)) {
       wx.showToast({

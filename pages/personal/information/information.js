@@ -9,19 +9,6 @@ Page({
     userInfo: {
       sex: 1
     },
-    // identityData: [{
-    //   value: 1,
-    //   name: '普通用户'
-    // }, {
-    //   value: 2,
-    //   name: '会员'
-    // }, {
-    //   value: 3,
-    //   name: '健康专员'
-    // }, ],
-    // identityType: '',
-    // identity: '',
-    // isRegister: false
     health_user: null,
     id: '',
     type: ''
@@ -32,8 +19,6 @@ Page({
    */
   onLoad: function (options) {
     this.getInfo();
-    console.log(this.data.userInfo);
-
   },
 
   getInfo() {
@@ -46,7 +31,6 @@ Page({
           health_user: res.health_user,
           id: res.id,
           type: res.type
-          // identity: self.data.identity Data[res.type - 1].name
         })
       }
     })
@@ -54,38 +38,23 @@ Page({
 
   register(e) {
     var self = this;
-    console.log(e);
-    var type = self.data.userInfo.type;
-    if (self.data.health_user) {
-      self.setData({
-        userInfo: {
-          token: wx.getStorageSync('token'),
-          name: e.detail.value.name,
-          age: e.detail.value.age,
-          phone: e.detail.value.phone,
-          profession: e.detail.value.profession,
-          sex: e.detail.value.sex,
-          stature: e.detail.value.stature,
-          weight: e.detail.value.weight,
-          id: self.data.id,
-          type: self.data.type
-        }
-      })
-    } else {
-      self.setData({
-        userInfo: {
-          token: wx.getStorageSync('token'),
-          name: e.detail.value.name,
-          age: e.detail.value.age,
-          phone: e.detail.value.phone,
-          profession: e.detail.value.profession,
-          sex: e.detail.value.sex,
-          stature: e.detail.value.stature,
-          weight: e.detail.value.weight,
-          type: 1
-        }
-      })
-    }
+
+    var type = self.data.health_user ? self.data.type : 1;
+    self.setData({
+      userInfo: {
+        token: wx.getStorageSync('token'),
+        name: e.detail.value.name,
+        age: e.detail.value.age,
+        phone: e.detail.value.phone,
+        profession: e.detail.value.profession,
+        sex: e.detail.value.sex,
+        stature: e.detail.value.stature,
+        weight: e.detail.value.weight,
+        id: self.data.id,
+        type: type
+      }
+    })
+
     if (self.data.userInfo.name && self.data.userInfo.phone) {
       infomation.register(self.data.userInfo).then(res => {
         console.log(res);
@@ -108,16 +77,5 @@ Page({
         icon: 'none'
       })
     }
-
   },
-
-  // IDChange(e) {
-  //   var self = this;
-  //   console.log(e);
-  //   self.setData({
-  //     identityType: e.detail.value + 1,
-  //     // identity: self.data.identityData[e.detail.value].name
-  //   })
-  // },
-
 })

@@ -32,8 +32,8 @@
 					</view>
 				</view>
 			</view>
+			<view class="refresh">下拉刷新</view>
 		</block>
-
 	</view>
 </scroll-view>
 
@@ -44,7 +44,8 @@
 			<radio bindtap="allCheck" checked="{{isAllCheck}}">全选</radio>
 		</view>
 		<view class="total" wx:if="{{!isShow}}">
-			<view class="number">共件: {{totalCount}}</view>
+			<!-- <view class="number">共件: {{totalCount}}</view> -->
+			<view class="number">不含运费</view>
 			<view class="sum">总计:<text style="color:#cc0033">￥ {{totalPrice}}</text></view>
 			<view class="pay" bindtap="toAccount">结算</view>
 		</view>

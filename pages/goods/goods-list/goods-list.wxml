@@ -7,29 +7,32 @@
 </view>
 <!-- 排序 -->
 <view class="rank">
-	<view class="{{current == 1 ? 'choose' : ''}}" data-selected="{{isSelected}}" data-num="1"  bindtap="currentTag">综合</view>
-	<view class="{{current == 2 ? 'choose' : ''}}" data-selected="{{isSelected}}" data-num="2" bindtap="currentTag">销量</view>
-	<view class="{{current == 3 ? 'choose' : ''}}" data-selected="{{isSelected}}" data-num="3" bindtap="currentTag">价格</view>
-	<view class="{{current == 4 ? 'choose' : ''}}" data-selected="{{isSelected}}" data-num="4" bindtap="currentTag">排序方式(顺序)</view>
-	<!-- <picker bindchange="sortChange" range="{{sortList}}" range-key="name" value="{{index}}">排序方式(顺序)</picker> -->
+	<view class="{{current == 1 ? 'choose' : ''}}" data-selected="{{isSelected}}" data-num="1" bindtap="currentTag">综合
+	</view>
+	<view class="{{current == 2 ? 'choose' : ''}}" data-selected="{{isSelected}}" data-num="2" bindtap="currentTag">销量
+	</view>
+	<view class="{{current == 3 ? 'choose' : ''}}" data-selected="{{isSelected}}" data-num="3" bindtap="currentTag">价格
+	</view>
+	<view class="{{current == 4 ? 'choose' : ''}}" data-selected="{{isSelected}}" data-num="4" bindtap="currentTag">
+		排序方式(顺序)</view>
 
 </view>
 <scroll-view scroll-y="true">
 	<view class="main">
 		<block>
 			<view class="goods" wx:for="{{goodsList}}" bindtap="toDetail" data-id="{{item.id}}">
-				<view>
-					<image mode="widthFix" class="goods-image" src="{{item.img}}"></image>
+				<view class="img-box">
+					<image mode="scaleToFill" class="goods-image" src="{{item.img}}"></image>
 				</view>
 				<view class="goods-info">
-					<view class="goods-name"> <text>推荐</text><text wx:if="{item.{is_fetch == 1}}">可自提</text>{{item.intro}}</view>
+					<view class="goods-name"> <text>推荐</text><text wx:if="{{item.is_fetch == 1}}">可自提</text>{{item.intro}}</view>
 					<view class="goods-sales">销量:{{item.sales}}</view>
-
 					<view class="price">
 						<view>
-							<view class="member" wx:if="{{user_type == 3 && user_id == 2}}">会员价:￥{{item.vip_price}}</view>
-							<view class="member" wx:elif="{{user_id == 1}}">零售价:￥{{item.price}}</view>
-							<view class="retail" wx:else>零售价:￥{{item.price}}</view>
+							<view class="member" wx:if="{{(user_type == 3 && user_id !== 1) || (user_type == 2 && user_id !== 1)}}">
+								会员价:￥{{item.vip_price}}</view>
+							<view class="member" wx:elif="{{user_id == 1}}">会员价:￥{{item.price}}</view>
+							<view class="member" wx:else>零售价:￥{{item.price}}</view>
 							<view class="retail">运费:￥{{item.freight}}</view>
 						</view>
 						<!-- <view class="goods-views">

@@ -9,33 +9,29 @@ Page({
     heightArr: [],
     classifyRight: [],
     keyword: '',
-    userType: ''
+    user_type: ''
   },
 
   onLoad() {
     this.getClassify(0);
-    console.log(app.globalData.userType);
+    console.log(app.globalData.user_type);
+    this.setData({
+      user_type: app.globalData.user_type
+    })
+    console.log('user_type', this.data.user_type);
   },
 
   getClassify(val) {
     var self = this;
+    wx.showLoading({
+      title: '数据加载中...',
+    })
     classify.classifyList().then(response => {
-      wx.showLoading({
-        title: '获取数据中...',
-        mask: true,
-        success: (res) => {
-          self.setData({
-            classifyData: response,
-            classifyRight: response[val].subs
-          })
-          console.log(self.data.classifyRight);
-          wx.hideLoading({
-            success: (res) => {},
-          })
-        },
-        fail: (res) => {},
-        complete: (res) => {},
+      self.setData({
+        classifyData: response,
+        classifyRight: response[val].subs
       })
+      wx.hideLoading()
     })
   },
   nav(e) {
@@ -48,8 +44,6 @@ Page({
   },
 
   toGoodsList(e) {
-    console.log(e);
-    
     wx.navigateTo({
       url: '../goods/goods-list/goods-list?id=' + e.currentTarget.dataset.id,
     })

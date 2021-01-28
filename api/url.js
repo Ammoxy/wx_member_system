@@ -13,7 +13,9 @@ const url = {
     'MerchantSelList': '/merchant/select/list', // 获取商家选择列表
     'HealthDetail': '/health/user/detail', // 获取健康专员详情
     'HealthApplyDetail': '/health/apply/detail', // 获取健康专员详情
-
+    'Withdraw': '/withdraw', // 提现
+    'UnderlingUser': '/underling/user', // 获取下级会员
+    'CommissionSource': '/commission/source', // 获取健康专员佣金来源
 
     'ClassifyList': '/classify', // 获取分类列表
     'GoodsList': '/goods/list', // 获取商品列表
@@ -27,8 +29,14 @@ const url = {
 
     'UserOrder': '/creation/user/order', // 创建会员订单
     'CreationOrder': '/creation/order', // 创建订单
+    'OrderPay': '/order/pay', // 订单支付
+    'UserOrderList': '/user/orders', // 获取会员订单列表
+    'Orders': '/orders', // 获取订单列表
+    'CofimReceive': '/confirm/receive', // 确定收货
+    'CancelOrder': '/cancel/order', // 取消订单
 
     'Banners': '/banner/list', // 获取轮播图列表
+    'DocType': '/document/type/list', // 获取资讯类型列表
 
 };
 

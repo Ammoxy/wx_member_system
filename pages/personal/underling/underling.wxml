@@ -1,0 +1,21 @@
+<scroll-view scroll-y="true" lower-threshold="100" bindscrolltolower="scrollToLower" style="height: 100vh;">
+  <view class="title">会员列表</view>
+  <block wx:for="{{underlingData}}" wx:key="index">
+    <view class="info">
+      <view class="avatar">
+        <image mode="aspectFill" src="{{item.wx_user.avatarUrl}}"></image>
+      </view>
+      <view class="item">
+        <view>昵称: {{item.wx_user.nickname}}</view>
+        <view>姓名: {{item.name}}</view>
+        <view>手机号: {{item.phone}}</view>
+      </view>
+    </view>
+  </block>
+  <view wx:if="{{showFoot}}" class="foot">
+    <text>没有更多数据了~ ╮（╯＿╰）╭</text>
+  </view>
+</scroll-view>
+
+
+<view class="not-data" wx:if="{{underlingData.length == 0}}">暂无数据</view>

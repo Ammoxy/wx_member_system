@@ -96,6 +96,14 @@ radio .wx-radio-input.wx-radio-input-checked::before {
     width: 60rpx;
 }
 
+.container .refresh {
+    text-align: center;
+    color: #ccc;
+    font-size: 24rpx;
+    background-color: #fff;
+    padding: 20rpx 0;
+}
+
 
 
 
@@ -129,12 +137,7 @@ radio .wx-radio-input.wx-radio-input-checked::before {
 }
 
 .box .settlement .total .number {
-    font-size: 30rpx;
-    color: #ccc;
-}
-
-.box .settlement .total .number {
-    font-size: 30rpx;
+    font-size: 24rpx;
     color: #ccc;
 }
 
