@@ -169,6 +169,7 @@ Page({
           isInfo: true
         })
       }
+      
     })
   },
 

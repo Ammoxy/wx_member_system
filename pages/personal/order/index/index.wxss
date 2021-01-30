@@ -43,7 +43,6 @@ page {
 .rank {
     display: flex;
     justify-content: space-around;
-    /* margin-top: 8vh; */
     padding: 10rpx 0;
     background-color: #fff;
 }
@@ -67,6 +66,7 @@ page {
     padding: 10rpx 0;
 }
 
+
 .goods {
     display: flex;
 }
@@ -86,30 +86,26 @@ page {
     font-weight: 700;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     overflow: hidden;
 }
 
 .price-box {
     display: flex;
     justify-content: flex-end;
-    /* width: 460rpx; */
+    align-items: center;
 }
 
 .price-box .text {
     color: #999;
-    font-size: 20rpx;
-    line-height: 42rpx;
+    font-size: 24rpx;
+    margin-right: 20rpx;
 }
 
 .price-box .price {
     font-size: 32rpx;
     font-weight: bold;
     color: #444;
-}
-
-.mt {
-    margin-top: 50rpx;
 }
 
 .item .handle {
@@ -124,6 +120,12 @@ page {
     border-radius: 30rpx;
     font-size: 30rpx;
     color: #fff;
+}
+
+.item .time {
+    color: #CC0033;
+    margin-top: 20rpx;
+    align-self: flex-end;
 }
 
 .choose {

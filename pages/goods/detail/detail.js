@@ -27,7 +27,9 @@ Page({
             have_merchant: []
         },
         count: 1,
-        user_type: ''
+        user_type: '',
+        hideModal: true, //模态框的状态  true-隐藏  false-显示
+        animationData: {}, //
     },
 
     /**
@@ -41,11 +43,11 @@ Page({
         });
         this.getDetail();
     },
-
+    // 获取商品详情
     getDetail() {
         var self = this;
         wx.showLoading({
-          title: '数据加载中...',
+            title: '数据加载中...',
         })
         if (self.data.user_id == 1) {
             goods.memberGoodDetail(wx.getStorageSync('token'), self.data.id).then(res => {
@@ -76,11 +78,12 @@ Page({
         }
     },
 
+    // 数量加减
     toSubtract() {
         var self = this;
-        if (self.data.count > 1) {
+        if (Number(self.data.count) > 1) {
             self.setData({
-                count: self.data.count - 1,
+                count: Number(self.data.count) - 1,
             })
         } else {
             wx.showToast({
@@ -93,17 +96,18 @@ Page({
     toAdd() {
         var self = this;
         self.setData({
-            count: self.data.count + 1,
+            count: Number(self.data.count) + 1,
         })
     },
 
+    // 加入购物车
     addCar() {
         var self = this;
         self.setData({
             carParam: {
                 token: wx.getStorageSync('token'),
                 good_id: self.data.good_id,
-                count: self.data.count,
+                count: Number(self.data.count),
                 type: 1
             }
         })
@@ -112,15 +116,19 @@ Page({
                 title: '添加购物车成功',
                 icon: 'none'
             })
+            self.setData({
+                hideModal: true
+            })
         })
     },
-
+    // 输入数量
     iptCount(e) {
         this.setData({
             count: e.detail.value
         })
     },
 
+    // 添加订单
     addOrder() {
         var self = this;
         var data = [];
@@ -129,7 +137,7 @@ Page({
             img: self.data.info.img,
             is_fetch: self.data.info.is_fetch,
             price: self.data.info.price,
-            count: self.data.count,
+            count: Number(self.data.count),
             name: self.data.info.name,
             intro: self.data.info.intro,
             id: self.data.info.id,
@@ -138,6 +146,59 @@ Page({
         console.log(data);
         wx.navigateTo({
             url: '../../car/order-detail/order-detail?data=' + JSON.stringify(data),
+        })
+    },
+
+    // 前往购物车
+    toCar() {
+        wx.switchTab({
+            url: '../../car/car',
+        })
+    },
+
+    // 购物车
+    // 显示遮罩层
+    showModal: function () {
+        var that = this;
+        that.setData({
+            hideModal: false
+        })
+        var animation = wx.createAnimation({
+            duration: 600, //动画的持续时间 默认400ms   数值越大，动画越慢   数值越小，动画越快
+            timingFunction: 'ease', //动画的效果 默认值是linear
+        })
+        this.animation = animation
+        setTimeout(function () {
+            that.fadeIn(); //调用显示动画
+        }, 200)
+    },
+    // 隐藏遮罩层
+    hideModal: function () {
+        var that = this;
+        var animation = wx.createAnimation({
+            duration: 800, //动画的持续时间 默认400ms   数值越大，动画越慢   数值越小，动画越快
+            timingFunction: 'ease', //动画的效果 默认值是linear
+        })
+        this.animation = animation
+        that.fadeDown(); //调用隐藏动画   
+        setTimeout(function () {
+            that.setData({
+                hideModal: true
+            })
+        }, 720) //先执行下滑动画，再隐藏模块
+
+    },
+    //动画集
+    fadeIn: function () {
+        this.animation.translateY(0).step()
+        this.setData({
+            animationData: this.animation.export() //动画实例的export方法导出动画数据传递给组件的animation属性
+        })
+    },
+    fadeDown: function () {
+        this.animation.translateY(300).step()
+        this.setData({
+            animationData: this.animation.export(),
         })
     },
 })

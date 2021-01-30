@@ -37,6 +37,7 @@ const url = {
 
     'Banners': '/banner/list', // 获取轮播图列表
     'DocType': '/document/type/list', // 获取资讯类型列表
+    'DocList': '/document/list', // 获取资讯
 
 };
 

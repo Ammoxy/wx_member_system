@@ -12,8 +12,6 @@ Page({
         isCommon: false,
         page: 1,
         limit: 20,
-        totalMomey: 0,
-        totalCount: 0,
         showFoot: false,
         hasMore: true,
         isPage: false,
@@ -53,7 +51,7 @@ Page({
             title: '数据加载中...',
         })
         orderAPI.userOrderList(wx.getStorageSync('token')).then(res => {
-            console.log(res);
+            // console.log(res);
             self.setData({
                 orderData: res
             })
@@ -64,8 +62,6 @@ Page({
     getComOrder(isPage) {
         var self = this;
         var param = {};
-        var totalMomey = 0;
-        var totalCount = 0;
         wx.showLoading({
             title: '数据加载中...',
         })
@@ -101,23 +97,6 @@ Page({
                 self.setData({
                     hasMore: false,
                     showFoot: true
-                })
-            }
-           
-            if (self.data.orderData.length > 0) {
-                self.data.orderData.forEach(item => {
-                    if (item.good.length > 1) {
-                        item.good.forEach(item => {
-                            console.log(item.price);
-
-                            totalMomey += item.price;
-                            totalCount += item.count;
-                        })
-                    }
-                })
-                self.setData({
-                    totalCount: totalCount,
-                    totalMomey: totalMomey
                 })
             }
             wx.hideLoading()

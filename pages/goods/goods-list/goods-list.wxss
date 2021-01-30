@@ -1,3 +1,6 @@
+page {
+    background-color: #f0f0f0;
+}
 .search {
     min-width: 100vw;
     position: fixed;
@@ -41,10 +44,12 @@
     justify-content: space-around;
     margin-top: 8vh;
     padding: 10rpx 0;
+    background-color: #fff;
 }
 
 .main {
-    height: 88vh;
+    /* height: 88vh; */
+    background-color: #fff;
 }
 
 .goods {
@@ -91,6 +96,7 @@
     background-color: #cc0033;
     color: #fff;
     font-size: 24rpx;
+    margin-right: 10rpx;
 }
 
 .goods .goods-info .goods-sales {

@@ -15,7 +15,7 @@ Page({
         carParam: null,
         count: null,
         goods: [],
-        totalCount: '',
+        totalCount: 0,
         totalPrice: 0,
         goodsInfo: [],
         user_type: '',
@@ -33,7 +33,17 @@ Page({
     },
 
     onShow() {
-        this.getInfo()
+        this.getInfo();
+        this.getList();
+        this.setData({
+            isAllCheck: false,
+            totalPrice: 0,
+            goods: [],
+            totalFreight: 0,
+            goodsInfo: [],
+            totalCount: 0,
+            isShow: false
+        })
     },
 
     // 获取购物车列表
@@ -293,7 +303,7 @@ Page({
                         console.log('用户点击确定')
                         console.log(arr)
                         wx.request({
-                            url: 'http://192.168.0.107/api/cart',
+                            url: 'https://he.fengniaotuangou.cn/api/cart',
                             method: 'DELETE',
                             data: {
                                 token: wx.getStorageSync('token'),
@@ -332,8 +342,6 @@ Page({
             goodsInfo: self.data.goodsInfo,
             totalCount: self.data.totalCount
         }
-        console.log(param.good.length);
-        console.log(param.good.length);
 
         if (param.good.length > 0 && param.goodsInfo.length > 0) {
             wx.navigateTo({
@@ -377,7 +385,7 @@ Page({
         var self = this;
         infomationAPI.userInfo(wx.getStorageSync('token')).then(res => {
             console.log(res);
-            if (res) {
+            if (res.user_id) {
                 self.setData({
                     user_type: res.type
                 })

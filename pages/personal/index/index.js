@@ -52,6 +52,7 @@ Page({
         }
 
     },
+    // 登录授权
     getUserInfo(e) {
         let self = this;
         wx.login({
@@ -61,7 +62,6 @@ Page({
                     wx.getUserInfo({
                         success: (res) => {
                             user.login(code, res.iv, res.encryptedData).then(response => {
-                                console.log(111, response);
                                 wx.showToast({
                                     title: '授权成功',
                                     icon: 'success',
@@ -77,15 +77,15 @@ Page({
                                             avatarUrl: response.info.avatarUrl,
                                             nickName: response.info.nickName
                                         };
-                                        // var health_user = response.userInfo
                                         wx.setStorageSync('wxInfo', wxInfo)
-                                        // wx.setStorageSync('health_user', health_user)
                                         self.setData({
                                             wxInfo: wxInfo,
                                             isAuthorization: false
                                         });
                                         console.log(self.data.isAuthorization);
-                                        // self.getInfo()
+                                        wx.reLaunch({
+                                            url: '/pages/home/home'
+                                        })
                                     }
                                 })
                             }).catch(err => {
@@ -99,7 +99,6 @@ Page({
             }
         });
     },
-
     // 取消授权
     cancel() {
         this.setData({
@@ -154,7 +153,7 @@ Page({
             wx.removeStorageSync('wxInfo')
         } else {
 
-            if (this.data.user_id != undefined) {
+            if (this.data.user_id != '') {
                 wx.navigateTo({
                     url: '/pages/personal/attache/attache?health_user=' + JSON.stringify(this.data.userInfo) + '&user_id=' + this.data.user_id,
                 })
@@ -185,7 +184,7 @@ Page({
         var self = this;
         infomation.userInfo(wx.getStorageSync('token')).then(res => {
             console.log(res);
-            if (res) {
+            if (res.user_id) {
                 app.globalData.user_type = res.type;
                 self.setData({
                     userInfo: res,

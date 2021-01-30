@@ -60,11 +60,11 @@
 			<image class="auto-img" src="../../../icon/comment.png"></image>
 			<view>已收货</view>
 		</view>
-		<!-- <view class="item" bindtap="toRefund">
-			<view class="dot"></view>
+		<view class="item" bindtap="toRefund">
+			<!-- <view class="dot"></view> -->
 			<image class="auto-img" src="../../../icon/refund.png"></image>
 			<view>待退款</view>
-		</view> -->
+		</view>
 	</view>
 </view>
 

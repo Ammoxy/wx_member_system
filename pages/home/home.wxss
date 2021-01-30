@@ -281,3 +281,36 @@ page {
   text-align: center;
   color: #999;
 }
+
+.btnBox {
+  width: 100rpx;
+  /* height:370rpx; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  position: fixed;
+  right: 8rpx;
+  bottom: 20rpx;
+  z-index: 10000;
+}
+
+.btnBox button {
+  margin: 10rpx 0 0 0;
+  padding: 0;
+  width: 90rpx;
+  height: 90rpx;
+  background-color: rgba(0, 0, 0, .8);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26rpx;
+  color: #fff !important;
+}
+
+.btnBox button image {
+  width: 70rpx;
+  height: 70rpx;
+}

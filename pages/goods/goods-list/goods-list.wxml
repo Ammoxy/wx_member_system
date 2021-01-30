@@ -25,7 +25,8 @@
 					<image mode="scaleToFill" class="goods-image" src="{{item.img}}"></image>
 				</view>
 				<view class="goods-info">
-					<view class="goods-name"> <text>推荐</text><text wx:if="{{item.is_fetch == 1}}">可自提</text>{{item.intro}}</view>
+					<!-- <text wx:if="{{item.is_fetch == 1}}">可自提</text> -->
+					<view class="goods-name"> <text>推荐</text>{{item.intro}}</view>
 					<view class="goods-sales">销量:{{item.sales}}</view>
 					<view class="price">
 						<view>

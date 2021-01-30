@@ -72,6 +72,6 @@ App({
 
   globalData: {
     userInfo: null,
-    user_type: 1
+    user_type: 1,
   }
 })

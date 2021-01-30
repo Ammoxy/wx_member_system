@@ -193,7 +193,7 @@ Page({
         var self = this;
         infomationAPI.userInfo(wx.getStorageSync('token')).then(res => {
             console.log(res);
-            if (res) {
+            if (res.user_id) {
                 self.setData({
                     user_type: res.type
                 })

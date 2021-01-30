@@ -4,6 +4,7 @@ page {
   display: flex;
   flex-direction: column;
   font-size: 30rpx;
+  background-color: #f0f0f0;
 }
 
 .search {
@@ -59,6 +60,7 @@ page {
 .choose {
   border-left: 4rpx solid #CC0033;
   color: #CC0033;
+  background-color: #f0f0f0;
 }
 
 /* 间隔 */
@@ -74,9 +76,11 @@ page {
 }
 
 .container .box {
-  margin-left: 10rpx;
+  margin: 0 10rpx;
+  padding: 10rpx;
   /* height: 100%; */
-  height: 90vh;
+  /* height: 90vh; */
+  background-color: #fff;
 
 }
 
@@ -105,4 +109,18 @@ page {
   width: 100rpx;
   height: 100rpx;
 
+}
+
+.container .header {
+  margin: 0 10rpx 10rpx 10rpx;
+  /* padding: 10rpx; */
+  width: calc(100% - 20rpx);
+  height: 280rpx;
+  background-color: blanchedalmond;
+}
+
+.container .header image {
+  width: 100%;
+  height: 100%;
+  display: block;
 }

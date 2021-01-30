@@ -2,11 +2,6 @@
 <view class="box">
   <view class="header">
     <swiper class="swiper" circular="true" autoplay="true" interval="5000" duration="1000">
-      <!-- <block wx:for="{{banner}}" wx:key="{{index}}">
-        <swiper-item>
-          <image mode="aspectFill" src="{{item.carouselImages}}" class="slide-image" />
-        </swiper-item>
-      </block> -->
       <block wx:for="{{bannerList}}">
         <swiper-item>
           <image mode="aspectFill" src="{{item.img}}" class="slide-image" />
@@ -17,9 +12,6 @@
   <view class='titleText'>资讯类型</view>
   <view class="classification">
     <view wx:for="{{classFication}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap='openClassification'>
-      <!-- <form bindsubmit="getFormID" report-submit="true">
-        <button formType="submit" class="formBtu"></button>
-      </form> -->
       <image mode='aspectFill' src="{{item.icon}}" />
       <text>{{item.name}}</text>
     </view>
@@ -29,23 +21,25 @@
     <block wx:if="{{information.length > 0}}">
       <view wx:for="{{information}}" wx:key="{{index}}">
         <!-- 单张大图 -->
-        <view wx:if="{{item.imgList.length == 0 || item.imgList.length == 2}}" class="activity-list1"
+        <!-- wx:if="{{item.imgList.length == 0 || item.imgList.length == 2}}"  -->
+        <view class="activity-list1"
           data-index="{{index}}" data-id="{{item.detailsId}}" bindtap='openDetals'>
           <view class="titleBox">
-            <text class="title">{{item.detailsTitle}}</text>
+            <text class="title">{{item.title}}</text>
           </view>
-          <image wx:if="{{item.imgList.length == 2}}" mode="aspectFill" src="{{item.imgList[0]}}" />
+          <!-- <image wx:if="{{item.imgList.length == 2}}" mode="aspectFill" src="{{item.img}}" /> -->
+          <image mode="aspectFill" src="{{item.img}}" />
         </view>
         <!-- 单张小图 -->
-        <view wx:elif="{{item.imgList.length == 1}}" class="activity-list2" data-index="{{index}}"
+        <!-- <view wx:elif="{{item.imgList.length == 1}}" class="activity-list2" data-index="{{index}}"
           data-id="{{item.detailsId}}" bindtap='openDetals'>
           <view class="titleBox">
             <text class="title">{{item.detailsTitle}}</text>
           </view>
           <image mode="aspectFill" src="{{item.imgList[0]}}" />
-        </view>
+        </view> -->
         <!-- 多图 -->
-        <view wx:elif="{{item.imgList.length > 2}}" class="activity-list3" data-index="{{index}}"
+        <!-- <view wx:elif="{{item.imgList.length > 2}}" class="activity-list3" data-index="{{index}}"
           data-id="{{item.detailsId}}" bindtap='openDetals'>
           <view class="titleBox">
             <text class="title">{{item.detailsTitle}}</text>
@@ -54,7 +48,7 @@
             <image wx:for="{{item.imgList}}" wx:for-item="items" wx:for-index="indexs" wx:key="{{items}}"
               wx:if="{{indexs < 3}}" mode="aspectFill" src="{{items}}" />
           </view>
-        </view>
+        </view> -->
       </view>
     </block>
     <text wx:else class="notData">暂无数据~</text>
@@ -63,4 +57,23 @@
   <view wx:if="{{showFoot}}" class="foot">
     <text>没有更多了~ ╮（╯＿╰）╭</text>
   </view>
+</view>
+
+<view class="btnBox">
+  <!-- 地址导航 -->
+  <button bindtap='map'>
+    <text>导航</text>
+  </button>
+  <!-- 电话按钮 -->
+  <button bindtap='callPhone'>
+    <text>电话</text>
+  </button>
+  <!-- 微信按钮 -->
+  <button bindtap='showCode'>
+    <text>微信</text>
+  </button>
+  <!-- 客服按钮 -->
+  <button open-type="contact">
+    <text>客服</text>
+  </button>
 </view>

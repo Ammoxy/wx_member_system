@@ -16,19 +16,19 @@
 </view>
 
 <!-- 订单列表 -->
-<scroll-view scroll-y="true" lower-threshold="100" bindscrolltolower="scrollToLower" style="height: 90vh;">
+<scroll-view scroll-y="true" lower-threshold="100" bindscrolltolower="scrollToLower" style="height: 100vh;">
 	<view class="list" wx:if="{{!isCommon}}">
 		<!-- 全部订单 -->
 		<block>
 			<view class="item" wx:for="{{orderData}}">
 				<view class="state">
+					<text style="color: #cc0033;" wx:if="{{item.is_fetch == 2}}">到店自取 | </text>
 					<text style="color: #cc0033;" wx:if="{{item.status == 1}}">待付款</text>
 					<text style="color: #cc0033;" wx:if="{{item.status == 2}}">待发货</text>
 					<text style="color: #cc0033;" wx:if="{{item.status == 3}}">待收货</text>
 					<text style="color: #cc0033;" wx:if="{{item.status == 4}}">已收货</text>
 					<text style="color: #cc0033;" wx:if="{{item.status == 5}}">退款</text>
 					<text style="color: #cc0033;" wx:if="{{item.status == 6}}">取消 </text>
-					<!-- <text style="color: #cc0033;" wx:if="{{item.status == 6}}">| 删除</text> -->
 				</view>
 				<view class="goods">
 					<view>
@@ -36,12 +36,13 @@
 					</view>
 					<view class="info">
 						<view class="name">{{item.userGood.intro}}</view>
-						<view class="price-box mt">
-							<text class="text">共计 {{item.count}} 件商品 运费: {{item.freight}}合计：</text>
-							<text class="price">￥{{item.money + item.freight}}</text>
-						</view>
 					</view>
 				</view>
+				<view class="price-box">
+					<text class="text">共计: {{item.count}} 商品 运费: {{item.freight}}</text>
+					<text class="price">合计: ￥{{item.money + item.freight}}</text>
+				</view>
+				<view class="time">{{item.created_at}}</view>
 				<view class="handle">
 					<view class="button" style="background-color: #cc0033;" data-id="{{item.id}}" wx:if="{{item.status == 3}}"
 						bindtap="toShipments">确认收货</view>
@@ -49,7 +50,8 @@
 						bindtap="toCancel">取消订单</view>
 					<view class="button" style="background-color: #cc0033;" wx:if="{{item.status == 1}}" bindtap="toPay"
 						data-id="{{item.id}}">付款</view>
-					<view class="button" style="background-color: #cc0033;" wx:if="{{item.is_fetch == 2 && item.status == 2}}">核销码: {{item.recaption.code}}</view>
+					<view class="button" style="background-color: #cc0033;" wx:if="{{item.is_fetch == 2 && item.status == 2}}">
+						核销码: {{item.recaption.code}}</view>
 				</view>
 			</view>
 		</block>
@@ -61,8 +63,8 @@
 		<!-- 全部订单 -->
 		<block>
 			<view class="item" wx:for="{{orderData}}">
-				<view style="color: #CC0033; font-size: 24rpx">创建时间: {{item.created_at}}</view>
 				<view class="state">
+					<text style="color: #cc0033;" wx:if="{{item.is_fetch == 2}}">到店自取 | </text>
 					<text style="color: #cc0033;" wx:if="{{item.status == 1}}">待付款</text>
 					<text style="color: #cc0033;" wx:if="{{item.status == 2}}">待发货</text>
 					<text style="color: #cc0033;" wx:if="{{item.status == 3}}">待收货</text>
@@ -75,10 +77,6 @@
 					</view>
 					<view class="info">
 						<view class="name">{{item.good[0].good.intro}}</view>
-						<view class="price-box mt">
-							<text class="text">共计 {{item.good[0].count}} 件商品 运费: {{item.freight}}合计：</text>
-							<text class="price">￥{{item.total_money + item.freight}}</text>
-						</view>
 					</view>
 				</view>
 				<view class="goods" wx:else>
@@ -86,26 +84,20 @@
 						<view class="doctorBox">
 							<view class="doctorList" wx:for="{{item.good}}" wx:key="{{index}}">
 								<image class="portrait" mode='aspectFill' src="{{item.good.img}}" />
-								<view class='name'><text>{{item.good.intro}}</text></view>
-								<!-- <view class="post"><text>{{item.doctorPost}}</text></view> -->
-								<!-- <view class="good">
-										<view class="lable">擅长</view><text>{{item.doctorGoodAt}}</text>
-									</view> -->
 							</view>
 						</view>
 					</scroll-view>
 				</view>
-				<view class="price-box" wx:if="{{item.good.length > 1}}">
-					<text class="text">共计 {{totalCount}} 件商品 运费: {{item.freight}}合计：</text>
-					<text class="price">￥{{totalMomey + item.freight}}</text>
+				<view class="price-box">
+					<text class="text">共计 {{item.good.length}} 件商品 运费: {{item.freight}}</text>
+					<text class="price">合计: ￥{{item.total_money + item.freight}}</text>
 				</view>
+				<view class="time">{{item.created_at}}</view>
 				<view class="handle">
 					<view class="button" style="background-color: #cc0033;" data-id="{{item.id}}" wx:if="{{item.status == 3}}"
 						bindtap="toShipments">确认收货</view>
 					<view class="button" style="background-color: #cc0033;" data-id="{{item.id}}" wx:if="{{item.status == 1}}"
 						bindtap="toCancel">取消订单</view>
-					<!-- <view class="button" style="background-color: #cc0033;" data-id="{{item.id}}" wx:if="{{item.status == 4}}">
-							去评价</view> -->
 					<view class="button" style="background-color: #cc0033;" data-id="{{item.id}}" wx:if="{{item.status == 1}}"
 						bindtap="toPay">付款</view>
 					<view></view>
