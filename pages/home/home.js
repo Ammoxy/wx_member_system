@@ -2,6 +2,7 @@
 var bannerAPI = require('../../model/home/banner')
 var docAPI = require('../../model/home/document')
 var app = getApp()
+// import qs from "qs"
 Page({
 
   /**
