@@ -1,7 +1,6 @@
 {
   "pages": [
     "pages/home/home",
-
     "pages/personal/index/index",
     "pages/personal/order/index/index",
     "pages/goods/detail/detail",
@@ -16,7 +15,8 @@
     "pages/car/order-detail/order-detail",
     "pages/personal/withdraw/withdraw",
     "pages/personal/underling/underling",
-    "pages/personal/commission-ource/commission-ource"
+    "pages/personal/commission-ource/commission-ource",
+    "pages/personal/order/detail/detail"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -54,5 +54,10 @@
       }
     ]
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  }
 }

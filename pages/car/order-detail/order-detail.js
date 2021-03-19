@@ -30,7 +30,6 @@ Page({
     goods: [],
     totalMoney: '',
     user_id: '',
-    // user_id: 1,
     is_fetch: null,
     checkDate: '',
     order_id: '',
@@ -43,6 +42,11 @@ Page({
    */
   onLoad: function (options) {
     this.getInfo();
+    if (options.user_id) {
+      this.setData({
+        user_id: options.user_id
+      })
+    }
     if (options.data) {
       // 会员订单
       console.log('会员订单 data', JSON.parse(options.data));
@@ -94,7 +98,7 @@ Page({
     })
     this.getInfo();
     // this.getAddress();
-    
+
   },
   // 选择日期
   bindDateChange: function (e) {
@@ -169,7 +173,7 @@ Page({
           isInfo: true
         })
       }
-      
+
     })
   },
 
@@ -223,7 +227,7 @@ Page({
     var self = this;
     var param = {}
     // 扫码
-    if (self.data.user_id == 1) {
+    if (self.data.user_id) {
       if (self.data.isInfo) {
         wx.showModal({
           title: '提示',
@@ -249,7 +253,7 @@ Page({
             money: self.data.orderData[0].price * self.data.orderData[0].count,
             count: self.data.totalCount,
             merchant_id: self.data.merchant_id,
-            user_id: 4,
+            user_id: self.data.user_id,
             date: self.data.checkDate
           }
           if (param.merchant_id) {
@@ -268,7 +272,7 @@ Page({
             money: self.data.orderData[0].price * self.data.orderData[0].count,
             count: self.data.totalCount,
             address_id: self.data.addressInfo.id,
-            user_id: 4
+            user_id: self.data.user_id
           }
           self.createOrder(param);
         }
@@ -343,7 +347,20 @@ Page({
                     }
                   })
                 })
+              } else if (res.data.code == 10002) {
+                wx.showToast({
+                  icon: "none",
+                  title: res.data.toast
+                });
+                wx.removeStorageSync('wxInfo')
+                wx.removeStorageSync('token')
+                wx.reLaunch({
+                  url: "/pages/personal/index/index"
+                });
               }
+            },
+            fail: (err) => {
+              console.log(err);
             }
           })
         } else {
@@ -422,6 +439,16 @@ Page({
                     }
                   })
                 })
+              } else if (res.data.code == 10002) {
+                wx.showToast({
+                  icon: "none",
+                  title: res.data.toast
+                });
+                wx.removeStorageSync('wxInfo')
+                wx.removeStorageSync('token')
+                wx.reLaunch({
+                  url: "/pages/personal/index/index"
+                });
               }
             }
           })

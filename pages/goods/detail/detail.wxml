@@ -18,21 +18,21 @@
 				{{details.intro}}</view>
 			<view class="profile">
 				<view class="price" style="color: #cc0033;font-size: 36rpx;"
-					wx:if="{{(user_id != 1 && user_type == 2) || (user_id != 1 && user_type == 3)}}">
+					wx:if="{{(user_id == '' && user_type == 2) || (user_id == '' && user_type == 3)}}">
 					￥{{details.vip_price}}</view>
 				<view class="price" style="color: #cc0033;font-size: 36rpx;"
-					wx:elif="{{user_id != 1 && user_type != 2 && user_type != 3}}">
+					wx:elif="{{user_id == '' && user_type != 2 && user_type != 3}}">
 					￥{{details.price}}</view>
-				<view class="price" style="color: #cc0033;font-size: 36rpx;" wx:if="{{user_id == 1}}">￥{{details.price}}</view>
+				<view class="price" style="color: #cc0033;font-size: 36rpx;" wx:if="{{user_id != ''}}">￥{{details.price}}</view>
 				<view>
 					<text style="color: #666666;font-size: 26rpx;padding-right: 10rpx;">运费:{{details.freight}}</text>
 					<text style="color: #666666;font-size: 26rpx;padding-right: 10rpx;">销量:{{details.sales}}</text>
 					<text style="color: #666666;font-size: 26rpx;">库存:{{details.repertory}}</text>
 				</view>
 			</view>
-			<view class="share">
+			<!-- <view class="share">
 				<image src="/icon/add.png"></image>
-			</view>
+			</view> -->
 		</view>
 		<!-- 详情内容 -->
 		<view class="content">
@@ -46,12 +46,12 @@
 		<image src="/icon/kf.png" />
 		<text>客服</text>
 	</button>
-	<button bindtap='toCar'>
+	<button bindtap='toCar' wx:if="{{user_id == ''}}">
 		<image src="/icon/car3.png" />
 		<text>购物车</text>
 	</button>
-	<text class="enroll" bindtap='showModal' wx:if="{{user_id == 1}}">添加订单</text>
-	<text class="enroll" bindtap='showModal' wx:else>加入购物车</text>
+	<text class="enroll1" bindtap='showModal' data-index="1" wx:if="{{user_id == ''}}">加入购物车</text>
+	<text class="enroll" bindtap='showModal' data-index="2">添加订单</text>
 </view>
 
 <view class="modals modals-bottom-dialog" hidden="{{hideModal}}">
@@ -59,9 +59,11 @@
 	<view class="bottom-dialog-body bottom-pos" animation="{{animationData}}">
 		<view class="good-info">
 			<image src="{{details.img}}"></image>
-			<view style="color: #CC0033" class="price" wx:if="{{(user_id != 1 && user_type == 2) || (user_id != 1 && user_type == 3)}}">￥{{details.vip_price}}</view>
-			<view style="color: #CC0033" class="price"wx:elif="{{user_id != 1 && user_type != 2 && user_type != 3}}">￥{{details.price}}</view>
-			<view style="color: #CC0033" class="price"  wx:if="{{user_id == 1}}">￥{{details.price}}</view>
+			<view style="color: #CC0033" class="price"
+				wx:if="{{(user_id == '' && user_type == 2) || (user_id == '' && user_type == 3)}}">￥{{details.vip_price}}</view>
+			<view style="color: #CC0033" class="price" wx:elif="{{user_id == '' && user_type != 2 && user_type != 3}}">
+				￥{{details.price}}</view>
+			<view style="color: #CC0033" class="price" wx:if="{{user_id != ''}}">￥{{details.price}}</view>
 		</view>
 		<view class="buy">
 			<view>购买数量: </view>
@@ -69,7 +71,7 @@
 			<input class="total ta" value="{{count}}" bindblur="iptCount"></input>
 			<text class="add" bindtap="toAdd">+</text>
 		</view>
-		<view class="btn" bindtap="addOrder" wx:if="{{user_id == 1}}">确定</view>
-		<view class="btn" bindtap="addCar" wx:else>确定</view>
+		<view class="btn" bindtap="addCar" wx:if="{{isAdd}}">确定</view>
+		<view class="btn" bindtap="addOrder" wx:else>确定</view>
 	</view>
 </view>

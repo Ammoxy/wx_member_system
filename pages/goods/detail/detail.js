@@ -13,8 +13,7 @@ Page({
         details: null,
         id: '',
         carParam: null,
-        // user_id: 1,
-        user_id: 2,
+        user_id: '',
         orderParam: null,
         merchant_id: '',
         info: {
@@ -30,12 +29,18 @@ Page({
         user_type: '',
         hideModal: true, //模态框的状态  true-隐藏  false-显示
         animationData: {}, //
+        isAdd: false
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        if (options.user_id) {
+            this.setData({
+                user_id: options.user_id
+            })
+        }
         this.setData({
             id: options.id,
             good_id: options.id,
@@ -49,7 +54,7 @@ Page({
         wx.showLoading({
             title: '数据加载中...',
         })
-        if (self.data.user_id == 1) {
+        if (self.data.user_id) {
             goods.memberGoodDetail(wx.getStorageSync('token'), self.data.id).then(res => {
                 WxParse.wxParse('article', 'html', res.detail, self, 2);
                 self.setData({
@@ -128,25 +133,60 @@ Page({
         })
     },
 
+
     // 添加订单
     addOrder() {
         var self = this;
-        var data = [];
-        data.push({
-            freight: self.data.info.freight,
-            img: self.data.info.img,
-            is_fetch: self.data.info.is_fetch,
-            price: self.data.info.price,
-            count: Number(self.data.count),
-            name: self.data.info.name,
-            intro: self.data.info.intro,
-            id: self.data.info.id,
-            have_merchant: self.data.info.have_merchant,
-        })
-        console.log(data);
-        wx.navigateTo({
-            url: '../../car/order-detail/order-detail?data=' + JSON.stringify(data),
-        })
+        if (self.data.user_id) {
+            var data = [];
+            data.push({
+                freight: self.data.info.freight,
+                img: self.data.info.img,
+                is_fetch: self.data.info.is_fetch,
+                price: self.data.info.price,
+                count: Number(self.data.count),
+                name: self.data.info.name,
+                intro: self.data.info.intro,
+                id: self.data.info.id,
+                have_merchant: self.data.info.have_merchant,
+            })
+            console.log(data);
+            wx.navigateTo({
+                url: '../../car/order-detail/order-detail?data=' + JSON.stringify(data) + "&user_id=" + self.data.user_id,
+            })
+        } else {
+            console.log(2222, self.data.details);
+
+            var param = {
+                good: [{
+                    good_id: self.data.details.id,
+                    count: Number(self.data.count),
+                    price: self.data.user_type == 1 ? self.data.details.price * Number(self.data.count) : self.data.details.vip_price * Number(self.data.count)
+                }],
+                money: self.data.user_type == 1 ? self.data.details.price * Number(self.data.count) : self.data.details.vip_price * Number(self.data.count),
+                totalFreight: Number(self.data.count) * self.data.details.freight,
+                goodsInfo: [{
+                    good_id: self.data.details.id,
+                    count: Number(self.data.count),
+                    vip_price: self.data.details.vip_price,
+                    freight: self.data.details.freight,
+                    img: self.data.details.img,
+                    intro: self.data.details.intro,
+                    name: self.data.details.name,
+                    id: self.data.details.id,
+                    price: self.data.details.price,
+                    have_merchant: self.data.details.have_merchant,
+                    is_fetch: self.data.details.is_fetch
+                }],
+                totalCount: Number(self.data.count)
+            }
+            console.log(333, param);
+
+            wx.navigateTo({
+                url: '../../car/order-detail/order-detail?param=' + JSON.stringify(param),
+            })
+        }
+
     },
 
     // 前往购物车
@@ -158,10 +198,20 @@ Page({
 
     // 购物车
     // 显示遮罩层
-    showModal: function () {
+    showModal: function (e) {
+        console.log(e);
         var that = this;
+        if (e.currentTarget.dataset.index == '1') {
+            that.setData({
+                isAdd: true
+            })
+        } else if (e.currentTarget.dataset.index == '2') {
+            that.setData({
+                isAdd: false
+            })
+        }
         that.setData({
-            hideModal: false
+            hideModal: false,
         })
         var animation = wx.createAnimation({
             duration: 600, //动画的持续时间 默认400ms   数值越大，动画越慢   数值越小，动画越快
@@ -172,6 +222,7 @@ Page({
             that.fadeIn(); //调用显示动画
         }, 200)
     },
+
     // 隐藏遮罩层
     hideModal: function () {
         var that = this;

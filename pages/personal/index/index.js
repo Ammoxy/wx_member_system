@@ -8,7 +8,7 @@ Page({
     data: {
         isAuthorization: false,
         userInfo: null,
-        qrCode: '/icon/qrcode.jpg',
+        qrCode: '',
         wxInfo: null,
         type: '',
         user_id: '',
@@ -183,7 +183,7 @@ Page({
     getInfo() {
         var self = this;
         infomation.userInfo(wx.getStorageSync('token')).then(res => {
-            console.log(res);
+            console.log(111, res);
             if (res.user_id) {
                 app.globalData.user_type = res.type;
                 self.setData({
@@ -193,7 +193,8 @@ Page({
                 })
                 if (res.health_user) {
                     self.setData({
-                        money: res.health_user.money
+                        money: res.health_user.money,
+                        qrCode: res.health_user.qr_code
                     })
                 }
             }
@@ -374,4 +375,13 @@ Page({
             })
         }
     },
+
+    // 分享
+    onShareAppMessage: (e) => {
+        return {
+            title: '合纵会员',
+            path: '/pages/home/home',
+            imageUrl: "../../../icon/share_img.jpg"
+        }
+    }
 })

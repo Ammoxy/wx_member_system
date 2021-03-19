@@ -46,27 +46,21 @@
           </view>
         </view>
         <view class="pro-info">
-          <view class="pro-price" wx:if="{{user_id == 1}}">￥{{item.price}}</view>
-          <view class="pro-price" wx:elif="{{(user_id != 1 && user_type == 2)|| (user_id != 1 && user_type == 3)}}">
+          <view class="pro-price" wx:if="{{user_id != ''}}">￥{{item.price}}</view>
+          <view class="pro-price" wx:elif="{{(user_id == '' && user_type == 2)|| (user_id == '' && user_type == 3)}}">
             ￥{{item.vip_price}}</view>
-          <view class="pro-price" wx:elif="{{user_id != 1 && user_type != 2 && user_type != 3}}">￥{{item.price}}</view>
+          <view class="pro-price" wx:elif="{{user_id == '' && user_type != 2 && user_type != 3}}">￥{{item.price}}</view>
           <!-- <view class="pro-count">运费: {{item.freight}}</view> -->
           <view class="pro-count">x{{item.count}}</view>
         </view>
       </view>
       <view class="item">
-        <!-- <view class="price-box" wx:if="{{fetch}}">
-          <text class="text">共计 {{item.count}} 件商品 合计：</text>
-          <text class="price" wx:if="{{user_id == 1}}">￥{{item.price * item.count}}</text>
-          <text class="price" wx:elif="{{(user_id != 1 && user_type == 2) || (user_id != 1 && user_type == 3)}}">￥{{item.vip_price * item.count}}</text>
-          <text class="price" wx:elif="{{user_id != 1 && user_type != 2 && user_type != 3}}">￥{{item.price * item.count}}</text>
-        </view> -->
         <view class="price-box">
           <text class="price" style="margin-right: 20rpx" wx:if="{{!fetch}}">运费: {{item.freight * item.count}}</text>
-          <text class="price" wx:if="{{user_id == 1}}">合计：￥{{item.price * item.count}}</text>
+          <text class="price" wx:if="{{user_id != ''}}">合计：￥{{item.price * item.count}}</text>
           <text class="price"
-            wx:elif="{{(user_id != 1 && user_type == 2) || (user_id != 1 && user_type == 3)}}">合计：￥{{item.vip_price * item.count}}</text>
-          <text class="price" wx:elif="{{user_id != 1 && user_type != 2 && user_type != 3}}">合计：￥{{item.price * item.count }}</text>
+            wx:elif="{{(user_id == '' && user_type == 2) || (user_id == '' && user_type == 3)}}">合计：￥{{item.vip_price * item.count}}</text>
+          <text class="price" wx:elif="{{user_id == '' && user_type != 2 && user_type != 3}}">合计：￥{{item.price * item.count }}</text>
         </view>
       </view>
       <!-- <view class="item bottom-item"></view> -->

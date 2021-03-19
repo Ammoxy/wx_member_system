@@ -1,0 +1,125 @@
+<view class="box">
+  <block wx:if="{{isCommon == 'true'}}">
+    <view class="item">
+      <view class="goods" wx:if="{{orderData.length == 1}}">
+        <view>
+          <image src="{{detail.good[0].good.img}}"></image>
+        </view>
+        <view class="info">
+          <view class="name">{{detail.good[0].good.intro}}</view>
+        </view>
+      </view>
+      <view class="goods" wx:else>
+        <scroll-view scroll-x>
+          <view class="doctorBox">
+            <view class="doctorList" wx:for="{{detail.good}}" wx:key="{{index}}">
+              <image class="portrait" mode='aspectFill' src="{{item.good.img}}" />
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+      <view class="price-box">
+        <text class="text">共计 {{detail.good.length}} 件商品 运费: {{detail.freight}}</text>
+        <text class="price">合计: ￥{{detail.total_money + detail.freight}}</text>
+      </view>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="item">
+      <view class="goods">
+        <view>
+          <image src="{{userGood.userGood.img}}"></image>
+        </view>
+        <view class="info">
+          <view class="name">{{userGood.userGood.intro}}</view>
+        </view>
+      </view>
+      <view class="price-box">
+        <text class="text">共计: {{userGood.count}} 商品 运费: {{userGood.freight}}</text>
+        <text class="price">合计: ￥{{userGood.money + userGood.freight}}</text>
+      </view>
+    </view>
+  </block>
+
+  <view class="order-info">
+    <view class="title">订单信息</view>
+    <view class="info">
+      <view class="left">配送方式:</view>
+      <textarea value='{{detail.is_fetch == 1? "物流配送" : "到店自取"}}' auto-height disabled> </textarea>
+    </view>
+    <view class="info" wx:if="{{detail.is_fetch == 1}}">
+      <view class="left">物流:</view>
+      <textarea value='{{detail.logistic}}' auto-height disabled> </textarea>
+    </view>
+    <view class="info" wx:if="{{detail.is_fetch == 1}}">
+      <view class="left">收货人:</view>
+      <textarea value='{{detail.orderShippingInfo.name}}' auto-height disabled> </textarea>
+    </view>
+    <view class="info" wx:if="{{detail.is_fetch == 1}}">
+      <view class="left">手机号:</view>
+      <textarea value='{{detail.orderShippingInfo.phone}}' auto-height disabled> </textarea>
+    </view>
+    <view class="info" wx:if="{{detail.is_fetch == 1}}">
+      <view class="left">收货地址:</view>
+      <textarea
+        value='{{detail.orderShippingInfo.province_id.name + " " + detail.orderShippingInfo.city_id.name + " " + detail.orderShippingInfo.district_id.name + " " + detail.orderShippingInfo.address}}'
+        auto-height disabled> </textarea>
+    </view>
+    <view class="info" wx:if="{{detail.is_fetch == 2}}">
+      <view class="left">店名:</view>
+      <textarea value='{{detail.recaption.merchant.name}}' auto-height disabled> </textarea>
+    </view>
+    <view class="info" wx:if="{{detail.is_fetch == 2}}">
+      <view class="left">取货地址:</view>
+      <textarea value='{{detail.recaption.merchant.address}}' auto-height disabled> </textarea>
+    </view>
+    <view class="info" wx:if="{{detail.is_fetch == 2}}">
+      <view class="left">核销码:</view>
+      <textarea value='{{detail.recaption.code}}' auto-height disabled> </textarea>
+    </view>
+    <view class="info">
+      <view class="left">订单号:</view>
+      <textarea value='{{detail.no}}' auto-height disabled> </textarea>
+    </view>
+    <view class="info" wx:if="{{detail.is_fetch == 2}}">
+      <view class="left">取货日期:</view>
+      <textarea value='{{detail.recaption.date}}' auto-height disabled> </textarea>
+    </view>
+    <view class="info">
+      <view class="left">创建时间:</view>
+      <textarea wx:if="{{detail.is_fetch == 1}}" value='{{detail.orderShippingInfo.updated_at}}' auto-height
+        disabled> </textarea>
+      <textarea wx:else value='{{detail.recaption.updated_at}}' auto-height disabled> </textarea>
+    </view>
+  </view>
+
+  <view class="order-info" wx:if="{{logisticsData}}">
+    <view class="title">物流信息</view>
+    <view class="info">
+      <view class="left">快递公司编号:</view>
+      <textarea value='{{logisticsData.ShipperCode}}' auto-height disabled> </textarea>
+    </view>
+    <view class="info">
+      <view class="left">物流运单号:</view>
+      <textarea value='{{logisticsData.LogisticCode}}' auto-height disabled> </textarea>
+    </view>
+    <view class="info">
+      <view class="left">物流状态:</view>
+      <textarea wx:if="{{logisticsData.State == 0}}" value='暂无物流信息' auto-height disabled> </textarea>
+      <textarea wx:if="{{logisticsData.State == 1}}" value='已取件' auto-height disabled> </textarea>
+      <textarea wx:if="{{logisticsData.State == 2}}" value='在途中' auto-height disabled> </textarea>
+      <textarea wx:if="{{logisticsData.State == 3}}" value='已签收' auto-height disabled> </textarea>
+    </view>
+    <view class='weui-cell-third'>
+      <block wx:for="{{logisticsData.Traces}}" wx:key="{{index}}">
+        <view class='weui-cell-list'>
+          <view class='weui-cell-circle'></view>
+          <view class='weui-cell-line'>
+            <view class='weui-cell-time'>{{item.AcceptTime}}</view>
+            <view class='weui-cell-event'>{{item.AcceptStation}}</view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

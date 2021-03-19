@@ -30,9 +30,9 @@
 					<view class="goods-sales">销量:{{item.sales}}</view>
 					<view class="price">
 						<view>
-							<view class="member" wx:if="{{(user_type == 3 && user_id !== 1) || (user_type == 2 && user_id !== 1)}}">
+							<view class="member" wx:if="{{(user_type == 3 && user_id == '') || (user_type == 2 && user_id == '')}}">
 								会员价:￥{{item.vip_price}}</view>
-							<view class="member" wx:elif="{{user_id == 1}}">会员价:￥{{item.price}}</view>
+							<view class="member" wx:elif="{{user_id != ''}}">会员价:￥{{item.price}}</view>
 							<view class="member" wx:else>零售价:￥{{item.price}}</view>
 							<view class="retail">运费:￥{{item.freight}}</view>
 						</view>

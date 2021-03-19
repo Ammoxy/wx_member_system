@@ -12,7 +12,7 @@
 		</view>
 	</view>
 	<view class="qrcode">
-		<view class="code">
+		<view class="code" wx:if="{{type == 3}}">
 			<image src="{{qrCode}}" bindtap="preview"></image>
 			<view class="code-tag">我的二维码</view>
 		</view>
@@ -85,8 +85,12 @@
 			<view>收货地址</view>
 		</view>
 		<view class="item">
-			<image class="auto-img img-bg" src="/icon/share.png" style="background: #CC3333;"></image>
+			<button open-type="share" class="share_btn">
+				<image class="auto-img img-bg" src="/icon/share.png" style="background: #CC3333;"></image>
+			</button>
 			<view>分享</view>
+
+
 		</view>
 		<view class="item" bindtap="toWithdraw" wx:if="{{type == 3}}">
 			<image class="auto-img img-bg" src="/icon/withdraw.png" style="background: #CC3333;"></image>

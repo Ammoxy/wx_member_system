@@ -35,6 +35,9 @@ Page({
             this.getComOrder()
         }
 
+        console.log(this.data.isCommon);
+        
+
     },
 
     currentTag(e) {
@@ -275,6 +278,29 @@ Page({
             })
             this.getComOrder(true);
         }
+    },
+
+    // 详情
+    toDetail(e) {
+        console.log(e);
+        wx.navigateTo({
+          url: '../detail/detail?detail=' + JSON.stringify(e.currentTarget.dataset.detail) + '&isCommon=' + this.data.isCommon,
+        })
+    },
+
+    toGoodDetail(e) {
+        console.log(e);
+        console.log(111);
+        if (e.currentTarget.dataset.on_shelf == 1) {
+            wx.navigateTo({
+                url: '../../../goods/detail/detail?id=' + e.currentTarget.dataset.id
+            })
+        } else {
+            wx.showToast({
+              title: '商品已下架',
+              icon: 'none'
+            })
+        }        
     },
 
 })

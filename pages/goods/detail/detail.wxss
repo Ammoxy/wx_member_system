@@ -153,12 +153,21 @@ page {
 }
 
 .nav .enroll {
-  width: 375rpx;
+  width: 300rpx;
   height: 105rpx;
   line-height: 105rpx;
   font-size: 36rpx;
   text-align: center;
   background-color: #CC0033;
+  color: #fff;
+}
+.nav .enroll1 {
+  width: 300rpx;
+  height: 105rpx;
+  line-height: 105rpx;
+  font-size: 36rpx;
+  text-align: center;
+  background-color: orange;
   color: #fff;
 }
 

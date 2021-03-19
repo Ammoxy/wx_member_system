@@ -113,21 +113,22 @@ orderAPI.cofimReceive = function (token, order_id, type) {
     })
 }
 
-// 删除
-// orderAPI.delCar = function (token, goods) {
-//     return new Promise((resolve, reject) => {
-//         api.del(api.baseUrl.host, api.url.DelCar, {
-//             token: token,
-//             goods: goods
-//         }, function (response) {
-//             if (response.code === 10000) {
-//                 var res = response.result
-//                 resolve(res);
-//             } else {
-//                 reject(response);
-//             }
-//         })
-//     })
-// }
+// 物流
+orderAPI.orderInquire = function (token, express_no, logistics_id) {
+    return new Promise((resolve, reject) => {
+        api.get(api.baseUrl.host, api.url.OrderInquire, {
+            token: token,
+            express_no: express_no,
+            logistics_id: logistics_id
+        }, function (response) {
+            if (response.code === 10000) {
+                var res = response.result
+                resolve(res);
+            } else {
+                reject(response);
+            }
+        })
+    })
+}
 
 module.exports = orderAPI;

@@ -14,8 +14,7 @@ Page({
         id: '',
         goodsList: [],
         detailId: '',
-        // user_id: 1,
-        user_id: 2,
+        user_id: '',
         user_type: '',
         current: 1,
         isSelected: false
@@ -25,6 +24,12 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        if (options.scene) {
+            console.log('扫码', options.scene);
+            this.setData({
+                user_id: options.scene
+            })
+        }
         this.setData({
             id: options.id,
         })
@@ -82,7 +87,7 @@ Page({
                     }
                 })
             }
-            
+
         } else if (e.currentTarget.dataset.num == 3) {
             if (self.data.isSelected) {
                 self.setData({
@@ -105,7 +110,7 @@ Page({
                     }
                 })
             }
-            
+
         } else if (e.currentTarget.dataset.num == 4) {
             if (self.data.isSelected) {
                 self.setData({
@@ -127,7 +132,7 @@ Page({
                 })
             }
         }
-        if (self.data.user_id == 1) {
+        if (self.data.user_id != '') {
             self.getMemberGoodList(self.data.paramData)
         } else {
             self.getGoodList(self.data.paramData);
@@ -170,7 +175,7 @@ Page({
                 perPage: self.data.limit,
             }
         })
-        if (self.data.user_id == 1) {
+        if (self.data.user_id != '') {
             self.getMemberGoodList(self.data.paramData)
         } else {
             self.getGoodList(self.data.paramData);
@@ -185,7 +190,7 @@ Page({
         })
 
         wx.navigateTo({
-            url: '../detail/detail?id=' + self.data.detailId + '&user_type=' + self.data.user_type,
+            url: '../detail/detail?id=' + self.data.detailId + '&user_type=' + self.data.user_type + '&user_id=' + self.data.user_id,
         })
     },
 

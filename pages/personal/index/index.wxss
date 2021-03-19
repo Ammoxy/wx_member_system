@@ -159,7 +159,8 @@ page {
 }
 
 /* 我的订单 */
-.order, .service {
+.order,
+.service {
     background-color: #fff;
 }
 
@@ -178,6 +179,8 @@ page {
 
     position: relative;
 }
+
+
 
 .order .list .item .dot {
     position: absolute;
@@ -213,6 +216,16 @@ page {
     font-size: 24rpx;
 
 }
+
+.service .list .item button {
+    border-radius: 0;
+    background-color: #fff;
+}
+
+.service .list .item button::after {
+    border: none;
+    border-radius: 0;
+  }
 
 /* 公共样式 */
 .title {

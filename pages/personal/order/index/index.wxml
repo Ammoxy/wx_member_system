@@ -44,6 +44,8 @@
 				</view>
 				<view class="time">{{item.created_at}}</view>
 				<view class="handle">
+					<view class="button" style="background-color: #cc0033;" data-detail="{{item}}" wx:if="{{item.status == 3}}"
+						bindtap="toDetail">订单详情</view>
 					<view class="button" style="background-color: #cc0033;" data-id="{{item.id}}" wx:if="{{item.status == 3}}"
 						bindtap="toShipments">确认收货</view>
 					<view class="button" style="background-color: #cc0033;" data-id="{{item.id}}" wx:if="{{item.status == 1}}"
@@ -71,7 +73,8 @@
 					<text style="color: #cc0033;" wx:if="{{item.status == 4}}">已收货</text>
 					<text style="color: #cc0033;" wx:if="{{item.status == 5}}">取消</text>
 				</view>
-				<view class="goods" wx:if="{{item.good.length == 1}}">
+				<view class="goods" wx:if="{{item.good.length == 1}}" bindtap="toGoodDetail"
+					data-on_shelf="{{item.good[0].good.on_shelf}}" data-id="{{item.good[0].good.id}}">
 					<view>
 						<image src="{{item.good[0].good.img}}"></image>
 					</view>
@@ -83,7 +86,8 @@
 					<scroll-view scroll-x>
 						<view class="doctorBox">
 							<view class="doctorList" wx:for="{{item.good}}" wx:key="{{index}}">
-								<image class="portrait" mode='aspectFill' src="{{item.good.img}}" />
+								<image class="portrait" mode='aspectFill' src="{{item.good.img}}" bindtap="toGoodDetail"
+									data-id="{{item.good.id}}" data-on_shelf="{{item.good.on_shelf}}" />
 							</view>
 						</view>
 					</scroll-view>
@@ -94,6 +98,8 @@
 				</view>
 				<view class="time">{{item.created_at}}</view>
 				<view class="handle">
+					<view class="button" style="background-color: #cc0033;" data-detail="{{item}}" wx:if="{{item.status == 3}}"
+						bindtap="toDetail">订单详情</view>
 					<view class="button" style="background-color: #cc0033;" data-id="{{item.id}}" wx:if="{{item.status == 3}}"
 						bindtap="toShipments">确认收货</view>
 					<view class="button" style="background-color: #cc0033;" data-id="{{item.id}}" wx:if="{{item.status == 1}}"

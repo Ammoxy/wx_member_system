@@ -3,10 +3,10 @@
   <block wx:for="{{sourceData}}" wx:key="index">
     <view class="info">
       <view class="avatar">
-        <image mode="aspectFill" src="{{item.wx_user.avatarUrl}}"></image>
+        <image mode="aspectFill" src="{{item.order.user.avatarUrl}}"></image>
       </view>
       <view class="item">
-        <view>昵称: {{item.wx_user.nickname}}</view>
+        <view>昵称: {{item.order.user.nickname}}</view>
         <view>佣金: {{item.money}}</view>
         <view>订单号: {{item.order.no}}</view>
         <view>订单类型: 
