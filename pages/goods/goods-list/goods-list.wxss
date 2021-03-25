@@ -43,8 +43,8 @@ page {
     text-align: left;
     font-size: 24rpx;
     background-color: #fff;
-    height: 80rpx;
-    line-height: 80rpx;
+    height: 75rpx;
+    line-height: 75rpx;
     /* padding: 0 10rpx; */
     width: 110rpx;
     
@@ -58,7 +58,7 @@ page {
     top: 0;
     display: flex;
     justify-content: space-around;
-    margin-top: 7vh;
+    margin-top: 80rpx;
     padding: 10rpx 0;
     background-color: #fff;
     z-index: 100;
