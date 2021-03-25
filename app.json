@@ -16,7 +16,9 @@
     "pages/personal/withdraw/withdraw",
     "pages/personal/underling/underling",
     "pages/personal/commission-ource/commission-ource",
-    "pages/personal/order/detail/detail"
+    "pages/personal/order/detail/detail",
+    "pages/home/msg-list/msg-list",
+    "pages/home/msg-detail/msg-detail"
   ],
   "window": {
     "backgroundTextStyle": "light",

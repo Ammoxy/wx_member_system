@@ -9,8 +9,8 @@
 <view class="main">
 	<!-- 左边导航 -->
 	<scroll-view class="sidebar" scroll-y="true">
-		<view class="sidebar">
-			<block wx:for="{{classifyData}}" wx:key="{{index}}" class="sidebar">
+		<view >
+			<block wx:for="{{classifyData}}" wx:key="{{index}}">
 				<view data-id="{{item.id}}" data-index="{{index}}" id="{{'left' + item.id}}" class="item {{index == num ? 'choose' : ''}}" bindtap="nav">
 					<text>{{item.name}}</text>
 				</view>
@@ -23,7 +23,7 @@
 	<!-- <scroll-view class="container" scroll-y="true" scroll-into-view="{{rightId}}" bindscroll="rightScrollTop"> -->
 	<view class="container">
 		<view class="header">
-			<image src="/icon/a.jpg"></image>
+			<image src="{{bg_img}}"></image>
 		</view>
 		<view class="box">
 			<block>
@@ -33,7 +33,7 @@
 						<view class="list" wx:for="{{item.subs}}">
 							<view class="item" bindtap="toGoodsList" data-id="{{item.id}}">
 								<image class="auto-img img-bg" src="{{item.img}}"></image>
-								<view>{{item.name}}</view>
+								<view class="pro-name">{{item.name}}</view>
 							</view>
 						</view>
 					</view>

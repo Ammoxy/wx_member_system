@@ -1,4 +1,5 @@
 var classify = require('../../model/classify/classify');
+var banner = require('../../model/home/banner')
 var app = getApp()
 Page({
   data: {
@@ -9,10 +10,12 @@ Page({
     heightArr: [],
     classifyRight: [],
     keyword: '',
-    user_type: ''
+    user_type: '',
+    bg_img: ''
   },
 
   onLoad() {
+    this.getPic()
     this.getClassify(0);
     console.log(app.globalData.user_type);
     this.setData({
@@ -21,17 +24,32 @@ Page({
     console.log('user_type', this.data.user_type);
   },
 
-  getClassify(val) {
+  getPic() {
     var self = this;
     wx.showLoading({
       title: '数据加载中...',
     })
+    banner.imagesCl(1).then(res => {
+      console.log(res);
+      
+      self.setData({
+        bg_img: res[0].image
+      })
+      wx.hideLoading()
+    })
+  },
+
+  getClassify(val) {
+    var self = this;
+    // wx.showLoading({
+    //   title: '数据加载中...',
+    // })
     classify.classifyList().then(response => {
       self.setData({
         classifyData: response,
         classifyRight: response[val].subs
       })
-      wx.hideLoading()
+      // wx.hideLoading()
     })
   },
   nav(e) {

@@ -4,14 +4,15 @@
     <swiper class="swiper" circular="true" autoplay="true" interval="5000" duration="1000">
       <block wx:for="{{bannerList}}">
         <swiper-item>
-          <image mode="aspectFill" src="{{item.img}}" class="slide-image" />
+          <image mode="aspectFill" src="{{item.img}}" class="slide-image" data-id="{{item.target}}" bindtap="openDetals" />
         </swiper-item>
       </block>
     </swiper>
   </view>
   <view class='titleText'>资讯类型</view>
   <view class="classification">
-    <view wx:for="{{classFication}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap='openClassification'>
+    <view wx:for="{{classFication}}" wx:key="{{index}}" data-index="{{index}}" data-id="{{item.id}}"
+      bindtap='openClassification'>
       <image mode='aspectFill' src="{{item.icon}}" />
       <text>{{item.name}}</text>
     </view>
@@ -20,35 +21,13 @@
   <view class="activity-box">
     <block wx:if="{{information.length > 0}}">
       <view wx:for="{{information}}" wx:key="{{index}}">
-        <!-- 单张大图 -->
-        <!-- wx:if="{{item.imgList.length == 0 || item.imgList.length == 2}}"  -->
-        <view class="activity-list1"
-          data-index="{{index}}" data-id="{{item.detailsId}}" bindtap='openDetals'>
+        <!-- 单张小图 -->
+        <view class="activity-list2" data-index="{{index}}" data-id="{{item.id}}" bindtap='openDetals'>
+          <image mode="aspectFill" src="{{item.img}}" />
           <view class="titleBox">
             <text class="title">{{item.title}}</text>
           </view>
-          <!-- <image wx:if="{{item.imgList.length == 2}}" mode="aspectFill" src="{{item.img}}" /> -->
-          <image mode="aspectFill" src="{{item.img}}" />
         </view>
-        <!-- 单张小图 -->
-        <!-- <view wx:elif="{{item.imgList.length == 1}}" class="activity-list2" data-index="{{index}}"
-          data-id="{{item.detailsId}}" bindtap='openDetals'>
-          <view class="titleBox">
-            <text class="title">{{item.detailsTitle}}</text>
-          </view>
-          <image mode="aspectFill" src="{{item.imgList[0]}}" />
-        </view> -->
-        <!-- 多图 -->
-        <!-- <view wx:elif="{{item.imgList.length > 2}}" class="activity-list3" data-index="{{index}}"
-          data-id="{{item.detailsId}}" bindtap='openDetals'>
-          <view class="titleBox">
-            <text class="title">{{item.detailsTitle}}</text>
-          </view>
-          <view class="imageBox">
-            <image wx:for="{{item.imgList}}" wx:for-item="items" wx:for-index="indexs" wx:key="{{items}}"
-              wx:if="{{indexs < 3}}" mode="aspectFill" src="{{items}}" />
-          </view>
-        </view> -->
       </view>
     </block>
     <text wx:else class="notData">暂无数据~</text>

@@ -1,0 +1,19 @@
+<view class="box">
+  <view class="nav">
+    <view wx:for="{{classFication}}" wx:key="{{index}}" data-id="{{item.id}}" data-index="{{index}}" bindtap='nav'
+      class="{{index == num ? 'nav_active' : ''}}">
+      {{item.name}}
+    </view>
+  </view>
+  <view class="list">
+    <block wx:for="{{information}}">
+      <view class="item" bindtap="toDetail" data-id="{{item.id}}">
+        <image src="{{item.img}}"></image>
+        <view class="info">
+          <view class="title">{{item.title}}</view>
+          <view class="time">{{item.updated_at}}</view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

@@ -376,6 +376,13 @@ Page({
         }
     },
 
+    toHelData() {
+        wx.showToast({
+          title: '该功能正在开发',
+          icon: 'none'
+        })
+    },
+
     // 分享
     onShareAppMessage: (e) => {
         return {

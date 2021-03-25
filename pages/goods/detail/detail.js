@@ -252,4 +252,13 @@ Page({
             animationData: this.animation.export(),
         })
     },
+
+    onShareAppMessage: (e) => {
+        console.log(e);
+        
+        return {
+          title: '安域智慧安防',
+          path: 'pages/goods/detail/detail?id=' + e.target.dataset.id,
+        }
+      }
 })

@@ -14,15 +14,13 @@ Page({
     information: [],
     address: '',
     qrCode: '/icon/qrcode.jpg',
+    classFication: []
   },
 
   onLoad: function (options) {
     this.getBanner()
     this.getDocType()
     this.getDoc()
-  },
-  onShow: function () {
-
   },
 
   getBanner() {
@@ -49,10 +47,16 @@ Page({
 
   getDoc() {
     var self = this;
-    docAPI.docList(1).then(res => {
+    var arr = []
+    docAPI.docList(0).then(res => {
       console.log(res);
+      res.data.forEach(item => {
+        if (item.is_show == 1) {
+          arr.push(item)
+        }
+      })
       self.setData({
-        information: res.data
+        information: arr
       })
     })
   },
@@ -75,25 +79,6 @@ Page({
   map(e) {
     var self = this;
     console.log("开启地图")
-    // wx.chooseLocation({
-    //   success(res) {
-    //     console.log(11, res)
-    //     self.setData({
-    //       address: res.address
-    //     })
-    //   },
-    //   fail: function (err) {
-    //     console.log(123, err)
-    //     wx.getSetting({
-    //       success: (res) => {
-    //         console.log(456, res)
-    //         if (res.authSetting['scope.userLocation'] == false) {
-
-    //         }
-    //       }
-    //     })
-    //   },
-    // })
     wx.getLocation({ //获取当前经纬度
       type: 'wgs84', //返回可以用于wx.openLocation的经纬度，官方提示bug: iOS 6.3.30 type 参数不生效，只会返回 wgs84 类型的坐标信息  
       success: function (res) {
@@ -118,5 +103,26 @@ Page({
     })
     console.log("地图")
   },
+
+  openClassification(e) {
+    console.log(e);
+    
+    wx.navigateTo({
+      url: './msg-list/msg-list?id=' + e.currentTarget.dataset.id + '&index=' + e.currentTarget.dataset.index,
+    })
+  },
+
+  openDetals(e) {
+    if (e.currentTarget.dataset.id) {
+      wx.navigateTo({
+        url: './msg-detail/msg-detail?id=' + e.currentTarget.dataset.id,
+      })
+    } else {
+      wx.showToast({
+        title: '该轮播图未设置跳转',
+        icon: 'none'
+      })
+    }
+  }
 
 })

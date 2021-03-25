@@ -31,5 +31,21 @@ doc.docList = function (document_type) {
   })
 }
 
+// 获取资讯详情
+doc.docDetail = function (id) {
+  return new Promise((resolve, reject) => {
+    api.get(api.baseUrl.host, api.url.DocDetail, {
+      id: id
+    }, function (response) {
+      if (response.code === 10000) {
+        var res = response.result
+        resolve(res);
+      } else {
+        reject(response);
+      }
+    })
+  })
+}
+
 
 module.exports = doc;

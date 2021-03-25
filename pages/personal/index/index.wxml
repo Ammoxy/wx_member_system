@@ -60,11 +60,10 @@
 			<image class="auto-img" src="../../../icon/comment.png"></image>
 			<view>已收货</view>
 		</view>
-		<view class="item" bindtap="toRefund">
-			<!-- <view class="dot"></view> -->
+		<!-- <view class="item" bindtap="toRefund">
 			<image class="auto-img" src="../../../icon/refund.png"></image>
 			<view>待退款</view>
-		</view>
+		</view> -->
 	</view>
 </view>
 
@@ -72,7 +71,7 @@
 <view class="service">
 	<view class="title">我的服务</view>
 	<view class="list">
-		<view class="item">
+		<view class="item" bindtap="toHelData">
 			<image class="auto-img img-bg" src="/icon/data.png" style="background: #CC3333;"></image>
 			<view>健康数据</view>
 		</view>

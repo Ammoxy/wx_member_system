@@ -1,0 +1,79 @@
+page {
+  background-color: #f0f0f0;
+}
+
+.nav {
+  position: fixed;
+  left: 0rpx;
+  top: 0;
+  z-index: 100000;
+  background-color: #fff;
+  height: 70rpx;
+  width: 100%;
+  margin-bottom: 10rpx;
+  font-size: 30rpx;
+  overflow-x: auto;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.nav view {
+  position: relative;
+  line-height: 70rpx;
+  text-align: center;
+  width: calc(100% / 3);
+  min-width: 187.5rpx;
+}
+
+.nav .nav_active {
+  color: #CC0033;
+  border-bottom: 5rpx solid #CC0033;
+}
+
+.list {
+  margin-top: 80rpx;
+  width: 100%;
+}
+
+.list .item {
+  display: flex;
+  background-color: #fff;
+  padding: 10rpx;
+  margin: 10rpx;
+}
+
+.list .item image {
+  width: 280rpx;
+  height: 190rpx;
+}
+
+.list .item .info {
+  width: calc(100% - 280rpx);
+  position: relative;
+}
+
+.list .item .info view {
+  margin: 15rpx 10rpx;
+}
+
+.list .item .info .title {
+  /* width: 480rpx; */
+  line-height: 40rpx;
+  color: #333;
+  font-size: 35rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.list .item .info .time {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: right;
+}

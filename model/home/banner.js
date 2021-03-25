@@ -15,4 +15,20 @@ banner.banners = function () {
   })
 }
 
+// 获取轮播图
+banner.imagesCl = function (type) {
+  return new Promise((resolve, reject) => {
+    api.get(api.baseUrl.host, api.url.ImagesCl, {
+      type: type
+    }, function (response) {
+      if (response.code === 10000) {
+        var res = response.result
+        resolve(res);
+      } else {
+        reject(response);
+      }
+    })
+  })
+}
+
 module.exports = banner;

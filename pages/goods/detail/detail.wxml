@@ -30,9 +30,10 @@
 					<text style="color: #666666;font-size: 26rpx;">库存:{{details.repertory}}</text>
 				</view>
 			</view>
-			<!-- <view class="share">
-				<image src="/icon/add.png"></image>
-			</view> -->
+			<view class="share">
+				<image src="/icon/share1.png"></image>
+				<button open-type="share" data-id="{{details.id}}">分享</button>
+			</view>
 		</view>
 		<!-- 详情内容 -->
 		<view class="content">

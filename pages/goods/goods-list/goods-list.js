@@ -8,16 +8,22 @@ Page({
      * 页面的初始数据
      */
     data: {
-        paramData: {},
+        // paramData: {},
         page: 1,
         limit: 10,
+        // classify_id: '',
+        order: 'sort',
+        type: 'asc',
+        name: '',
         id: '',
         goodsList: [],
         detailId: '',
         user_id: '',
         user_type: '',
         current: 1,
-        isSelected: false
+        isSelected: false,
+        showFoot: false,
+        keyword: ''
     },
 
     /**
@@ -42,126 +48,91 @@ Page({
         self.setData({
             current: e.currentTarget.dataset.num,
             isSelected: !e.currentTarget.dataset.selected,
+            page: 1,
+            goodsList: [],
+            showFoot: false
         })
         if (e.currentTarget.dataset.num == 1) {
-            if (self.data.isSelected) {
-                self.setData({
-                    paramData: {
-                        token: wx.getStorageSync('token'),
-                        currentPage: self.data.page,
-                        perPage: self.data.limit,
-                        order: 'sort',
-                        type: 'asc'
-                    }
-                })
-            } else {
-                self.setData({
-                    paramData: {
-                        token: wx.getStorageSync('token'),
-                        currentPage: self.data.page,
-                        perPage: self.data.limit,
-                        order: 'sort',
-                        type: 'desc'
-                    }
-                })
-            }
+            self.setData({
+                order: 'sort',
+                type: 'asc'
+
+            })
         } else if (e.currentTarget.dataset.num == 2) {
             if (self.data.isSelected) {
                 self.setData({
-                    paramData: {
-                        token: wx.getStorageSync('token'),
-                        currentPage: self.data.page,
-                        perPage: self.data.limit,
-                        order: 'sales',
-                        type: 'desc'
-                    }
+                    order: 'sales',
+                    type: 'desc'
                 })
             } else {
                 self.setData({
-                    paramData: {
-                        token: wx.getStorageSync('token'),
-                        currentPage: self.data.page,
-                        perPage: self.data.limit,
-                        order: 'sales',
-                        type: 'asc'
-                    }
+                    order: 'sales',
+                    type: 'asc'
                 })
             }
 
         } else if (e.currentTarget.dataset.num == 3) {
             if (self.data.isSelected) {
                 self.setData({
-                    paramData: {
-                        token: wx.getStorageSync('token'),
-                        currentPage: self.data.page,
-                        perPage: self.data.limit,
-                        order: 'price',
-                        type: 'desc'
-                    }
+                    order: 'price',
+                    type: 'desc'
+
                 })
             } else {
                 self.setData({
-                    paramData: {
-                        token: wx.getStorageSync('token'),
-                        currentPage: self.data.page,
-                        perPage: self.data.limit,
-                        order: 'price',
-                        type: 'asc'
-                    }
+                    order: 'price',
+                    type: 'asc'
                 })
             }
 
         } else if (e.currentTarget.dataset.num == 4) {
-            if (self.data.isSelected) {
-                self.setData({
-                    paramData: {
-                        token: wx.getStorageSync('token'),
-                        currentPage: self.data.page,
-                        perPage: self.data.limit,
-                        type: 'desc'
-                    }
-                })
-            } else {
-                self.setData({
-                    paramData: {
-                        token: wx.getStorageSync('token'),
-                        currentPage: self.data.page,
-                        perPage: self.data.limit,
-                        type: 'asc'
-                    }
-                })
-            }
+            self.setData({
+                order: 'sort',
+                type: 'asc',
+                keyword: '',
+                name: ''
+            })
         }
         if (self.data.user_id != '') {
-            self.getMemberGoodList(self.data.paramData)
+            self.getMemberGoodList()
         } else {
-            self.getGoodList(self.data.paramData);
+            self.getGoodList();
         }
     },
 
     // 普通商品
-    getGoodList(val) {
+    getGoodList() {
         var self = this;
         wx.showLoading({
             title: '数据加载中...',
         })
-        goods.goodsList(val).then(res => {
+        goods.goodsList(wx.getStorageSync('token'), self.data.page, self.data.limit, self.data.name, self.data.id, self.data.order, self.data.type).then(res => {
             self.setData({
-                goodsList: res.data
+                goodsList: self.data.goodsList.concat(res.data)
             })
+            if (res.data.length == 0) {
+                self.setData({
+                    showFoot: true
+                })
+            }
             wx.hideLoading()
         })
     },
     // 会员商品
-    getMemberGoodList(val) {
+    getMemberGoodList() {
         var self = this;
         wx.showLoading({
             title: '数组加载中...',
         })
-        goods.memberGoodsList(val).then(res => {
+        goods.memberGoodsList(wx.getStorageSync('token'), self.data.page, self.data.limit, self.data.name, self.data.order, self.data.type).then(res => {
             self.setData({
-                goodsList: res.data
+                goodsList: self.data.goodsList.concat(res.data)
             })
+            if (res.data.length == 0) {
+                self.setData({
+                    showFoot: true
+                })
+            }
             wx.hideLoading()
         })
     },
@@ -176,9 +147,9 @@ Page({
             }
         })
         if (self.data.user_id != '') {
-            self.getMemberGoodList(self.data.paramData)
+            self.getMemberGoodList()
         } else {
-            self.getGoodList(self.data.paramData);
+            self.getGoodList();
         }
     },
 
@@ -204,5 +175,43 @@ Page({
                 })
             }
         })
+    },
+
+    onReachBottom() {
+        console.log('上拉')
+        var self = this;
+        var page = self.data.page + 1; //获取当前页数并+1
+        self.setData({
+            page: page, //更新当前页数
+        })
+        if (!self.data.showFoot) {
+            if (self.data.user_id != '') {
+                self.getMemberGoodList()
+            } else {
+                self.getGoodList();
+            }
+        }
+    },
+
+    searchName(e) {
+        this.setData({
+            keyword: e.detail.value
+        })
+    },
+
+    toSearch() {
+        let self = this;
+        self.setData({
+            page: 1,
+            goodsList: [],
+            showFoot: false,
+            name: self.data.keyword
+        })
+        console.log(self.data.keyword);
+        if (self.data.user_id != '') {
+            self.getMemberGoodList()
+        } else {
+            self.getGoodList();
+        }
     },
 })

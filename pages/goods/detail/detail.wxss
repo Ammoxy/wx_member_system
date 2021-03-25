@@ -5,6 +5,10 @@ page {
   height: 100%;
 }
 
+.box {
+  margin-bottom: 105rpx;
+}
+
 
 .box swiper {
   width: 100%;
@@ -37,11 +41,32 @@ page {
 }
 
 .box .goods .share {
-  text-align: right;
+  display: flex;
+  justify-content: flex-end;
 }
 
+.box .goods .share button {
+  border-radius: 0;
+  background-color: #fff;
+  padding: 0;
+  margin: 0;
+  width: 160rpx;
+  height: 50rpx;
+  text-align: center;
+  line-height: 50rpx;
+}
+
+.box .goods .share button::after {
+  border: none;
+  border-radius: 0;
+}
+
+/* .box .goods .share button {
+  padding: 0 20rpx;
+} */
+
 .box .goods .share image {
-  width: 40rpx;
+  width: 50rpx;
   height: 50rpx;
 }
 

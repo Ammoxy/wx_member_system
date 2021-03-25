@@ -73,6 +73,8 @@ page {
 /* 右边内容 */
 .container {
   flex: 1;
+  height: 100%;
+  overflow-y: auto;
 }
 
 .container .box {
@@ -95,15 +97,23 @@ page {
 }
 
 .container .box .list .item {
-  margin: 20rpx 15rpx;
+  margin: 10rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 28%;
+  text-align: center;
 }
 
-.container .box .item view {
+.container .box .item .pro-name {
   font-size: 28rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
+
 
 .container .box .list image {
   width: 100rpx;
