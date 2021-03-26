@@ -10,7 +10,7 @@ Page({
         userInfo: null,
         qrCode: '',
         wxInfo: null,
-        type: '',
+        type: 1,
         user_id: '',
         page: 1,
         limit: 20,
@@ -28,9 +28,9 @@ Page({
         var url = decodeURIComponent(options.q);
 
         if (!wx.getStorageSync('token')) {
-            this.setData({
-                isAuthorization: true
-            })
+            // this.setData({
+            //     isAuthorization: true
+            // })
         } else {
             this.getComOrder()
         }
@@ -43,9 +43,9 @@ Page({
             wxInfo: wx.getStorageSync('wxInfo'),
         })
         if (!wx.getStorageSync('token')) {
-            this.setData({
-                isAuthorization: true
-            })
+            // this.setData({
+            //     isAuthorization: true
+            // })
         } else {
             this.getInfo()
             this.getComOrder()
@@ -80,9 +80,9 @@ Page({
                                         wx.setStorageSync('wxInfo', wxInfo)
                                         self.setData({
                                             wxInfo: wxInfo,
-                                            isAuthorization: false
+                                            // isAuthorization: false
                                         });
-                                        console.log(self.data.isAuthorization);
+                                        // console.log(self.data.isAuthorization);
                                         wx.reLaunch({
                                             url: '/pages/home/home'
                                         })

@@ -75,7 +75,7 @@
       <view class="number">共件: {{totalCount}} <text wx:if="{{!fetch}}">运费: {{freight}}</text></view>
       <view class="sum" wx:if="{{!fetch}}">总计:<text style="color:#cc0033">￥ {{totalPrice}}</text></view>
       <view class="sum" wx:else>总计:<text style="color:#cc0033">￥ {{totalMoney}}</text></view>
-      <view class="pay" bindtap="toAccount">提交订单</view>
+      <view class="pay" bindtap="toAccount">结算</view>
     </view>
   </view>
 </view>

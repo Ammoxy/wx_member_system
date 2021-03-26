@@ -31,7 +31,7 @@ Page({
     })
     banner.imagesCl(1).then(res => {
       console.log(res);
-      
+
       self.setData({
         bg_img: res[0].image
       })

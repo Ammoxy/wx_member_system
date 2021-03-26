@@ -38,6 +38,7 @@
   </view>
 </view>
 
+<!-- 侧边导航 -->
 <view class="btnBox">
   <!-- 地址导航 -->
   <button bindtap='map'>

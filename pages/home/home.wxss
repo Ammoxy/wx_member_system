@@ -1,6 +1,5 @@
-/* pages/home/home.wxss */
 page {
-  /* background-color: #eee; */
+  background-color: #eee;
   color: #666;
 }
 
@@ -10,7 +9,7 @@ page {
 
 /* banner图 */
 .header {
-  position: relative;
+  /* position: relative; */
   width: 100vw;
   height: 56.25vw;
 }
@@ -34,8 +33,8 @@ page {
   line-height: 60rpx;
   padding-left: 20rpx;
   font-weight: 700;
+  background-color: #fff;
 }
-
 
 /* 活动列表 */
 .activity-box {
@@ -48,7 +47,6 @@ page {
 /* 原来的 */
 .activity-list {
   position: relative;
-  /* formID按钮父元素 */
   width: 48vw;
   padding: 14rpx 0.5vw;
   margin: 0 0.5vw 10rpx 0.5vw;
@@ -85,15 +83,11 @@ page {
 /* 单张小图 */
 .activity-list2 {
   position: relative;
-  /* formID按钮父元素 */
   width: 95vw;
   padding: 25rpx 0;
-  /* margin:0 0.5vw 10rpx 0.5vw; */
   font-size: 28rpx;
   border-bottom: 2rpx solid #eee;
-
   display: flex;
-  /* flex-direction: column; */
   align-items: flex-start;
 }
 
@@ -101,7 +95,6 @@ page {
   width: 300rpx;
   height: 180rpx;
   margin-left: 10rpx;
-  /* margin-left: 1vw; */
 }
 
 .activity-list2 .titleBox {
@@ -117,7 +110,6 @@ page {
 .activity-list2 .titleBox .title {
   width: 100%;
   padding: 0 15rpx;
-  /* height: 80rpx; */
   line-height: 40rpx;
   color: #333;
   font-size: 35rpx;
@@ -140,9 +132,7 @@ page {
 
 /* 四分导航 */
 .classification {
-  /* width:100vw; */
   height: 170rpx;
-  /* padding: 0 37rpx 0 12rpx; */
   overflow-x: auto;
   background-color: #fff;
   border-bottom: 10rpx solid #f8f8f8;
@@ -154,10 +144,8 @@ page {
 
 .classification view {
   position: relative;
-  /* formID按钮父元素 */
   min-width: 150rpx;
   height: 150rpx;
-  /* margin-left: 25rpx; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -167,7 +155,6 @@ page {
 .classification image {
   width: 65rpx;
   height: 65rpx;
-  /* border-radius: 70rpx; */
 }
 
 .classification text {
@@ -183,7 +170,6 @@ page {
 
 .btnBox {
   width: 100rpx;
-  /* height:370rpx; */
   display: flex;
   flex-direction: column;
   align-items: center;

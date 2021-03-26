@@ -73,7 +73,7 @@ Page({
                 wx.hideLoading()
             })
         } else {
-            goods.goodDetail(wx.getStorageSync('token'), self.data.id).then(res => {
+            goods.goodDetail(self.data.id).then(res => {
                 WxParse.wxParse('article', 'html', res.detail, self, 2);
                 self.setData({
                     details: res
@@ -181,10 +181,11 @@ Page({
                 totalCount: Number(self.data.count)
             }
             console.log(333, param);
-
             wx.navigateTo({
                 url: '../../car/order-detail/order-detail?param=' + JSON.stringify(param),
             })
+
+
         }
 
     },
@@ -201,26 +202,45 @@ Page({
     showModal: function (e) {
         console.log(e);
         var that = this;
-        if (e.currentTarget.dataset.index == '1') {
+        if (wx.getStorageSync('token')) {
+            if (e.currentTarget.dataset.index == '1') {
+                that.setData({
+                    isAdd: true
+                })
+            } else if (e.currentTarget.dataset.index == '2') {
+                that.setData({
+                    isAdd: false
+                })
+            }
             that.setData({
-                isAdd: true
+                hideModal: false,
             })
-        } else if (e.currentTarget.dataset.index == '2') {
-            that.setData({
-                isAdd: false
+            var animation = wx.createAnimation({
+                duration: 600, //动画的持续时间 默认400ms   数值越大，动画越慢   数值越小，动画越快
+                timingFunction: 'ease', //动画的效果 默认值是linear
+            })
+            this.animation = animation
+            setTimeout(function () {
+                that.fadeIn(); //调用显示动画
+            }, 200)
+        } else {
+            wx.showModal({
+                title: '提示',
+                content: '您未登录, 无法操作, 是否前往登录',
+                confirm: '是',
+                cancel: '否',
+                success(res) {
+                    if (res.confirm) {
+                        console.log('用户点击确定')
+                        wx.switchTab({
+                            url: "../../personal/index/index"
+                        })
+                    } else if (res.cancel) {
+                        console.log('用户点击取消')
+                    }
+                }
             })
         }
-        that.setData({
-            hideModal: false,
-        })
-        var animation = wx.createAnimation({
-            duration: 600, //动画的持续时间 默认400ms   数值越大，动画越慢   数值越小，动画越快
-            timingFunction: 'ease', //动画的效果 默认值是linear
-        })
-        this.animation = animation
-        setTimeout(function () {
-            that.fadeIn(); //调用显示动画
-        }, 200)
     },
 
     // 隐藏遮罩层
@@ -255,10 +275,10 @@ Page({
 
     onShareAppMessage: (e) => {
         console.log(e);
-        
+
         return {
-          title: '安域智慧安防',
-          path: 'pages/goods/detail/detail?id=' + e.target.dataset.id,
+            title: '安域智慧安防',
+            path: 'pages/goods/detail/detail?id=' + e.target.dataset.id,
         }
-      }
+    }
 })

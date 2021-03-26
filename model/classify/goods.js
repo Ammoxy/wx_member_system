@@ -4,10 +4,9 @@ const tools = require('../../utils/tools');
 var goods = {};
 
 // 商品列表
-goods.goodsList = function (token, currentPage, perPage, name, classify_id, order, type) {
+goods.goodsList = function (currentPage, perPage, name, classify_id, order, type) {
     return new Promise((resolve, reject) => {
         api.get(api.baseUrl.host, api.url.GoodsList, {
-            token: token,
             currentPage: currentPage,
             perPage: perPage,
             name: name,
@@ -26,10 +25,9 @@ goods.goodsList = function (token, currentPage, perPage, name, classify_id, orde
 }
 
 // 详情
-goods.goodDetail = function (token, id) {
+goods.goodDetail = function (id) {
     return new Promise((resolve, reject) => {
         api.get(api.baseUrl.host, api.url.GoodDetail, {
-            token: token,
             id: id
         }, function (response) {
             if (response.code === 10000) {

@@ -52,7 +52,7 @@
 		<text>购物车</text>
 	</button>
 	<text class="enroll1" bindtap='showModal' data-index="1" wx:if="{{user_id == ''}}">加入购物车</text>
-	<text class="enroll" bindtap='showModal' data-index="2">添加订单</text>
+	<text class="enroll" bindtap='showModal' data-index="2">立即购买</text>
 </view>
 
 <view class="modals modals-bottom-dialog" hidden="{{hideModal}}">

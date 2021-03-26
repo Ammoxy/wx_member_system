@@ -78,7 +78,7 @@ page {
 
 /* 个人信息 */
 .personal {
-    height: 10vh;
+    height: 12vh;
     padding: 20rpx;
     background-color: #cc0033;
     color: #fff;
@@ -107,9 +107,9 @@ page {
 }
 
 .name .nick-name {
-    margin: 20rpx 0;
+    padding: 20rpx 0;
     font-size: 36rpx;
-    width: 350rpx;
+    /* width: 400rpx; */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -119,10 +119,24 @@ page {
     font-size: 24rpx;
 }
 
+
+.name .login-btn {
+    border-radius: 0;
+    background-color: #fff;
+    margin: 0;
+    /* width: 10vw; */
+    margin-top: 10rpx;
+}
+
+.name .login-btn::after {
+    border: none;
+    border-radius: 0;
+}
+
 .id-tag {
     width: 80rpx;
-    height: 25rpx;
-    line-height: 25rpx;
+    height: 20rpx;
+    line-height: 20rpx;
     padding: 10rpx 20rpx;
     border-radius: 30rpx;
     background-color: rgba(0, 0, 0, 0.5);
@@ -225,7 +239,7 @@ page {
 .service .list .item button::after {
     border: none;
     border-radius: 0;
-  }
+}
 
 /* 公共样式 */
 .title {

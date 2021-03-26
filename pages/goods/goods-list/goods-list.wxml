@@ -8,10 +8,10 @@
 	<view class="{{current == 1 ? 'choose' : ''}}" data-selected="{{isSelected}}" data-num="1" bindtap="currentTag">综合
 	</view>
 	<view class="{{current == 2 ? 'choose' : ''}}" data-selected="{{isSelected}}" data-num="2" bindtap="currentTag">销量
-		<image src="{{type == 'desc' && order == 'sales'? '/icon/up.png' : '/icon/down.png'}}"></image>
+		<image src="{{type == 'desc' && order == 'sales'? '/icon/down.png' : '/icon/up.png'}}" wx:if="{{current == 2}}"></image>
 	</view>
 	<view class="{{current == 3 ? 'choose' : ''}}" data-selected="{{isSelected}}" data-num="3" bindtap="currentTag">价格
-		<image src="{{type == 'asc' && order == 'price' ? '/icon/up.png' : '/icon/down.png'}}"></image>
+		<image src="{{type == 'asc' && order == 'price' ? '/icon/up.png' : '/icon/down.png'}}" wx:if="{{current == 3}}"></image>
 	</view>
 	<view class="{{current == 4 ? 'choose' : ''}}" data-selected="{{isSelected}}" data-num="4" bindtap="currentTag">
 		重置

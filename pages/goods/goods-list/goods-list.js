@@ -2,6 +2,7 @@
 var goods = require('../../../model/classify/goods');
 var infomationAPI = require('../../../model/personal/infomation')
 var app = getApp()
+let keyword
 Page({
 
     /**
@@ -23,7 +24,6 @@ Page({
         current: 1,
         isSelected: false,
         showFoot: false,
-        keyword: ''
     },
 
     /**
@@ -40,7 +40,9 @@ Page({
             id: options.id,
         })
         this.getList();
-        this.getInfo()
+        if (wx.getStorageSync('token')) {
+            this.getInfo();
+        }
     },
 
     currentTag(e) {
@@ -89,8 +91,8 @@ Page({
             self.setData({
                 order: 'sort',
                 type: 'asc',
-                keyword: '',
-                name: ''
+                name: '',
+                keyword: ''
             })
         }
         if (self.data.user_id != '') {
@@ -106,7 +108,7 @@ Page({
         wx.showLoading({
             title: '数据加载中...',
         })
-        goods.goodsList(wx.getStorageSync('token'), self.data.page, self.data.limit, self.data.name, self.data.id, self.data.order, self.data.type).then(res => {
+        goods.goodsList(self.data.page, self.data.limit, self.data.name, self.data.id, self.data.order, self.data.type).then(res => {
             self.setData({
                 goodsList: self.data.goodsList.concat(res.data)
             })
@@ -194,9 +196,7 @@ Page({
     },
 
     searchName(e) {
-        this.setData({
-            keyword: e.detail.value
-        })
+        keyword = e.detail.value
     },
 
     toSearch() {
@@ -205,9 +205,8 @@ Page({
             page: 1,
             goodsList: [],
             showFoot: false,
-            name: self.data.keyword
+            name: keyword
         })
-        console.log(self.data.keyword);
         if (self.data.user_id != '') {
             self.getMemberGoodList()
         } else {

@@ -1,13 +1,6 @@
-// pages/home/home.js
 var bannerAPI = require('../../model/home/banner')
 var docAPI = require('../../model/home/document')
-var app = getApp()
-// import qs from "qs"
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     showFoot: false,
     bannerList: [],
@@ -23,6 +16,7 @@ Page({
     this.getDoc()
   },
 
+  // 获取轮播图
   getBanner() {
     var self = this;
     wx.showLoading({
@@ -36,6 +30,7 @@ Page({
     })
   },
 
+  // 获取资讯类型
   getDocType() {
     var self = this;
     docAPI.docType().then(res => {
@@ -45,6 +40,7 @@ Page({
     })
   },
 
+  // 获取资讯
   getDoc() {
     var self = this;
     var arr = []
@@ -61,6 +57,29 @@ Page({
     })
   },
 
+  // 前往资讯列表
+  openClassification(e) {
+    console.log(e);
+    wx.navigateTo({
+      url: './msg-list/msg-list?id=' + e.currentTarget.dataset.id + '&index=' + e.currentTarget.dataset.index,
+    })
+  },
+
+  // 前往资讯详情
+  openDetals(e) {
+    if (e.currentTarget.dataset.id) {
+      wx.navigateTo({
+        url: './msg-detail/msg-detail?id=' + e.currentTarget.dataset.id,
+      })
+    } else {
+      wx.showToast({
+        title: '该轮播图未设置跳转',
+        icon: 'none'
+      })
+    }
+  },
+
+  // 打电话
   callPhone() {
     wx.makePhoneCall({
       phoneNumber: '15976506555'
@@ -76,6 +95,7 @@ Page({
     })
   },
 
+  // 导航
   map(e) {
     var self = this;
     console.log("开启地图")
@@ -93,36 +113,9 @@ Page({
             })
           },
         })
-        // wx.openLocation({ //​使用微信内置地图查看位置。
-        //   latitude: 22.93772, //要去的纬度-地址
-        //   longitude: 113.38424, //要去的经度-地址
-        //   name: "奥园广场",
-        //   address: '奥园广场'
-        // })
       }
     })
     console.log("地图")
   },
-
-  openClassification(e) {
-    console.log(e);
-    
-    wx.navigateTo({
-      url: './msg-list/msg-list?id=' + e.currentTarget.dataset.id + '&index=' + e.currentTarget.dataset.index,
-    })
-  },
-
-  openDetals(e) {
-    if (e.currentTarget.dataset.id) {
-      wx.navigateTo({
-        url: './msg-detail/msg-detail?id=' + e.currentTarget.dataset.id,
-      })
-    } else {
-      wx.showToast({
-        title: '该轮播图未设置跳转',
-        icon: 'none'
-      })
-    }
-  }
 
 })

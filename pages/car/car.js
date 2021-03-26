@@ -107,7 +107,7 @@ Page({
             if (item.isCheck) {
                 // 参数: 会员与普通用户不同
                 console.log(self.data.user_type);
-                
+
                 if (self.data.user_type == 2 || self.data.user_type == 3) {
                     goodsArr.push({
                         good_id: item.good.id,
@@ -365,20 +365,28 @@ Page({
 
     //下拉刷新
     onPullDownRefresh: function () {
-        wx.showNavigationBarLoading() //在标题栏中显示加载
-        this.getList();
-        this.setData({
-            isAllCheck: false,
-            totalPrice: 0,
-            goods: [],
-            goodsInfo: []
-        })
-        //模拟加载
-        setTimeout(function () {
-            // complete
-            wx.hideNavigationBarLoading() //完成停止加载
-            wx.stopPullDownRefresh() //停止下拉刷新
-        }, 1500);
+        if (wx.getStorageSync('token')) {
+            wx.showNavigationBarLoading() //在标题栏中显示加载
+            this.getList();
+            this.setData({
+                isAllCheck: false,
+                totalPrice: 0,
+                goods: [],
+                goodsInfo: []
+            })
+            //模拟加载
+            setTimeout(function () {
+                // complete
+                wx.hideNavigationBarLoading() //完成停止加载
+                wx.stopPullDownRefresh() //停止下拉刷新
+            }, 1500);
+        } else {
+            wx.showToast({
+                title: '请先登录',
+                icon: 'none'
+            })
+        }
+
     },
 
     getInfo() {
