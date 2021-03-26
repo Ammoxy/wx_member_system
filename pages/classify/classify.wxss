@@ -89,6 +89,8 @@ page {
 .container .box .title {
   color: #666666;
   font-size: 30rpx;
+  border-left: 2rpx solid #c2bfbf;
+  padding-left: 14rpx;
 }
 
 .container .box .list {

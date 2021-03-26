@@ -8,8 +8,9 @@
 			<view class="nick-name">{{wxInfo.nickName}} <text wx:if="{{type == 3}}">佣金: {{money}}</text></view>
 			<view class="id-tag" wx:if="{{type == 2}}">会员</view>
 			<view class="id-tag" wx:elif="{{type == 3}}">健康专员</view>
-			<view class="id-tag"wx:elif="{{type == 1 && wxInfo}}">普通人员</view>
-			<button wx:if="{{!wxInfo}}" size="mini" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="login-btn">立即登录</button>
+			<view class="id-tag" wx:elif="{{type == 1 && wxInfo}}">普通人员</view>
+			<button wx:if="{{!wxInfo}}" size="mini" open-type="getUserInfo" bindgetuserinfo="getUserInfo"
+				class="login-btn">立即登录</button>
 		</view>
 	</view>
 	<view class="qrcode">
