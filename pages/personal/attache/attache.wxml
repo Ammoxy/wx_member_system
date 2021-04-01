@@ -1,37 +1,72 @@
 <form bindsubmit='registerAttache'>
 	<view class="info">
 		<view class="left">姓名:</view>
-		<input class="{{disabled == true ? 'ban-color' : ''}}" placeholder="请输入姓名" value='{{userInfo.name}}' name="name" bindblur="nameBlur" disabled="{{disabled}}"></input>
+		<input class="{{disabled == true ? 'ban-color' : ''}}" placeholder="请输入姓名" value='{{userInfo.name}}' name="name"
+			bindblur="nameBlur" disabled="{{disabled}}"></input>
 	</view>
 	<view class="info">
 		<view class="left">电话:</view>
-		<input class="{{disabled == true ? 'ban-color' : ''}}" placeholder="请输入电话" value='{{userInfo.phone}}' name="phone" bindblur="phoneBlur" disabled="{{disabled}}"></input>
-  </view>
-  <view class="info">
+		<input class="{{disabled == true ? 'ban-color' : ''}}" placeholder="请输入电话" value='{{userInfo.phone}}' name="phone"
+			bindblur="phoneBlur" disabled="{{disabled}}"></input>
+	</view>
+	<view class="info">
 		<view class="left">身份证号:</view>
-		<input class="{{disabled == true ? 'ban-color' : ''}}" placeholder="请输入身份证" value='{{userInfo.identity}}' name="identity" bindblur="identityBlur" disabled="{{disabled}}"></input>
-  </view>
-  <view class="info">
+		<input class="{{disabled == true ? 'ban-color' : ''}}" placeholder="请输入身份证" value='{{userInfo.identity}}'
+			name="identity" bindblur="identityBlur" disabled="{{disabled}}"></input>
+	</view>
+	<view class="info">
 		<view class="left">地址:</view>
-		<input class="{{disabled == true ? 'ban-color' : ''}}" placeholder="请输入地址" value='{{userInfo.address}}' name="address" bindblur="addressBlur" disabled="{{disabled}}"></input>
+		<input class="{{disabled == true ? 'ban-color' : ''}}" placeholder="请输入地址" value='{{userInfo.address}}'
+			name="address" bindblur="addressBlur" disabled="{{disabled}}"></input>
 	</view>
 	<view class="info">
 		<view class="left">部门:</view>
-		<picker bindchange="merchantChange" range="{{merchantList}}" range-key="name" value="{{index}}" disabled="{{disabled}}">
-			<input class="{{disabled == true ? 'ban-color' : ''}}" placeholder="请选择部门" value='{{merchant ? merchant : ""}}' name="merchant_id" disabled></input>
-		</picker>
-  </view>
-  <view class="info">
+		<!-- <picker bindchange="merchantChange" range="{{merchantList}}" range-key="name" value="{{index}}" disabled="{{disabled}}"> -->
+		<input class="{{disabled == true ? 'ban-color' : ''}}" placeholder="请选择部门" value='{{merchant ? merchant : ""}}'
+			name="merchant_id" bindtap="showModal" disabled></input>
+		<!-- </picker> -->
+	</view>
+	<view class="info">
 		<view class="left">健康专员等级:</view>
-		<picker bindchange="healthChange" range="{{helUserList}}" range-key="name" value="{{index}}" disabled="{{disabled}}">
-			<input class="{{disabled == true ? 'ban-color' : ''}}" placeholder="请选择健康专员" value='{{healthUser ? healthUser : ""}}' name="health_id" disabled></input>
+		<picker bindchange="healthChange" range="{{helUserList}}" range-key="name" value="{{index}}"
+			disabled="{{disabled}}">
+			<input class="{{disabled == true ? 'ban-color' : ''}}" placeholder="请选择健康专员"
+				value='{{healthUser ? healthUser : ""}}' name="health_id" disabled></input>
 		</picker>
 	</view>
 
-	<view class="submit" wx:if="{{isSave}}">
+	<view class="submit" wx:if="{{user_id == '' || state == 2}}">
 		<button form-type='submit'>提交信息</button>
 	</view>
 	<view class="submit" wx:if="{{state == 1}}">
 		<button disabled>待审核</button>
 	</view>
+	<view class="submit" wx:if="{{state == 3}}">
+		<button form-type='submit'>重新提交</button>
+	</view>
 </form>
+
+<view class="modals modals-bottom-dialog" hidden="{{hideModal}}">
+	<view class="modals-cancel" data-index="1"></view>
+	<view class="bottom-dialog-body bottom-pos" animation="{{animationData}}">
+		<view class="close" bindtap="hideModal">取消</view>
+		<view class="info-box">
+			<view class="item">
+				<text>等级: </text>
+				<picker bindchange="estateChange" range="{{estateList}}" range-key="title" value="{{index}}">
+					<input class="input" placeholder='请选择部门等级' disabled="true" name="estate"
+						value="{{estate ? estate : estateList[is_estate].title}}"></input>
+				</picker>
+			</view>
+			<view class="item">
+				<text>部门: </text>
+				<picker bindchange="merchantChange" range="{{merchantList}}" range-key="name" value="{{index}}">
+					<input class="input" placeholder='请选择部门' disabled="true" name="merchant_sel"
+						value="{{merchant_sel ? merchant_sel : merchantList[is_merchant].name}}"></input>
+				</picker>
+			</view>
+		</view>
+
+		<view class="btn" bindtap="hideModal"  data-index="2">确定</view>
+	</view>
+</view>

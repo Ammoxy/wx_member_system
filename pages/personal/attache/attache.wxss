@@ -37,6 +37,12 @@ radio .wx-radio-input.wx-radio-input-checked::before {
   line-height: 60rpx;
 }
 
+.info #department {
+  width: 500rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+
 .submit {
   margin-top: 40rpx;
 }
@@ -55,3 +61,82 @@ radio .wx-radio-input.wx-radio-input-checked::before {
 .ban-color {
   color: #ccc;
 }
+
+/*模态框*/
+.modals {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.modals-cancel {
+  position: absolute;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.bottom-dialog-body {
+  position: absolute;
+  z-index: 10001;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 30rpx;
+  height: 600rpx;
+  background-color: #fff;
+}
+
+/*动画前初始位置*/
+.bottom-pos {
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
+}
+
+.bottom-dialog-body .btn {
+  background-color: #CC0033;
+  color: #fff;
+  position: fixed;
+  bottom: 30rpx;
+  left: 0;
+  right: 0;
+  /* width: 80vh; */
+  margin: 0 30rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 50rpx;
+}
+
+.bottom-dialog-body .close {
+  color: #cc0033;
+  text-align: right;
+  padding: 10rpx 0;
+}
+
+/* 选择 */
+.info-box {
+  width: 100%;
+  margin-top: 50rpx;
+}
+
+.info-box .item {
+  display: flex;
+  margin: 50rpx auto;
+}
+
+.info-box .item text {
+  width: 20%;
+  margin-right: 20rpx;
+}
+
+.info-box .item {
+  width: 70%
+}
+

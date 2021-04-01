@@ -67,10 +67,11 @@ attache.healthUser = function (token) {
 }
 
 // 部门列表
-attache.merchantSelList = function (token) {
+attache.merchantSelList = function (token, type) {
     return new Promise((resolve, reject) => {
         api.get(api.baseUrl.host, api.url.MerchantSelList, {
-            token: token
+            token: token,
+            type: type
         }, function (response) {
             if (response.code === 10000) {
                 var res = response.result
