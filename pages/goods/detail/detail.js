@@ -23,7 +23,6 @@ Page({
             price: '',
             count: '',
             id: '',
-            have_merchant: []
         },
         count: 1,
         user_type: '',
@@ -67,7 +66,6 @@ Page({
                         name: res.name,
                         intro: res.intro,
                         id: res.id,
-                        have_merchant: res.have_merchant
                     }
                 })
                 wx.hideLoading()
@@ -148,7 +146,6 @@ Page({
                 name: self.data.info.name,
                 intro: self.data.info.intro,
                 id: self.data.info.id,
-                have_merchant: self.data.info.have_merchant,
             })
             console.log(data);
             wx.navigateTo({
@@ -175,7 +172,6 @@ Page({
                     name: self.data.details.name,
                     id: self.data.details.id,
                     price: self.data.details.price,
-                    have_merchant: self.data.details.have_merchant,
                     is_fetch: self.data.details.is_fetch
                 }],
                 totalCount: Number(self.data.count)
