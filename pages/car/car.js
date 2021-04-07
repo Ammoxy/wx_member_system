@@ -22,7 +22,7 @@ Page({
         isShow: false,
         choseLength: 0,
         totalFreight: 0,
-        have_merchant: [], // 商家地址
+        // have_merchant: [], // 商家地址
     },
 
     /**
@@ -101,7 +101,7 @@ Page({
         var self = this;
         var goodsArr = [];
         var goodsInfo = [];
-        var have_merchant = [];
+        // var have_merchant = [];
 
         arr.forEach(item => {
             if (item.isCheck) {
@@ -132,7 +132,7 @@ Page({
                     name: item.good.name,
                     id: item.good.id,
                     price: item.good.price,
-                    have_merchant: item.good.have_merchant,
+                    // have_merchant: item.good.have_merchant,
                     is_fetch: item.good.is_fetch
                 })
             }
@@ -142,7 +142,7 @@ Page({
         self.setData({
             goods: goodsArr,
             goodsInfo: goodsInfo,
-            have_merchant: have_merchant
+            // have_merchant: have_merchant
         });
     },
 

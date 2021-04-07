@@ -1,81 +1,103 @@
 <form bindsubmit="toAccount"></form>
-<view class="pay-content">
-  <view class="fetch-box" wx:if="{{is_fetch == 1}}">
-    <text class="left default">到店自取</text>
-    <switch name="fetch" checked="{{fetch}}" bindtap="toSet"></switch>
-  </view>
-  <!-- 选择收货地址 -->
-  <block>
-    <view wx:if="{{fetch}}" class="address-box">
-      <text class="left">自取时间</text>
-      <picker mode="date" value="{{date}}" start="2020-01-01" end="2030-01-01" bindchange="bindDateChange">
-        <input class="input" placeholder="请选择日期" value="{{checkDate ? checkDate : ''}}" disabled></input>
-      </picker>
+<block wx:if="{{!showAddress}}">
+  <view class="pay-content">
+    <view class="fetch-box" wx:if="{{is_fetch == 1}}">
+      <text class="left default">到店自取</text>
+      <switch name="fetch" checked="{{fetch}}" bindtap="toSet"></switch>
     </view>
-    <view wx:if="{{fetch}}" class="address-box">
-      <text class="left">商家地址</text>
-      <picker bindchange="addressChange" range="{{merchantList}}" range-key="address" value="{{index}}">
+    <!-- 选择收货地址 -->
+    <block>
+      <view wx:if="{{fetch}}" class="address-box">
+        <text class="left">自取时间</text>
+        <picker mode="date" value="{{date}}" start="2020-01-01" end="2030-01-01" bindchange="bindDateChange">
+          <input class="input" placeholder="请选择日期" value="{{checkDate ? checkDate : ''}}" disabled></input>
+        </picker>
+      </view>
+      <view wx:if="{{fetch}}" class="address-box">
+        <text class="left">商家地址</text>
+        <!-- <picker bindchange="addressChange" range="{{merchantList}}" range-key="address" value="{{index}}"> -->
         <input class="input" placeholder='请选择商家地址' disabled name="merchant_id"
-          value="{{merchant ? merchant : merchantList[is_merchant].name}}"></input>
-      </picker>
-    </view>
-    <view class="address-box" bindtap="toAdd" wx:else>
-      <view class="img-box">
-        <image class="auto-img" src="/icon/loc.png"></image>
+          value="{{merchant}}" bindtap="showSearch"></input>
+        <!-- </picker> -->
       </view>
-      <view class="address">
-        <view class="user_info"><text>{{addressInfo.name}}</text><text>{{addressInfo.phone}}</text></view>
-        <view class="user_add">{{addressInfo.address}}</view>
-      </view>
-      <view class="right-icon">
-        <image class="auto-img" src="/icon/right.png"></image>
-      </view>
-    </view>
-  </block>
-
-  <!-- 订单内容 -->
-  <view class="order-content">
-    <view class="order-item" wx:for="{{orderData}}">
-      <view class="item">
-        <view class="pro-img">
-          <image class="auto-img" mode="scaleToFill" src="{{item.img}}" />
+      <view class="address-box" bindtap="toAdd" wx:else>
+        <view class="img-box">
+          <image class="auto-img" src="/icon/loc.png"></image>
         </view>
-        <view class="pro-desc">
-          <view class="pro-name">
-            <view class="en-name">{{item.intro}}</view>
+        <view class="address">
+          <view class="user_info"><text>{{addressInfo.name}}</text><text>{{addressInfo.phone}}</text></view>
+          <view class="user_add">{{addressInfo.address}}</view>
+        </view>
+        <view class="right-icon">
+          <image class="auto-img" src="/icon/right.png"></image>
+        </view>
+      </view>
+    </block>
+
+    <!-- 订单内容 -->
+    <view class="order-content">
+      <view class="order-item" wx:for="{{orderData}}">
+        <view class="item">
+          <view class="pro-img">
+            <image class="auto-img" mode="scaleToFill" src="{{item.img}}" />
+          </view>
+          <view class="pro-desc">
+            <view class="pro-name">
+              <view class="en-name">{{item.intro}}</view>
+            </view>
+          </view>
+          <view class="pro-info">
+            <view class="pro-price" wx:if="{{user_id != ''}}">￥{{item.price}}</view>
+            <view class="pro-price" wx:elif="{{(user_id == '' && user_type == 2)|| (user_id == '' && user_type == 3)}}">
+              ￥{{item.vip_price}}</view>
+            <view class="pro-price" wx:elif="{{user_id == '' && user_type != 2 && user_type != 3}}">￥{{item.price}}
+            </view>
+            <!-- <view class="pro-count">运费: {{item.freight}}</view> -->
+            <view class="pro-count">x{{item.count}}</view>
           </view>
         </view>
-        <view class="pro-info">
-          <view class="pro-price" wx:if="{{user_id != ''}}">￥{{item.price}}</view>
-          <view class="pro-price" wx:elif="{{(user_id == '' && user_type == 2)|| (user_id == '' && user_type == 3)}}">
-            ￥{{item.vip_price}}</view>
-          <view class="pro-price" wx:elif="{{user_id == '' && user_type != 2 && user_type != 3}}">￥{{item.price}}</view>
-          <!-- <view class="pro-count">运费: {{item.freight}}</view> -->
-          <view class="pro-count">x{{item.count}}</view>
+        <view class="item">
+          <view class="price-box">
+            <text class="price" style="margin-right: 20rpx" wx:if="{{!fetch}}">运费: {{item.freight * item.count}}</text>
+            <text class="price" wx:if="{{user_id != ''}}">合计：￥{{item.price * item.count}}</text>
+            <text class="price"
+              wx:elif="{{(user_id == '' && user_type == 2) || (user_id == '' && user_type == 3)}}">合计：￥{{item.vip_price * item.count}}</text>
+            <text class="price"
+              wx:elif="{{user_id == '' && user_type != 2 && user_type != 3}}">合计：￥{{item.price * item.count }}</text>
+          </view>
         </view>
+        <!-- <view class="item bottom-item"></view> -->
       </view>
-      <view class="item">
-        <view class="price-box">
-          <text class="price" style="margin-right: 20rpx" wx:if="{{!fetch}}">运费: {{item.freight * item.count}}</text>
-          <text class="price" wx:if="{{user_id != ''}}">合计：￥{{item.price * item.count}}</text>
-          <text class="price"
-            wx:elif="{{(user_id == '' && user_type == 2) || (user_id == '' && user_type == 3)}}">合计：￥{{item.vip_price * item.count}}</text>
-          <text class="price" wx:elif="{{user_id == '' && user_type != 2 && user_type != 3}}">合计：￥{{item.price * item.count }}</text>
-        </view>
-      </view>
-      <!-- <view class="item bottom-item"></view> -->
     </view>
   </view>
-</view>
 
-<!--底部结算  -->
-<view class="box">
-  <view class="settlement">
-    <view class="total">
-      <view class="number">共件: {{totalCount}} <text wx:if="{{!fetch}}">运费: {{freight}}</text></view>
-      <view class="sum" wx:if="{{!fetch}}">总计:<text style="color:#cc0033">￥ {{totalPrice}}</text></view>
-      <view class="sum" wx:else>总计:<text style="color:#cc0033">￥ {{totalMoney}}</text></view>
-      <view class="pay" bindtap="toAccount">结算</view>
+  <!--底部结算  -->
+  <view class="box">
+    <view class="settlement">
+      <view class="total">
+        <view class="number">共件: {{totalCount}} <text wx:if="{{!fetch}}">运费: {{freight}}</text></view>
+        <view class="sum" wx:if="{{!fetch}}">总计:<text style="color:#cc0033">￥ {{totalPrice}}</text></view>
+        <view class="sum" wx:else>总计:<text style="color:#cc0033">￥ {{totalMoney}}</text></view>
+        <view class="pay" bindtap="toAccount">结算</view>
+      </view>
     </view>
   </view>
-</view>
+</block>
+<block wx:else>
+  <view class="searchPage">
+    <button class="return" bindtap="hideSearch">返回</button>
+
+    <view class="search">
+      <input placeholder='请输入地址' bindblur="getDetail" name="search_detail" confirm-type="search"></input>
+      <button size="mini" type="primary" bindtap="detailChange">搜索</button>
+    </view>
+
+    <view class="no-address" wx:if="{{merchantList.length == 0}}">搜索不到该地址</view>
+
+    
+
+    <view class="search-item" wx:for="{{merchantList}}" wx:key="{{index}}">
+      <text bindtap="addressChange" data-address="{{item.name}}" data-id="{{item.id}}">{{item.name}}</text>
+    </view>
+  </view>
+</block>

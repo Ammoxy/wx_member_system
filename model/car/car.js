@@ -48,5 +48,22 @@ car.delCar = function (token, goods) {
         })
     })
 }
-
+// 获取商家地址
+car.takeMerchants = function (token, good_id, type, name) {
+    return new Promise((resolve, reject) => {
+        api.get(api.baseUrl.host, api.url.TakeMerchants, {
+            token: token,
+            good_id: good_id,
+            type: type,
+            name: name
+        }, function (response) {
+            if (response.code === 10000) {
+                var res = response.result
+                resolve(res);
+            } else {
+                reject(response);
+            }
+        })
+    })
+}
 module.exports = car;

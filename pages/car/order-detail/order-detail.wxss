@@ -216,3 +216,56 @@ page {
 .fetch-box .default {
   width: 80vw;
 }
+
+.searchPage {
+  height: 100%;
+  z-index: 100;
+  background-color: #fff;
+}
+
+.search {
+  width: 92vw;
+  padding: 0 4vw;
+  height: 100rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 28rpx;
+  border-bottom: 2rpx solid #ddd;
+  background-color: #fff;
+}
+
+.return {
+  height: 60rpx;
+  line-height: 60rpx;
+  color: #fff;
+  background: #cc0033;
+  border-radius: 0;
+  font-size: 28rpx;
+  margin-top: 1rpx;
+}
+
+.search input {
+  flex: 1;
+  /* width:500rpx; */
+}
+
+.search button {
+  color: #fff;
+  border-radius: 30rpx;
+  background-color: #cc0033;
+}
+
+.no-address {
+  padding: 50rpx 0;
+  text-align: center;
+  font-size: 30rpx;
+}
+
+.search-item {
+  /* margin-left: 20rpx; */
+  margin-top: 20rpx;
+  padding: 5rpx 10rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+  font-size: 30rpx;
+}

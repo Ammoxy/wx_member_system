@@ -35,7 +35,8 @@ const url = {
     'CofimReceive': '/confirm/receive', // 确定收货
     'CancelOrder': '/cancel/order', // 取消订单
     'OrderInquire': '/order/inquire', // 物流信息
-
+    'TakeMerchants': '/take/merchants', // 获取商品自提商家列表
+    
     'Banners': '/banner/list', // 获取轮播图列表
     'DocType': '/document/type/list', // 获取资讯类型列表
     'DocList': '/document/list', // 获取资讯

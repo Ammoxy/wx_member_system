@@ -2,6 +2,7 @@
 var address = require('../../../model/personal/address');
 var attache = require('../../../model/personal/attache');
 var orderAPI = require('../../../model/car/order');
+var carAPI = require('../../../model/car/car')
 var infomation = require('../../../model/personal/infomation')
 var app = getApp()
 Page({
@@ -34,7 +35,9 @@ Page({
     checkDate: '',
     order_id: '',
     user_type: '',
-    isInfo: false
+    isInfo: false,
+    showAddress: false,
+    search_detail: ''
   },
 
   /**
@@ -56,7 +59,7 @@ Page({
         totalCount: JSON.parse(options.data)[0].count,
         totalPrice: JSON.parse(options.data)[0].count * JSON.parse(options.data)[0].price + JSON.parse(options.data)[0].count * JSON.parse(options.data)[0].freight,
         freight: JSON.parse(options.data)[0].freight * JSON.parse(options.data)[0].count,
-        merchantList: JSON.parse(options.data)[0].have_merchant,
+        // merchantList: JSON.parse(options.data)[0].have_merchant,
         is_fetch: JSON.parse(options.data)[0].is_fetch,
         totalMoney: JSON.parse(options.data)[0].count * JSON.parse(options.data)[0].price
       })
@@ -76,7 +79,7 @@ Page({
       if (JSON.parse(options.param).goodsInfo.length == 1) {
         this.setData({
           is_fetch: JSON.parse(options.param).goodsInfo[0].is_fetch,
-          merchantList: JSON.parse(options.param).goodsInfo[0].have_merchant,
+          // merchantList: JSON.parse(options.param).goodsInfo[0].have_merchant,
         })
       } else {
         this.setData({
@@ -107,14 +110,35 @@ Page({
       checkDate: e.detail.value
     })
   },
+  // 获取商家地址
+  detailChange() {
+    var self = this;
+    var type;
+    if (self.data.user_id) {
+      type = 2
+    } else {
+      type = 1
+    }
+    carAPI.takeMerchants(wx.getStorageSync('token'), self.data.orderData[0].id, type, self.data.search_detail).then(res => {
+      console.log('商家地址', res);
+      self.setData({
+        merchantList: res
+      })
+    })
+  },
   // 选择商家地址
   addressChange(e) {
+    console.log(e);
+    
     var self = this;
     self.setData({
-      merchant: self.data.merchantList[e.detail.value].address,
+      showAddress: false,
+      merchant: e.currentTarget.dataset.address,
       is_merchant: e.detail.value,
-      merchant_id: self.data.merchantList[e.detail.value].id,
+      merchant_id: e.currentTarget.dataset.id,
     })
+    console.log(self.data.merchant_id);
+    
   },
   // 获取地址列表
   getAddress() {
@@ -463,5 +487,24 @@ Page({
       }
 
     }
-  }
+  },
+
+  showSearch() {
+    this.setData({
+      showAddress: true
+    })
+  },
+
+  hideSearch() {
+    this.setData({
+      showAddress: false
+    })
+  },
+   // 选择详细地址
+   getDetail(e) {
+    console.log(e);
+    this.setData({
+        search_detail: e.detail.value,
+    })
+},
 })
