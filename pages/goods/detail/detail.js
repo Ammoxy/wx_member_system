@@ -273,7 +273,7 @@ Page({
         console.log(e);
 
         return {
-            title: '安域智慧安防',
+            title: '合纵会员',
             path: 'pages/goods/detail/detail?id=' + e.target.dataset.id,
         }
     }
