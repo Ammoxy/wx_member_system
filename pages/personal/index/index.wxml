@@ -117,7 +117,7 @@
 		<view class="authorization-box">
 			<view class="authorization-name">微信登录授权</view>
 			<view class="authorization-use">
-				<view>合纵会员小程序申请获取以下权限</view>
+				<view>合纵汇康平台小程序申请获取以下权限</view>
 				<view>· 获得您的公开信息（昵称、头像等）</view>
 			</view>
 			<view class="authorization-btn">

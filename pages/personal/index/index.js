@@ -386,7 +386,7 @@ Page({
     // 分享
     onShareAppMessage: (e) => {
         return {
-            title: '合纵会员',
+            title: '合纵汇康平台',
             path: '/pages/home/home',
             imageUrl: "../../../icon/share_img.jpg"
         }
